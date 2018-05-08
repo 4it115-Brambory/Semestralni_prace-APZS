@@ -11,7 +11,6 @@ public class Student extends Uzivatel{
 	
 	private String jmeno;
 	private String prijmeni;
-	private String email;
 	private Date datumNarozeni;
 	private String telefon;
 	private String pohlavi;
@@ -70,24 +69,6 @@ public class Student extends Uzivatel{
      */
 	public void setPrijmeni(String prijmeni) {
 		this.prijmeni = prijmeni;
-	}
-	
-	/**
-     * Getter na e-mail.
-     * 
-     * @return String email.
-     */
-	public String getEmail() {
-		return email;
-	}
-	
-	/**
-     * Setter na e-mail.
-     * 
-     * @param String email.
-     */
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	
 	/**
@@ -169,7 +150,7 @@ public class Student extends Uzivatel{
      */
 	@Override
 	public String toString() {
-		return "Student [jmeno=" + jmeno + ", prijmeni=" + prijmeni + ", email=" + email + ", datumNarozeni="
+		return "Student [jmeno=" + jmeno + ", prijmeni=" + prijmeni + ", datumNarozeni="
 				+ datumNarozeni + ", telefon=" + telefon + ", pohlavi=" + pohlavi + ", statniPrislusnost="
 				+ statniPrislusnost + "]";
 	}
