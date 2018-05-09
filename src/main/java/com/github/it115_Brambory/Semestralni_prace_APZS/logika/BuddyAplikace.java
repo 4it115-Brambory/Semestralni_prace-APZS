@@ -293,7 +293,7 @@ public class BuddyAplikace implements IBuddyAplikace {
 	/**
      *  Metoda na odebrání buddyho se seznamu buddy studentů
      *  
-     *  @param int id
+     *  @param int id buddy studenta
      *  @return boolean
      */
 	public boolean vymazBuddyho(int id) {
@@ -308,7 +308,7 @@ public class BuddyAplikace implements IBuddyAplikace {
 	/**
      *  Metoda na odebrání exchange se seznamu exchange studentů
      *  
-     *  @param int id
+     *  @param int id exchange studenta
      *  @return boolean
      */
 	public boolean vymazExchange(int id) {
@@ -323,7 +323,7 @@ public class BuddyAplikace implements IBuddyAplikace {
 	/**
      *  Metoda na odebrání vztahu exchange a buddy studenta
      *  
-     *  @param int id
+     *  @param int id vztahu studentů
      *  @return boolean
      */
 	public boolean vymazVztahStudentu(int id) {
@@ -338,7 +338,7 @@ public class BuddyAplikace implements IBuddyAplikace {
 	/**
      *  Metoda na odebrání requestu ze seznamu requestů
      *  
-     *  @param int id
+     *  @param int id requestu
      *  @return boolean
      */
 	public boolean vymazRequest(int id) {
@@ -353,7 +353,7 @@ public class BuddyAplikace implements IBuddyAplikace {
 	/**
      *  Metoda na odebrání akce ze seznamu akcí
      *  
-     *  @param int id
+     *  @param int id akce
      *  @return boolean
      */
 	public boolean vymazAkci(int id) {
@@ -364,7 +364,7 @@ public class BuddyAplikace implements IBuddyAplikace {
 			return false;
 		}		
 	}
-	
+		
 	//----------------------------------------------------------------------------
 	//		Zbytek, nastavení konce aplikace, getter na zjištění konce aplikace
 	//----------------------------------------------------------------------------

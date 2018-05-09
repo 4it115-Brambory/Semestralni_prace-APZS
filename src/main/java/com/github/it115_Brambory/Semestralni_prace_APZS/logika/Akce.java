@@ -1,6 +1,7 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.logika;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,6 +26,7 @@ public class Akce {
 	private String popis;
 	private int cena; //bude to jenom v Kč, ať si to neděláme těžší
 	private int maxUcast;
+	private Map<Integer, Exchange> seznamExchangeNaAkci;
 	
 	/**
      * Konstruktor třídy Akce.
@@ -199,6 +201,21 @@ public class Akce {
 		this.maxUcast = maxUcast;
 	}
 
+	/**
+     * Metoda sloužící k přidání studenta na akci po tom, co zaplatil.
+     * 
+     * @param Exchange student
+     * @return boolean
+     */
+	public boolean pridejStudentaNaAkci(Exchange student) {
+		if (seznamExchangeNaAkci.containsKey(id)) {
+			return false;
+		}else {
+			seznamExchangeNaAkci.put(student.getId() , student);
+			return true;
+		}
+	}
+	
 	/**
      * Metoda toString k výpisu obsahu proměnných.
      * 

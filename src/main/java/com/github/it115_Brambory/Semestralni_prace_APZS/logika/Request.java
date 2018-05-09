@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class Request {
 
 	private int id;
-	private Exchange zadatel;
+	private Exchange zadatel;//žadatel = exchange student
 	private Akce akce;
 	private boolean zaplaceno;
 	//false - nezaplaceno, true - zaplaceno
@@ -98,12 +98,13 @@ public class Request {
 	}
 	
 	/**
-     * Setter na žadatele.
+     * Nastaví hodnotu zaplaceno na true -> žadatel zaplatil za akci.
      * 
-     * @param String zadatel.
      */
-	public void setZaplaceno(boolean zaplaceno) {
-		this.zaplaceno = zaplaceno;
+	public void setZaplaceno() {
+		if(akce.pridejStudentaNaAkci(zadatel)) {
+		zaplaceno = true;
+		}
 	}
 
 	/**
