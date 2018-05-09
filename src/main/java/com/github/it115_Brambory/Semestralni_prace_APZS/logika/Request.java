@@ -16,7 +16,8 @@ public class Request {
 	private int id;
 	private Exchange zadatel;
 	private Akce akce;
-	private String stav;
+	private boolean zaplaceno;
+	//false - nezaplaceno, true - zaplaceno
 	
 	/**
      * Konstruktor pro request.
@@ -27,7 +28,7 @@ public class Request {
 		this.id = id;
 		this.zadatel = zadatel;
 		this.akce = akce;
-		this.stav = "Pending";
+		this.zaplaceno = false;
 		//pomocí setteru se dá "stav" přepsat na libovolný řetězec.
 		//preferoval bych "Pending" nebo "Zaplaceno"
 	}
@@ -70,30 +71,30 @@ public class Request {
 	}
 	
 	/**
-     * Getter na žadatele.
+     * Getter na akci.
      * 
-     * @return Akce zadatel.
+     * @return Akce akce.
      */
 	public Akce getAkce() {
 		return akce;
 	}
 	
 	/**
-     * Setter na žadatele.
+     * Setter na akci.
      * 
-     * @param Akce zadatel.
+     * @param Akce akce.
      */
 	public void setAkce(Akce akce) {
 		this.akce = akce;
 	}
 	
 	/**
-     * Getter na žadatele.
+     * Getter na zaplaceno.
      * 
-     * @return String zadatel.
+     * @return boolean zaplaceno.
      */
-	public String getStav() {
-		return stav;
+	public boolean getZaplaceno() {
+		return zaplaceno;
 	}
 	
 	/**
@@ -101,8 +102,8 @@ public class Request {
      * 
      * @param String zadatel.
      */
-	public void setStav(String stav) {
-		this.stav = stav;
+	public void setZaplaceno(boolean zaplaceno) {
+		this.zaplaceno = zaplaceno;
 	}
 
 	/**
@@ -112,6 +113,6 @@ public class Request {
      */
 	@Override
 	public String toString() {
-		return "Request [id=" + id + ", zadatel=" + zadatel + ", akce=" + akce + ", stav=" + stav + "]";
+		return "Request [id=" + id + ", zadatel=" + zadatel + ", akce=" + akce + ", zaplaceno=" + zaplaceno + "]";
 	}
 }
