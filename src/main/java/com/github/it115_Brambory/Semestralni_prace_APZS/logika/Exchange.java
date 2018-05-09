@@ -22,16 +22,16 @@ public class Exchange extends Student{
 	/**
      * Konstruktor pro exchange studenta.
      * 
-     * @param String email, String heslo, boolean access, String jmeno, String prijmeni, String email2,
-			Date datumNarozeni, String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR.
+     * @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR.
      */
-	public Exchange(String email, String heslo, boolean access, String jmeno, String prijmeni, String email2,
-			Date datumNarozeni, String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR) {
-		super(email, heslo, access, jmeno, prijmeni, email2, datumNarozeni, telefon, pohlavi, statniPrislusnost);
+	public Exchange(String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR) {
+		super(email, heslo, access, jmeno, prijmeni, datumNarozeni, telefon, pohlavi, statniPrislusnost);
 		this.id = id;
 		this.adresaCR = adresaCR;
 	}
-	
+
 	/**
      * Getter na Id.
      * 

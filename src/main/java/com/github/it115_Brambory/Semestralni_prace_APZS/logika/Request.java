@@ -28,6 +28,8 @@ public class Request {
 		this.zadatel = zadatel;
 		this.akce = akce;
 		this.stav = "Pending";
+		//pomocí setteru se dá "stav" přepsat na libovolný řetězec.
+		//preferoval bych "Pending" nebo "Zaplaceno"
 	}
 
 	/**

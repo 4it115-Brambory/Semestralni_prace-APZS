@@ -10,11 +10,13 @@ import javafx.scene.layout.GridPane;
  * Kontroler, který zprostředkovává komunikaci mezi grafikou
  * a logikou adventury (měl by... :D )
  * 
- * @author Filip Vencovsky, Libor Zíka
+ * @author Filip Vencovsky, Libor Zíka, další z teamu - cmon :D
  *
  */
 public class HomeController extends GridPane implements Observer {
-	
+	// do metod piště "buddyAplikace.getBuddyAplikace()." a pak stačí ctrl+mezerník
+	// a našeptávač vám ukáže možné metody, hlavně ty, které jsou implemetované ve třídě
+	//BuddyAplikce pro práci s objektama ze seznamů
 	private IBuddyAplikace buddyAplikace;
 	
 	/**
@@ -30,7 +32,6 @@ public class HomeController extends GridPane implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 }

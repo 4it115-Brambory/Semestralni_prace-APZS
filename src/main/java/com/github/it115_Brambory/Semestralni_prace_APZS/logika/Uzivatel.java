@@ -62,7 +62,8 @@ public class Uzivatel{
 	}
 	
 	/**
-     * Getter k nastavení práv pro přístup.
+     * Getter k právům pro přístup.
+     * 1 - admin access, 0 - student access.
      * 
      * @return boolean access.
      */

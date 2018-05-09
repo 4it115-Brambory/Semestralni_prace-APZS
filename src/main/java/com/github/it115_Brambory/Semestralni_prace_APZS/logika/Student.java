@@ -20,15 +20,14 @@ public class Student extends Uzivatel{
      * Konstruktor pro obecného studenta.
      * Potomci třídy - buddy a exchange student.
      * 
-     * @param String email, String heslo, boolean access, String jmeno, String prijmeni, String email2,
-			Date datumNarozeni, String telefon, String pohlavi, String statniPrislusnost.
+     * @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost.
      */
-	public Student(String email, String heslo, boolean access, String jmeno, String prijmeni, String email2,
-			Date datumNarozeni, String telefon, String pohlavi, String statniPrislusnost) {
+	public Student(String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost) {
 		super(email, heslo, access);
 		this.jmeno = jmeno;
 		this.prijmeni = prijmeni;
-		email = email2;
 		this.datumNarozeni = datumNarozeni;
 		this.telefon = telefon;
 		this.pohlavi = pohlavi;

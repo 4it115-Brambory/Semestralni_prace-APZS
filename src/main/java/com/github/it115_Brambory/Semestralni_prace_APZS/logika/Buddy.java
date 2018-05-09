@@ -23,14 +23,14 @@ public class Buddy extends Student{
 	/**
      * Konstruktor pro buddy studenta.
      * 
-     * @param String email, String heslo, boolean access, String jmeno, String prijmeni, String email2,
-			Date datumNarozeni, String telefon, String pohlavi, String statniPrislusnost, int id, String xname,
-			String titul, String adresa.
+     * @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost, int id, String xname, String titul,
+			String adresa.
      */
-	public Buddy(String email, String heslo, boolean access, String jmeno, String prijmeni, String email2,
-			Date datumNarozeni, String telefon, String pohlavi, String statniPrislusnost, int id, String xname,
-			String titul, String adresa) {
-		super(email, heslo, access, jmeno, prijmeni, email2, datumNarozeni, telefon, pohlavi, statniPrislusnost);
+	public Buddy(String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost, int id, String xname, String titul,
+			String adresa) {
+		super(email, heslo, access, jmeno, prijmeni, datumNarozeni, telefon, pohlavi, statniPrislusnost);
 		this.id = id;
 		this.xname = xname;
 		this.titul = titul;

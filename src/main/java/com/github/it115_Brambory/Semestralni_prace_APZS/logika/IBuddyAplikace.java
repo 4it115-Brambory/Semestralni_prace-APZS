@@ -13,10 +13,15 @@ public interface IBuddyAplikace {
      */
 	public BuddyAplikace getBuddyAplikace();
 	
+	/**
+     *  Metoda nastaví konec aplikace
+     */
+	public void setKonecBuddyAplikace();
+	
 	/** 
      * Vrací informaci o tom, zda BuddyAplikace již skončila.
      * 
-     * @return   vrací true, pokud BuddyAplikace skončila
+     * @return   true = konec aplikace, false = aplikace pokračuje
      */
 	public boolean konecBuddyAplikace();
 }
