@@ -19,11 +19,11 @@ import javax.persistence.Id;
 @Entity
 public class Akce {
 
-	private int id;
-	private String druh;
+	private int akce_id;
+	private String typ;
 	private String nazev;
-	private Date datumACasOd;
-	private Date datumACasDo;
+	private Date casOd;
+	private Date casDo;
 	private String misto;
 	private String popis;
 	private int cena; //bude to jenom v Kč, ať si to neděláme těžší
@@ -35,13 +35,13 @@ public class Akce {
      * @param int id, String druh, String nazev, Date datumACasOd, Date datumACasDo, String misto, String popis,
 			int cena, int maxUcast.
      */
-	public Akce(int id, String druh, String nazev, Date datumACasOd, Date datumACasDo, String misto, String popis,
+	public Akce(int akce_id, String typ, String nazev, Date casOd, Date casDo, String misto, String popis,
 			int cena, int maxUcast) {
-		this.id = id;
-		this.druh = druh;
+		this.akce_id = akce_id;
+		this.typ = typ;
 		this.nazev = nazev;
-		this.datumACasOd = datumACasOd;
-		this.datumACasDo = datumACasDo;
+		this.casOd = casOd;
+		this.casDo = casDo;
 		this.misto = misto;
 		this.popis = popis;
 		this.cena = cena;
@@ -49,31 +49,31 @@ public class Akce {
 	}
 	
 	/**
-     * Getter na Id.
+     * Getter na Id akce.
      * 
-     * @return int id.
+     * @return int id akce.
      */
 	@Id
-	public int getId() {
-		return id;
+	public int getAkceId() {
+		return akce_id;
 	}
 	
 	/**
-     * Getter na druh akce.
+     * Getter na typ akce.
      * 
-     * @return String druh.
+     * @return String typ.
      */
-	public String getDruh() {
-		return druh;
+	public String getTypAkce() {
+		return typ;
 	}
 
 	/**
-     * Setter na druh akce.
+     * Setter na typ akce.
      * 
-     * @param String druh.
+     * @param String typ.
      */
-	public void setDruh(String druh) {
-		this.druh = druh;
+	public void setTypAkce(String druh) {
+		this.typ = typ;
 	}
 	
 	/**
@@ -135,35 +135,35 @@ public class Akce {
      * 
      * @return Date datumACasOd.
      */
-	public Date getDatumACasOd() {
-		return datumACasOd;
+	public Date getCasOd() {
+		return casOd;
 	}
 
 	/**
      * Setter na čas, kdy akce začíná.
      * 
-     * @param Date datumACasOd.
+     * @param Date casOd.
      */
-	public void setDatumACasOd(Date datumACasOd) {
-		this.datumACasOd = datumACasOd;
+	public void setCasOd(Date casOd) {
+		this.casOd = casOd;
 	}
 	
 	/**
      * Getter na čas, kdy akce končí.
      * 
-     * @return Date datumACasDo.
+     * @return Date casDo.
      */
-	public Date getDatumACasDo() {
-		return datumACasDo;
+	public Date getCasDo() {
+		return casDo;
 	}
 
 	/**
      * Setter na čas, kdy akce končí.
      * 
-     * @param Date datumACasDo.
+     * @param Date casDo.
      */
-	public void setDatumACasDo(Date datumACasDo) {
-		this.datumACasDo = datumACasDo;
+	public void setCasDo(Date casDo) {
+		this.casDo = casDo;
 	}
 	
 	/**
@@ -209,8 +209,8 @@ public class Akce {
      */
 	@Override
 	public String toString() {
-		return "Akce [id=" + id + ", druh=" + druh + ", nazev=" + nazev + ", datumACasOd=" + datumACasOd
-				+ ", datumACasDo=" + datumACasDo + ", misto=" + misto + ", popis=" + popis + ", cena=" + cena
+		return "Akce [id=" + akce_id + ", druh=" + typ + ", nazev=" + nazev + ", datumACasOd=" + casOd
+				+ ", datumACasDo=" + casDo + ", misto=" + misto + ", popis=" + popis + ", cena=" + cena
 				+ ", maxUcast=" + maxUcast + "]";
 	}
 	
