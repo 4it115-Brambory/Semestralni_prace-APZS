@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
+ * @author Libor Zíka
+ * 
  * Třída popisující vztah mezi studentem zahraničním a buddy studentem.
  * 
  * Je nutné použít API pro persistenci a identifikovat třídu jako entitu, která je možným předmětem persistence.

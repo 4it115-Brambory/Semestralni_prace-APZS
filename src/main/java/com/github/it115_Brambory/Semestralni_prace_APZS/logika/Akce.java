@@ -8,6 +8,8 @@ import javax.persistence.Id;
 
 
 /**
+ * @author Libor Zíka
+ * 
  * Třída popisující základní atributy akce.
  * 
  * Je nutné použít API pro persistenci a identifikovat třídu jako entitu, která je možným předmětem persistence.
@@ -26,7 +28,6 @@ public class Akce {
 	private String popis;
 	private int cena; //bude to jenom v Kč, ať si to neděláme těžší
 	private int maxUcast;
-	private Map<Integer, Exchange> seznamExchangeNaAkci;
 	
 	/**
      * Konstruktor třídy Akce.
@@ -199,21 +200,6 @@ public class Akce {
      */
 	public void setMaxUcast(int maxUcast) {
 		this.maxUcast = maxUcast;
-	}
-
-	/**
-     * Metoda sloužící k přidání studenta na akci po tom, co zaplatil.
-     * 
-     * @param Exchange student
-     * @return boolean
-     */
-	public boolean pridejStudentaNaAkci(Exchange student) {
-		if (seznamExchangeNaAkci.containsKey(id)) {
-			return false;
-		}else {
-			seznamExchangeNaAkci.put(student.getId() , student);
-			return true;
-		}
 	}
 	
 	/**

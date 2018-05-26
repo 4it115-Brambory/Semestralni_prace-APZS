@@ -3,7 +3,7 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.main;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
-import com.github.it115_Brambory.Semestralni_prace_APZS.ui.HomeController;
+import com.github.it115_Brambory.Semestralni_prace_APZS.ui.TestController;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -36,10 +36,12 @@ public class Start extends Application {
     	@Override
 		public void start (Stage primaryStage) throws Exception {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/MainWindow.fxml"));
+			//loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/MainWindow.fxml"));
+			loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/TestWindow.fxml"));
+			
 	    	Parent root = loader.load();
 	
-	    	HomeController controller = loader.getController();
+	    	TestController controller = loader.getController();
 	    	IBuddyAplikace buddyAplikace = new BuddyAplikace();
 			controller.inicializuj(buddyAplikace);
 	    	

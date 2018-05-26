@@ -3,6 +3,8 @@ package com.github.it115_Brambory.Semestralni_prace_APZS.logika;
 import java.util.Date;
 
 /**
+ * @author Libor Zíka
+ * 
  * Třída popisující obecného studenta.
  * Ve třídách Exchange a Buddy jsou blíže vysvětleni potomci třídy - čeští studenti a zahraniční.
  * 
@@ -23,7 +25,7 @@ public class Student extends Uzivatel{
      * @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost.
      */
-	public Student(String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+	public Student(String email, String heslo, int access, String jmeno, String prijmeni, Date datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost) {
 		super(email, heslo, access);
 		this.jmeno = jmeno;

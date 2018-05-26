@@ -1,10 +1,20 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.logika;
 
-import java.util.Date;
+
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
+
+import com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect.DBTransakce;
 
 //import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 
+/**
+ * 
+ * @author Libor Zíka
+ *
+ * Hlavní třída logiky, která si drží data
+ */
 public class BuddyAplikace implements IBuddyAplikace {
 	
 	private boolean konecBuddyAplikace = false;
@@ -14,34 +24,38 @@ public class BuddyAplikace implements IBuddyAplikace {
 	private Map<Integer, Akce> seznamAkci;
 	private Map<Integer, Request> seznamRequestu;
 	private Map<Integer, VztahStudentu> seznamVztahuStudentu;
+	//zde stačí typ uživatel, protože stačí email, heslo a access
+	//protože email a heslo je potřeba k přihlášení a access určuje tabulku, ze které uživatel pochází - tedy "práva" pro provádění akcí
+	//tedy jestli je to buddy, exchange nebo admin. Jak provedete kontrolu oprávnění nechám na vás :)
 	private Uzivatel aktualniUzivatel;
+	private DBTransakce databazeOperace; //<- odsud používejte ty metody, jsou to v podstatě sql dotazy
+	//jsou tam metody na přidávání, úpravu, mazání a get(select), takže s daty pracujte přes tyto metody,
+	//ať se to rovnou mění v databázi a není starost z dalším ukládáním
 	
 	/**
      *  Konstruktor buddyAplikace. Načte data z databáze do patřičných seznamů.
+	 * @throws SQLException 
      *  
      */
-	public BuddyAplikace() {
-		// TODO načíst data z databáze
+	public BuddyAplikace() /*throws SQLException*/ {
+		
+		seznamBuddy = new HashMap();
+		seznamExchange = new HashMap();
+		seznamAdminu = new HashMap();
+		seznamAkci = new HashMap();
+		seznamRequestu = new HashMap();
+		seznamVztahuStudentu = new HashMap();
+		databazeOperace = new DBTransakce();
+		
+		// TODO - něco sem napište :D asi něco k inicializaci, aby to fungovalo no :D
+		
+		//data z databáze se budou načítat asi až v jednotlivých FXML, zavolá se metoda pro určitý SQL příkaz a pak se
+		//přiřadí do proměnné této třídy, na ně jsou pak gettery.
+		//takto - databazeOperace.metoda(parametry);
+		
 	}
 	
-	/**
-     *  Metoda uloží data z aplikace do databáze.
-     *  
-     *  @return boolean
-     */
-	public boolean ulozData() {
-		//když proběhlo uložení dobře
-		if (true){
-			//TODO
-			//uložit všechna data do databáze
-			//bude se tak dít po stisknutní tlačítka "uložit", nebo před koncem aplikace, kdy se
-			//ve vyskakovacím okně zeptáme uživatele, zda si přeje uložit.
-			//
-			//možná by bylo dobrý data z databáze smazat a pak tam nahrát komplet nový. Jinak nevim jak
-			//snadno zaznamenávat zvlášť změny pro zápis a zvlášť změny pro vymazání nebo změnu.
-	}
-		return false;
-	}
+	
 	//----------------------------------------------------------------------------
 	//			Metody pro přihlášení a odhlášení
 	//----------------------------------------------------------------------------
@@ -55,57 +69,14 @@ public class BuddyAplikace implements IBuddyAplikace {
      */
 	public boolean logIn(String email, String heslo){
 		
-		if (kontrolaPritomnostiAdmina(seznamAdminu, email, heslo)) {//když je email v tabulce admin tak zkontroluj heslo a pak nastav aktualniho uzivatele a access
-			//TODO
-			return true;
-		}else if (kontrolaPritomnostiExchange(seznamExchange, email, heslo)) {//když je email v tabulce buddy tak zkontroluj heslo a pak nastav aktualniho uzivatele a access
-			//TODO
-			return true;
-		}else if (kontrolaPritomnostiBuddy(seznamBuddy, email, heslo)) {//když je email v tabulce exchange tak zkontroluj heslo a pak nastav aktualniho uzivatele a access
-			//TODO
-			return true;
-		}else {
+		//TODO - z metody, která udělá join všech 3 tabulek - buddy, exchange a admin - se vybere jen jmeno, heslo a access
+		//pak se ptame jestli existuji takove prihlasovaci udaje v tom selectu, jestli ano tak nastavime aktualniho uzivatele
+		//jestli ne tak hodit hlasku, ze neplatne jmeno nebo heslo a nechat v puvodnim stavu jako na zacatku
+		
+		//nastaveni promenne aktualniUzivatel = new Uzivatel(email, heslo, access);
+		
 			return false;
-		}
-	}
-	/**
-     *  Metoda kontroluje přítomnost uživatele v seznamu adminů.
-     *  
-     *  @param Map<Integer, Admin> tabulka, String email, String heslo
-     *  
-     *  @return boolean
-     */
-	public boolean kontrolaPritomnostiAdmina(Map<Integer, Admin> tabulka, String email, String heslo) {
-		//TODO
-		//if (je v tabulce && se shoduje heslo)
-		//tak return true;
-		return false;
-	}
-	/**
-     *  Metoda kontroluje přítomnost uživatele v seznamu exchange studentů.
-     *  
-     *  @param Map<Integer, Exchange> tabulka, String email, String heslo
-     *  
-     *  @return boolean
-     */
-	public boolean kontrolaPritomnostiExchange(Map<Integer, Exchange> tabulka, String email, String heslo) {
-		//TODO
-		//if (je v tabulce && se shoduje heslo)
-		//tak return true;
-		return false;
-	}
-	/**
-     *  Metoda kontroluje přítomnost uživatele v seznamu buddy studentů.
-     *  
-     *  @param Map<Integer, Buddy> tabulka, String email, String heslo
-     *  
-     *  @return boolean
-     */
-	public boolean kontrolaPritomnostiBuddy(Map<Integer, Buddy> tabulka, String email, String heslo) {
-		//TODO
-		//if (je v tabulce && se shoduje heslo)
-		//tak return true;
-		return false;
+		
 	}
 	
 	/**
@@ -115,9 +86,26 @@ public class BuddyAplikace implements IBuddyAplikace {
      */
 	public boolean logOut(){
 		//TODO
-		//dotaz na uložení
+		//dotaz na uložení neproběhne, protože se data do databáze ukládají při kliknutí na tlačítko uložit
+		//a jeste by bylo dobre vratit se na prvni fxml, uvodni prihlasovaci obrazovka.
+		//Do teto metody by se mohla vlozit metoda z databazeOperace.metoda(parametry); na odhlaseni
 		aktualniUzivatel = null;
 		return true;
+	}
+	
+	//----------------------------------------------------------------------------
+	//		Gettery na databazeOperace, abychom v controllerech mohli používat DB metody
+	//----------------------------------------------------------------------------
+	/**
+     *  Getter na databazeOperace.
+     *  Nezapomenout se v UI ptát na hodnotu atributu access, jen pro jistotu...
+     *  Stejně by měl každej uživatel mít svoje FXML, kde se mu nabízej ty akce,
+     *  asi jsem jen trochu paranoidní už :D
+     *  
+     *  @return Uzivatel aktualniUzivatel
+     */
+	public DBTransakce getDatabazeOperace() {
+		return databazeOperace;
 	}
 	
 	//----------------------------------------------------------------------------
@@ -186,183 +174,6 @@ public class BuddyAplikace implements IBuddyAplikace {
      */
 	public Map<Integer, VztahStudentu> getSeznamVztahuStudentu() {
 		return seznamVztahuStudentu;
-	}
-	
-	//----------------------------------------------------------------------------
-	//		Metody pro přidávání objektů do seznamů
-	//			pozn.: admina nelze přidat, prostě ne :D
-	//			leda tak přímo v databázi no... :D
-	//----------------------------------------------------------------------------
-	
-	/**
-     *  Metoda sloužící k přidání buddyho do seznamu buddy studentů.
-     *  Nejprve metoda zjistí, jestli už takový buddy se stejným ID v seznamu náhodou není.
-     *  
-     *  @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
-			String telefon, String pohlavi, String statniPrislusnost, int id, String xname, String titul,
-			String adresa
-     *  @return boolean
-     */
-	public boolean pridejBuddyho(String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
-			String telefon, String pohlavi, String statniPrislusnost, int id, String xname, String titul,
-			String adresa) {
-		if (seznamBuddy.containsKey(id)) {
-			return false;
-		}else {
-			seznamBuddy.put(id, new Buddy(email, heslo, access, jmeno, prijmeni, datumNarozeni,
-					telefon, pohlavi, statniPrislusnost, id, xname, titul, adresa));
-			return true;
-		}
-	}
-	
-	/**
-     *  Metoda sloužící k přidání exchange do seznamu exchange studentů.
-     *  Nejprve metoda zjistí, jestli už takový exchange se stejným ID v seznamu náhodou není.
-     *  
-     *  @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
-			String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR
-     *  @return boolean
-     */
-	public boolean pridejExchange(String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
-			String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR) {
-		if (seznamExchange.containsKey(id)) {
-			return false;
-		}else {
-			seznamExchange.put(id, new Exchange(email, heslo, access, jmeno, prijmeni, datumNarozeni, telefon, pohlavi, statniPrislusnost, id, adresaCR));
-			return true;
-		}
-	}
-	
-	/**
-     *  Metoda sloužící k přidání requestu do seznamu requestů.
-     *  Nejprve metoda zjistí, jestli už takový request se stejným ID v seznamu náhodou není.
-     *  
-     *  @param int id, Exchange zadatel, Akce akce
-     *  @return boolean
-     */
-	public boolean pridejRequest(int id, Exchange zadatel, Akce akce) {
-		if (seznamRequestu.containsKey(id)) {
-			return false;
-		}else {
-			seznamRequestu.put(id, new Request(id, zadatel, akce));
-			return true;
-		}
-	}
-	
-	/**
-     *  Metoda sloužící k přidání akce do seznamu akcí.
-     *  Nejprve metoda zjistí, jestli už taková akce se stejným ID v seznamu náhodou není.
-     *  
-     *  @param int id, String druh, String nazev, Date datumACasOd, Date datumACasDo, String misto, String popis,
-			int cena, int maxUcast
-     *  @return boolean
-     */
-	public boolean pridejAkci(int id, String druh, String nazev, Date datumACasOd, Date datumACasDo, String misto, String popis,
-			int cena, int maxUcast) {
-		if (seznamAkci.containsKey(id)) {
-			return false;
-		}else {
-			seznamAkci.put(id, new Akce(id, druh, nazev, datumACasOd, datumACasDo, misto, popis,
-					cena, maxUcast));
-			return true;
-		}
-	}
-	
-	/**
-     *  Metoda sloužící k přidání vztahu studentů do seznamu vztahů studentů.
-     *  Nejprve metoda zjistí, jestli už takový vztah se stejným ID v seznamu náhodou není.
-     *  
-     *  @param int id, Exchange exchange, Buddy buddy
-     *  @return boolean
-     */
-	public boolean pridejVztahStudentu(int id, Exchange exchange, Buddy buddy) {
-		if (seznamVztahuStudentu.containsKey(id)) {
-			return false;
-		}else {
-			seznamVztahuStudentu.put(id, new VztahStudentu(id, exchange, buddy));
-			return true;
-		}
-	}
-	
-	//----------------------------------------------------------------------------
-	//		Metody pro odebírání objektů ze seznamů
-	//			pozn.: admina nelze odebrat, prostě ne :D
-	//			leda tak přímo z databáze no... :D
-	//----------------------------------------------------------------------------
-	
-	/**
-     *  Metoda na odebrání buddyho se seznamu buddy studentů
-     *  
-     *  @param int id buddy studenta
-     *  @return boolean
-     */
-	public boolean vymazBuddyho(int id) {
-		if (seznamBuddy.containsKey(id)) {
-			seznamBuddy.remove(id);
-			return true;
-		}else {
-			return false;
-		}		
-	}
-	
-	/**
-     *  Metoda na odebrání exchange se seznamu exchange studentů
-     *  
-     *  @param int id exchange studenta
-     *  @return boolean
-     */
-	public boolean vymazExchange(int id) {
-		if (seznamExchange.containsKey(id)) {
-			seznamExchange.remove(id);
-			return true;
-		}else {
-			return false;
-		}		
-	}
-	
-	/**
-     *  Metoda na odebrání vztahu exchange a buddy studenta
-     *  
-     *  @param int id vztahu studentů
-     *  @return boolean
-     */
-	public boolean vymazVztahStudentu(int id) {
-		if (seznamVztahuStudentu.containsKey(id)) {
-			seznamVztahuStudentu.remove(id);
-			return true;
-		}else {
-			return false;
-		}		
-	}
-	
-	/**
-     *  Metoda na odebrání requestu ze seznamu requestů
-     *  
-     *  @param int id requestu
-     *  @return boolean
-     */
-	public boolean vymazRequest(int id) {
-		if (seznamRequestu.containsKey(id)) {
-			seznamRequestu.remove(id);
-			return true;
-		}else {
-			return false;
-		}		
-	}
-	
-	/**
-     *  Metoda na odebrání akce ze seznamu akcí
-     *  
-     *  @param int id akce
-     *  @return boolean
-     */
-	public boolean vymazAkci(int id) {
-		if (seznamAkci.containsKey(id)) {
-			seznamAkci.remove(id);
-			return true;
-		}else {
-			return false;
-		}		
 	}
 		
 	//----------------------------------------------------------------------------

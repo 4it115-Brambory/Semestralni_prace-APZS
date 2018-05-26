@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Třída popisující obecného studenta.
- * Ve třídách Exchange a Buddy jsou blíže vysvětleni potomci třídy - čeští studenti a zahraniční.
+ * @author Libor Zíka
+ * 
+ * Třída popisující administrátora.
+ * Moc atributů nemá, ale potřebuje se jen přihlásit a dělat úpravy.
  * 
  */
 @Entity
@@ -20,7 +22,7 @@ public class Admin extends Uzivatel{
      * 
      * @param String email, String heslo, boolean access, String jmeno, String prijmeni, int id.
      */
-	public Admin(String email, String heslo, boolean access, String jmeno, String prijmeni, int id) {
+	public Admin(String email, String heslo, int access, String jmeno, String prijmeni, int id) {
 		super(email, heslo, access);
 		this.jmeno = jmeno;
 		this.prijmeni = prijmeni;
