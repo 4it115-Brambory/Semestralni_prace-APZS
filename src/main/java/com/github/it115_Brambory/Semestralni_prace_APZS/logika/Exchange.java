@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
+ * @author Libor Zíka
+ * 
  * Třída popisující zahraničního studenta.
  * 
  * Je nutné použít API pro persistenci a identifikovat třídu jako entitu, která je možným předmětem persistence.
@@ -22,10 +24,10 @@ public class Exchange extends Student{
 	/**
      * Konstruktor pro exchange studenta.
      * 
-     * @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+     * @param String email, String heslo, int access, String jmeno, String prijmeni, Date datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR.
      */
-	public Exchange(String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
+	public Exchange(String email, String heslo, int access, String jmeno, String prijmeni, Date datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR) {
 		super(email, heslo, access, jmeno, prijmeni, datumNarozeni, telefon, pohlavi, statniPrislusnost);
 		this.id = id;

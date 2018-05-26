@@ -1,6 +1,8 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.logika;
 
 /**
+ * @author Libor Zíka
+ * 
  *  Rozhraní které musí implementovat BuddyAplikace, je na ně navázáno uživatelské rozhraní
  *
  */

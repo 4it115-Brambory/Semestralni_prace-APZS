@@ -2,23 +2,25 @@ package com.github.it115_Brambory.Semestralni_prace_APZS.logika;
 
 
 /**
- * Třída popisující uživatele.
- * Ve potomek třídy - student.
+ * @author Libor Zíka
+ * 
+ * Třída popisující obecného uživatele.
+ * Potomci - admin, student.
  * 
  */
 public class Uzivatel{
 	
 	private String email;
 	private String heslo;
-	private boolean access;
-	//0 pro studenta a 1 pro admina
+	private int access;
+	//0 pro buddy, 1 pro exchange a 2 pro admina
 	
 	/**
      * Konstruktor pro uživatele.
      * 
      * @param String email, String heslo, boolean access.
      */
-	public Uzivatel(String email, String heslo, boolean access) {
+	public Uzivatel(String email, String heslo, int access) {
 		super();
 		this.email = email;
 		this.heslo = heslo;
@@ -67,7 +69,7 @@ public class Uzivatel{
      * 
      * @return boolean access.
      */
-	public boolean getAccess() {
+	public int getAccess() {
 		return access;
 	}
 	
@@ -76,7 +78,7 @@ public class Uzivatel{
      * 
      * @param boolean access.
      */
-	public void setAccess(boolean access) {
+	public void setAccess(int access) {
 		this.access = access;
 	}
 

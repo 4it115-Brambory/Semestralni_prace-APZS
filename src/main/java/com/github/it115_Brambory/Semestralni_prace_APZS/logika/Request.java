@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
+ * @author Libor Zíka
+ * 
  * Třída popisující vztah mezi akcí a žadatelem v podobě žádosti.
  * 
  * Je nutné použít API pro persistenci a identifikovat třídu jako entitu, která je možným předmětem persistence.
@@ -18,6 +20,8 @@ public class Request {
 	private Akce akce;
 	private boolean zaplaceno;
 	//false - nezaplaceno, true - zaplaceno
+	private boolean schvaleno;
+	//false - neschvaleno, true - schvaleno
 	
 	/**
      * Konstruktor pro request.
@@ -29,8 +33,7 @@ public class Request {
 		this.zadatel = zadatel;
 		this.akce = akce;
 		this.zaplaceno = false;
-		//pomocí setteru se dá "stav" přepsat na libovolný řetězec.
-		//preferoval bych "Pending" nebo "Zaplaceno"
+		this.schvaleno = false;
 	}
 
 	/**
@@ -102,11 +105,26 @@ public class Request {
      * 
      */
 	public void setZaplaceno() {
-		if(akce.pridejStudentaNaAkci(zadatel)) {
 		zaplaceno = true;
-		}
 	}
 
+	/**
+     * Getter na schváleno.
+     * 
+     * @return boolean schvaleno.
+     */
+	public boolean getSchvaleno() {
+		return schvaleno;
+	}
+	
+	/**
+     * Nastaví hodnotu schvaleno na true -> admin schválil žádost o přihlášení na akci.
+     * 
+     */
+	public void setSchvaleno() {
+		schvaleno = true;
+	}
+	
 	/**
      * Metoda toString k výpisu obsahu proměnných.
      * 

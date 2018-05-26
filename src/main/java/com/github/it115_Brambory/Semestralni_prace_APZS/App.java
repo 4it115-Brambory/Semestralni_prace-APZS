@@ -1,5 +1,4 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS;
-
 /**
  * Hello world!
  *
