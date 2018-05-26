@@ -1,6 +1,7 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect;
 
 import java.sql.*;
+import java.util.Date;
 import java.util.Map;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
@@ -119,15 +120,26 @@ public class DBTransakce {
 //						pozn.: to samé jako nahoře, nutno provést aktualizace seznamu							//
 //--------------------------------------------------------------------------------------------------------------//
 
-
-	//takhle se insertuje
-		/*
-		String sql = "INSERT INTO jmenoTabulky ('atribut1', 'atribut2', 'atribut3')"
-				+ "VALUES (hodnota11, hodnota12, hodnota13), (hodnota21, hodnota22, hodnota23), (hodnota31, hodnota32, hodnota33);";
+		//není potřeba zadávat Id akce, to se vytvoří samo
+		public void insertNovaAkce(String typ, String nazev, Date casOd, Date casDo, String misto, String popis,
+			int cena, int maxUcast) throws SQLException {
+			
+		//výpočet proměnné, která se dosadí do podmínky
+		String sql = "SELECT akce_id FROM Akce ORDER BY akce_id DESC";
+		Connection connection = connectionClass.getConnection();
 		Statement statement = connection.createStatement();
-		statement.executeUpdate(sql);    			
-		*/
-
+		ResultSet resultSet = statement.executeQuery(sql);
+		int akce_id = resultSet.getInt("akce_id");
+		if (akce_id == 0) {
+			akce_id = 1;
+		}else {
+			akce_id += 1;
+		}		
+		sql = "INSERT INTO `Akce` (`akce_id`, `typ`, `nazev`, `casOd`, `casDo`, `misto`, `popis`, `cena`, `maxUcast`) VALUES ('" + akce_id +"', '" + typ +"',"
+				+ " '" + typ + "', '" + nazev +"', '" + casOd +"', '" + casDo + "', '" + misto + "', '" + popis + "', '" + cena + "', '" + maxUcast + "')";
+		statement.executeUpdate(sql);
+		connection.close();
+	}
 
 	
 	
@@ -156,18 +168,9 @@ public class DBTransakce {
 		return false;
 	}
 	
-	public void logInTest () throws SQLException {
+	public boolean logIn () throws SQLException {
 		
-		
-		
-		String sql = "INSERT INTO `Admin` (`admin_id`, `jmeno`, `prijmeni`, `email`, `heslo`, `access`) VALUES ('1', 'Dorota', 'Máchalová', 'dorymachy@gmail.com', 'heslo123', '2')";
-		Connection connection = connectionClass.getConnection();
-		Statement statement = connection.createStatement();
-		statement.executeUpdate(sql);
-		
-		connection.close();
-		
-		
+		return false;
 	}
 	
 	
@@ -175,7 +178,7 @@ public class DBTransakce {
 
 //------------------------------------------------------------------------------------------------------------------//
 //																													//
-//--------- Metody k nastavení stavu žádosti -> schváleno/zamítnuto a zaplaceno/nezaplaceno							//
+//--------- Metody k nastavení stavu žádosti -> schváleno/zamítnuto a zaplaceno/nezaplaceno. Kontrola plnosti akce	//
 //																													//
 //------------------------------------------------------------------------------------------------------------------//		
 	
@@ -196,5 +199,10 @@ public class DBTransakce {
 		return false;
 	}
 	
-	
+	public boolean zjistiObsazenostAkce(int requestID) throws SQLException{
+		//todo
+		//počet schválených přihlášených na akci / celkový počet. Nemůže být
+		//větší jak jedna. To už se nedá ani přihlásit a ani schválit žádost
+		return false;
+	}
 }

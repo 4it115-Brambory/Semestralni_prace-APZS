@@ -40,7 +40,7 @@ public class TestController extends GridPane implements Observer {
 		//Ahoj, tohle mi tady nechte zakomentovaný, jsou to testy, že funguje databázový připojení
 		//a že se data správně vkládaj do programu
 		textAreaTest.setText("Ahoj, toto je test, že funguje okno\n");
-		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
+		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
 		
 	}
 	
