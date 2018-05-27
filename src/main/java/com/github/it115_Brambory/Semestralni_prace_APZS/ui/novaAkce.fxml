@@ -12,7 +12,7 @@
       <Button layoutX="177.0" layoutY="81.0" mnemonicParsing="false" text="Přehled akcí" />
       <Button layoutX="37.0" layoutY="81.0" mnemonicParsing="false" text="Přehled žádostí" />
       <Button layoutX="289.0" layoutY="81.0" mnemonicParsing="false" text="Přehled českých buddy" />
-      <Button layoutX="476.0" layoutY="81.0" mnemonicParsing="false" text="Přehled zahraničních studentu" />
+      <Button layoutX="476.0" layoutY="81.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
       <TextArea layoutX="175.0" layoutY="15.0" prefHeight="46.0" prefWidth="200.0" />
       <Label layoutX="37.0" layoutY="38.0" text="Příhlášen jako:" />
       <Button layoutX="37.0" layoutY="313.0" mnemonicParsing="false" text="Zpět" />
