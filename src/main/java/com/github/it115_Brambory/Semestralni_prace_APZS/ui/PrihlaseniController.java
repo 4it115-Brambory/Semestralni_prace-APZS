@@ -31,19 +31,14 @@ import javafx.scene.layout.Pane;
 public class PrihlaseniController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
-
-	public TextField getEmail() {
-		return email;
-	}
-
-	public PasswordField getHeslo() {
-		return heslo;
-	}
+	private Parent root;
+	private Stage window;
 
 	@FXML
 	private TextField email;
 	@FXML
 	private PasswordField heslo;
+
 
 	/**
 	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
@@ -67,38 +62,69 @@ public class PrihlaseniController extends Pane implements Observer {
 		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
 
 	}
-
-	@FXML public void prihlasit() throws IOException 
 	
-    {   FXMLLoader loader = new FXMLLoader();
-		int ukazatel = this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn(email.toString(), heslo.toString()); 
-				switch (ukazatel)
-				{case 1: ukazatel = 0; System.out.println("Zadané údaje nejsou platné"); break;
-				case 2: ukazatel = 1;
-				loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/TestWindow.fxml"));
-				
-		    	
-				
-				break;
-				case 3: ukazatel = 2; 
-				loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/TestWindow.fxml"));
-				
-		    	
-				
-				break;
-				case 4: ukazatel = 3; 
-				loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/TestWindow.fxml"));
-				
-		    	
-				
-				
-				break;};				;
-				Parent root = loader.load();    
+	@FXML
+	/**
+	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím proč. Myslím, že by ještě měla načítat kontroler		
+	 */
+    private void sceneExchange() throws IOException{
+        System.out.println("Scene changing...");
+        root = FXMLLoader.load(getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/prihlaseni.fxml"));
+        window.setScene(new Scene(root));
+        
+    }
+	
+	
+	/**
+	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím proč. Myslím, že by ještě měla načítat kontroler		
+	 */
+	@FXML
+    private void sceneAdmin() throws IOException{
+        System.out.println("Scene changing...");
+        root = FXMLLoader.load(getClass().getResource("prehledakciadmin.fxml"));
+        window.setScene(new Scene(root));
+    }
+	
+	
+	/**
+	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím proč. Myslím, že by ještě měla načítat kontroler		
+	 */
+	@FXML
+    private void sceneBuddy() throws IOException{
+        System.out.println("Scene changing...");
+        root = FXMLLoader.load(getClass().getResource("prehledakcibuddy.fxml"));
+        window.setScene(new Scene(root));
+    }
+
+	@FXML public void prihlasit() throws IOException 	
+    { 
+		String h = heslo.getText();
+		String e = email.getText();
+		
+		
+		int ukazatel = buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn(h,e); 
+		if (ukazatel == 0) {
+		    System.out.println("Chybné přihlašovací údaje");
+		} else if (ukazatel == 1) {
+		    sceneExchange();/*přepnutí na exchange*/
+		} else if (ukazatel == 2) {
+		    sceneBuddy();/*přepnutí na buddyho*/;
+		} else  {
+			 sceneAdmin();/*přepnutí na admina*/;
+		}
+				;
+			   
         }
+	
+	
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub  
 	}
 
 }
+
+	
+	
+

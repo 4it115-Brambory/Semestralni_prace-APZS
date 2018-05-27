@@ -259,7 +259,7 @@ public class DBTransakce {
 	public int logIn (String email, String heslo) {
 		
 		
-		return 0;
+		return 1;
 	}
 	
 	public boolean logIn () throws SQLException {
