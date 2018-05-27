@@ -11,7 +11,6 @@ import javax.persistence.Id;
 /**
  * @author Libor Zíka
  * 
- * 
  * Třída popisující základní atributy akce.
  * 
  * Je nutné použít API pro persistenci a identifikovat třídu jako entitu, která je možným předmětem persistence.
