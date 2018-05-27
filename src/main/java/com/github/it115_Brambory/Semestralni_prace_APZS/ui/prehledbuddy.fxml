@@ -15,7 +15,7 @@
       <Button id="prehledceskych" layoutX="231.0" layoutY="48.0" mnemonicParsing="false" text="Přehled českých buddy" />
       <Button id="prehledzahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
       <Button layoutX="509.0" layoutY="14.0" mnemonicParsing="false" text="Odhlásit" />
-      <TextField layoutX="113.0" layoutY="14.0" />
+      <TextArea id="prihlasen" layoutX="113.0" layoutY="14.0" />
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
       <TableView layoutX="25.0" layoutY="86.0" prefHeight="223.0" prefWidth="539.0">
         <columns>

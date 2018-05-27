@@ -83,7 +83,7 @@ public class Uzivatel{
 	}
 
 	/**
-     * Metoda toString k výpisu obsahu proměnných.
+     * Metoda toString slouží pro výpis obsahu proměnných.
      * 
      * @return String výpis atributů.
      */
