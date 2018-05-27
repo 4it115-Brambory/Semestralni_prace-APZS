@@ -34,7 +34,8 @@ public class TestController extends GridPane implements Observer {
 		//ToDo
 		
 		
-				
+		
+		
 		
 		//---------------------------------------------------------------------------------------------------------------------------------
 		//Ahoj, tohle mi tady nechte zakomentovaný, jsou to testy, že funguje databázový připojení

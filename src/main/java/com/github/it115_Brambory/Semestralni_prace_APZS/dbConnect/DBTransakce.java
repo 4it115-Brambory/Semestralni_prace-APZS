@@ -83,6 +83,7 @@ public class DBTransakce {
 	}
 
 	// zde vzít inspiraci pro vkládání datumu z sql do javy
+	
 	public void printTime() throws SQLException {
 		Connection connection = null;
 		ResultSet resultSet = null;
