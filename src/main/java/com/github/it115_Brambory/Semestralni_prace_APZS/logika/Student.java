@@ -13,7 +13,7 @@ public class Student extends Uzivatel{
 	
 	private String jmeno;
 	private String prijmeni;
-	private Date datumNarozeni;
+	private String datumNarozeni;
 	private String telefon;
 	private String pohlavi;
 	private String statniPrislusnost;
@@ -22,10 +22,11 @@ public class Student extends Uzivatel{
      * Konstruktor pro obecného studenta.
      * Potomci třídy - buddy a exchange student.
      * 
+     * 
      * @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost.
      */
-	public Student(String email, String heslo, int access, String jmeno, String prijmeni, Date datumNarozeni,
+	public Student(String email, String heslo, int access, String jmeno, String prijmeni, String datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost) {
 		super(email, heslo, access);
 		this.jmeno = jmeno;
@@ -77,7 +78,7 @@ public class Student extends Uzivatel{
      * 
      * @return Date datumNarozeni.
      */
-	public Date getDatumNarozeni() {
+	public String getDatumNarozeni() {
 		return datumNarozeni;
 	}
 
@@ -86,7 +87,7 @@ public class Student extends Uzivatel{
      * 
      * @param Date datumNarozeni.
      */
-	public void setDatumNarozeni(Date datumNarozeni) {
+	public void setDatumNarozeni(String datumNarozeni) {
 		this.datumNarozeni = datumNarozeni;
 	}
 	

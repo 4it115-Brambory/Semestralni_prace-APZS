@@ -8,6 +8,7 @@ import javax.persistence.Id;
 /**
  * @author Libor Zíka
  * 
+ * 
  * Třída popisující Buddy studenta.
  * 
  * Je nutné použít API pro persistenci a identifikovat třídu jako entitu, která je možným předmětem persistence.
@@ -29,7 +30,7 @@ public class Buddy extends Student{
 			String telefon, String pohlavi, String statniPrislusnost, int id, String xname, String titul,
 			String adresa.
      */
-	public Buddy(String email, String heslo, int access, String jmeno, String prijmeni, Date datumNarozeni,
+	public Buddy(String email, String heslo, int access, String jmeno, String prijmeni, String datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost, int id, String xname, String titul,
 			String adresa) {
 		super(email, heslo, access, jmeno, prijmeni, datumNarozeni, telefon, pohlavi, statniPrislusnost);
