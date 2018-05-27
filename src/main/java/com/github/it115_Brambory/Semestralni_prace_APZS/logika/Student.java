@@ -22,7 +22,6 @@ public class Student extends Uzivatel{
      * Konstruktor pro obecného studenta.
      * Potomci třídy - buddy a exchange student.
      * 
-     * 
      * @param String email, String heslo, boolean access, String jmeno, String prijmeni, Date datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost.
      */

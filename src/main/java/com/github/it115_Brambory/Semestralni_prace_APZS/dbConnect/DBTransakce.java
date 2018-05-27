@@ -3,12 +3,9 @@ package com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-import javax.naming.spi.DirStateFactory.Result;
-import javax.swing.text.html.MinimalHTMLWriter;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 

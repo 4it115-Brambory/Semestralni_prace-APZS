@@ -6,7 +6,6 @@ import javax.persistence.Id;
 /**
  * @author Libor Zíka
  * 
- * 
  * Třída popisující vztah mezi akcí a žadatelem v podobě žádosti.
  * 
  * Je nutné použít API pro persistenci a identifikovat třídu jako entitu, která je možným předmětem persistence.

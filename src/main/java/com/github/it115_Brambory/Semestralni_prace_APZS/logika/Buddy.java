@@ -8,7 +8,6 @@ import javax.persistence.Id;
 /**
  * @author Libor Zíka
  * 
- * 
  * Třída popisující Buddy studenta.
  * 
  * Je nutné použít API pro persistenci a identifikovat třídu jako entitu, která je možným předmětem persistence.
