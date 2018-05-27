@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.Observable;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -20,11 +19,17 @@ import javafx.scene.layout.Pane;
  * @author Jan Mandík
  *
  */
-public class PrihlaseniController extends Pane implements Observer {
+public class DetailakceadminController extends Pane implements Observer {
 	
 	private IBuddyAplikace buddyAplikace;	
-	@FXML private TextField email;
-	@FXML private PasswordField cena;
+	@FXML private TextField nazev;
+	@FXML private TextField cena;
+	@FXML private TextField typ;
+	@FXML private TextField casOd;
+	@FXML private TextField casDo;
+	@FXML private TextField maxucast;
+	
+	@FXML private TextArea prihlasen;
 	
 	/**
      *  Metoda k inicializaci hry. Načte všechny potřebné prvky
