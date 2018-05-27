@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="167.0" layoutY="71.0" mnemonicParsing="false" text="Přehled akcí" />
+      <Button layoutX="27.0" layoutY="71.0" mnemonicParsing="false" text="Přehled žádostí" />
+      <Button layoutX="279.0" layoutY="71.0" mnemonicParsing="false" text="Přehled českých buddy" />
+      <TextArea layoutX="156.0" layoutY="15.0" prefHeight="46.0" prefWidth="200.0" />
+      <Label layoutX="41.0" layoutY="28.0" text="Příhlášen jako:" />
+      <Label layoutX="91.0" layoutY="140.0" text="Typ:" />
+      <Label layoutX="91.0" layoutY="179.0" text="Název:" />
+      <Label layoutX="91.0" layoutY="222.0" text="Čas od:" />
+      <Label layoutX="91.0" layoutY="265.0" text="Čas do:" />
+      <Label layoutX="380.0" layoutY="140.0" text="Místo:" />
+      <Label layoutX="380.0" layoutY="179.0" text="Popis:" />
+      <Label layoutX="380.0" layoutY="222.0" text="Cena:" />
+      <Label layoutX="380.0" layoutY="265.0" text="Maximální účast:" />
+      <TextField layoutX="141.0" layoutY="135.0" />
+      <TextField layoutX="141.0" layoutY="174.0" />
+      <TextField layoutX="141.0" layoutY="217.0" />
+      <TextField layoutX="141.0" layoutY="260.0" />
+      <TextField layoutX="499.0" layoutY="260.0" />
+      <TextField layoutX="499.0" layoutY="217.0" />
+      <TextField layoutX="499.0" layoutY="174.0" />
+      <TextField layoutX="499.0" layoutY="135.0" />
+      <Button layoutX="466.0" layoutY="71.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
+      <Button layoutX="466.0" layoutY="23.0" mnemonicParsing="false" text="Ohdlásit" />
+      <Button layoutX="47.0" layoutY="566.0" mnemonicParsing="false" text="Schválení" />
+      <Button layoutX="377.0" layoutY="566.0" mnemonicParsing="false" text="Zamítnutí" />
+      <TableView layoutX="108.0" layoutY="310.0" prefHeight="223.0" prefWidth="539.0">
+         <columns>
+            <TableColumn id="email" prefWidth="75.0" text="email" />
+            <TableColumn id="jmeno" prefWidth="90.0" text="jmeno" />
+            <TableColumn id="prijmeni" prefWidth="84.0" text="prijmeni" />
+            <TableColumn id="statniprislusnost" prefWidth="66.0" text="stat" />
+            <TableColumn id="datumnarozeni" prefWidth="107.0" text="datum narozeni" />
+            <TableColumn id="telefon" prefWidth="116.0" text="telefon" />
+         </columns>
+      </TableView>
+   </children>
+</Pane>
