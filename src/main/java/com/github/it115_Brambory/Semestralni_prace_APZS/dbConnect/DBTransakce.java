@@ -608,7 +608,7 @@ public class DBTransakce {
 	// přihlášení se nastaví aktuální uživatel. //
 	// //
 	// ------------------------------------------------------------------------------------------------------------------//
-
+    //Honza komentuje: Meotda by měla dát číslo 0-3, podle toho, co je uživatel zač 0-nic 1-Exchange 2-Budy 3-admin
 	// jestli se shoduje zahashovany retezec z inputu s hashem v db?
 	// Jako tabulka pro dotazování se joinou všechny 3 tabulky s uživateli
 	public int logIn(String email, String heslo) {
