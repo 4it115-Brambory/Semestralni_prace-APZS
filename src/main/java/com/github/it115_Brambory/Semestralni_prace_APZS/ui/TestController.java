@@ -45,7 +45,8 @@ public class TestController extends GridPane implements Observer {
 		
 		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().insertNovaAkce("Pesi", "Pochodak",
 				"5.6. 14:30 2018", "5.6. 18:30 2018", "Bezdez", "pesi vylet", 450, 5);
-		
+		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateAkci(1, "Na kole", "Cyklovylet",
+				"5.6. 14:30 2018", "5.6. 18:30 2018", "Bezdez", "pesi vylet", 450, 5);
 	}
 	
 	@Override

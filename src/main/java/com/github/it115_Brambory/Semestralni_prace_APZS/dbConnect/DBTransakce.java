@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 
 /**
@@ -131,38 +130,169 @@ public class DBTransakce {
 	// metodami pro získání seznamu //
 	// --------------------------------------------------------------------------------------------------------------//
 
-	// takhle se updatuje
-	/*
+	/**
+	 * Metoda pro úpravu buddy studenta, volá se v detailu buddy studenta při
+	 * stisknutí tlačítka pro uložení.
 	 * 
-	 * 
-	 * $stmt = $db->
-	 * prepare("UPDATE Akce SET misto=?, typ_akce=?, zacatek_akce=?, konec_akce=? WHERE akce_id=?"
-	 * ); $stmt->execute(array(htmlspecialchars($_POST['misto']),
-	 * htmlspecialchars($_POST['typ_akce']),
-	 * htmlspecialchars($_POST['zacatek_akce']),
-	 * htmlspecialchars($_POST['konec_akce']), htmlspecialchars($_GET['akce_id'])));
-	 * 
-	 * 
+	 * @param buddy_id
+	 * @param email
+	 * @param heslo
+	 * @param access
+	 * @param jmeno
+	 * @param prijmeni
+	 * @param datumNarozeni
+	 * @param telefon
+	 * @param pohlavi
+	 * @param statniPrislusnost
+	 * @param xname
+	 * @param titul
+	 * @param adresa
+	 * @throws SQLException
 	 */
+	public void updateBuddyStudenta(int buddy_id, String email, String heslo, int access, String jmeno, String prijmeni,
+			String datumNarozeni, String telefon, String pohlavi, String statniPrislusnost, String xname, String titul,
+			String adresa) throws SQLException {
 
-	public boolean updateBuddyStudenta(int buddyID) throws SQLException {
-		return false;
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			// System.out.println("zkousime");
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			// změna string parametru času do java date, aby se mohl preformatovat pro sql
+			DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
+			Date datumNarozeniUpdated = pozadovanyFormat.parse(datumNarozeni);
+
+			// sql DATE ma tento format -> YYYY-MM-DD
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String sql = "UPDATE `Buddy` SET `buddy_id`='" + buddy_id + "', `adresa`='" + adresa + "', `titul`='"
+					+ titul + "', `xname`='" + xname + "', `jmeno`='" + jmeno + "', `prijmeni`='" + prijmeni
+					+ "', `datumNarozeni`='" + dateFormat.format(datumNarozeniUpdated) + "', `telefon`='" + telefon
+					+ "', `pohlavi`='" + pohlavi + "', `statniPrislusnost`='" + statniPrislusnost + "', `email`='"
+					+ email + "', `heslo`='" + heslo + "', `access`='" + access + "' WHERE `buddy_id`='" + buddy_id
+					+ "'";
+
+			statement.executeUpdate(sql);
+			System.out.println("updated");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("not updated");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-	public boolean updateExchangeStudenta(int exchangeStudentID) throws SQLException {
-		return false;
+	/**
+	 * Metoda pro úpravu exchange studenta, volá se v detailu exchange studenta při stisknutí tlačítka pro uložení
+	 * 
+	 * @param exchange_id
+	 * @param email
+	 * @param heslo
+	 * @param access
+	 * @param jmeno
+	 * @param prijmeni
+	 * @param datumNarozeni
+	 * @param telefon
+	 * @param pohlavi
+	 * @param statniPrislusnost
+	 * @param adresaCR
+	 * @throws SQLException
+	 */
+	public void updateExchangeStudenta(int exchange_id, String email, String heslo, int access, String jmeno,
+			String prijmeni, String datumNarozeni, String telefon, String pohlavi, String statniPrislusnost,
+			String adresaCR) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			// System.out.println("zkousime");
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			// změna string parametru času do java date, aby se mohl preformatovat pro sql
+			DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
+			Date datumNarozeniUpdated = pozadovanyFormat.parse(datumNarozeni);
+
+			// sql DATE ma tento format -> YYYY-MM-DD
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String sql = "UPDATE `Exchange` SET `exchange_id`='" + exchange_id + "', `adresaCR`='" + adresaCR
+					+ "', `jmeno`='" + jmeno + "', `prijmeni`='" + prijmeni + "', `datumNarozeni`='"
+					+ dateFormat.format(datumNarozeniUpdated) + "', `telefon`='" + telefon + "', `pohlavi`='" + pohlavi
+					+ "', `statniPrislusnost`='" + statniPrislusnost + "', `email`='" + email + "', `heslo`='" + heslo
+					+ "', `access`='" + access + "' WHERE `exchange_id`='" + exchange_id + "'";
+
+			statement.executeUpdate(sql);
+			System.out.println("updated");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("not updated");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-	public boolean updateAkci(int akceID) throws SQLException {
-		return false;
-	}
+	/**
+	 * Metoda pro úpravu akce, volá se v detailu akce při stisknutí tlačítka pro uložení
+	 * 
+	 * @param akce_id
+	 * @param typ
+	 * @param nazev
+	 * @param casOd
+	 * @param casDo
+	 * @param misto
+	 * @param popis
+	 * @param cena
+	 * @param maxUcast
+	 * @throws SQLException
+	 */
+	public void updateAkci(int akce_id, String typ, String nazev, String casOd, String casDo, String misto,
+			String popis, int cena, int maxUcast) throws SQLException {
 
-	public boolean updateRequest(int requestID) throws SQLException {
-		return false;
-	}
+		Connection connection = null;
+		Statement statement = null;
 
-	public boolean updateVztahuStudentu(int vztahStudentuID) throws SQLException {
-		return false;
+		try {
+			// System.out.println("zkousime");
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			// změna string parametru času do java date, aby se mohl preformatovat pro sql
+			DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. HH:mm yyyy");
+			Date casOdUpdated = pozadovanyFormat.parse(casOd);
+			Date casDoUpdated = pozadovanyFormat.parse(casDo);
+
+			// sql DATETIME ma tento format -> YYYY-MM-DD HH:MI:SS
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String sql = "UPDATE `Akce` SET `akce_id`='" + akce_id + "', `typ`='" + typ + "', `nazev`='" + nazev
+					+ "', `casOd`='" + dateFormat.format(casOdUpdated) + "', `casDo`='"
+					+ dateFormat.format(casDoUpdated) + "', `misto`='" + misto + "', `popis`='" + popis + "', `cena`='"
+					+ cena + "', `maxUcast`='" + maxUcast + "' WHERE `akce_id`='" + akce_id + "'";
+			statement.executeUpdate(sql);
+			System.out.println("updated");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("not updated");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	// --------------------------------------------------------------------------------------------------------------//
@@ -417,6 +547,14 @@ public class DBTransakce {
 		}
 	}
 
+	/**
+	 * Metoda pro vložení nového vztahu studentů. Není potřeba zadávat Id vztahu, to
+	 * se vytvoří samo.
+	 * 
+	 * @param exchange_id
+	 * @param buddy_id
+	 * @throws SQLException
+	 */
 	public void insertNovyVztahStudentu(int exchange_id, int buddy_id) throws SQLException {
 
 		Connection connection = null;
@@ -488,6 +626,37 @@ public class DBTransakce {
 	// zaplaceno/nezaplaceno. Kontrola plnosti akce //
 	// //
 	// ------------------------------------------------------------------------------------------------------------------//
+
+	// INSPIRACE
+
+	public void updateVztahuStudentu(int vztah_id, int exchange_id, int buddy_id) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			// System.out.println("zkousime");
+			// výpočet proměnné, která se dosadí do podmínky
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "UPDATE `VztahBuddyExchange` SET `vztah_id`='" + vztah_id + "', `exchange_id`='" + exchange_id
+					+ "', `buddy_id`='" + buddy_id + "' WHERE `vztah_id`='" + vztah_id;
+
+			statement.executeUpdate(sql);
+			System.out.println("updated");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("not updated");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	// stačí jen metoda na set zaplaceno, protože default hodnota je false, protože
 	// hned po přihlášení student zaplaceno nemá.
