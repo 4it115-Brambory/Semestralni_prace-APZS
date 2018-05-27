@@ -13,7 +13,7 @@ public class Uzivatel{
 	private String email;
 	private String heslo;
 	private int access;
-	//0 pro buddy, 1 pro exchange a 2 pro admina
+	//0 nepřihlášeno, 1 pro buddy, 2 pro exchange a 3 pro admina
 	
 	/**
      * Konstruktor pro uživatele.

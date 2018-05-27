@@ -1,10 +1,14 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 
@@ -34,6 +38,7 @@ public class DBTransakce {
 	private Map<Integer, Request> seznamRequestu;
 	private Map<Integer, VztahStudentu> seznamVztahuStudentu;
 	ConnectionClass connectionClass = new ConnectionClass();
+	Uzivatel prihlasovany;
 
 	// ----------------------------------------------------------------------------------------------------------//
 	// //
@@ -83,7 +88,7 @@ public class DBTransakce {
 	}
 
 	// zde vzít inspiraci pro vkládání datumu z sql do javy
-	
+
 	public void printTime() throws SQLException {
 		Connection connection = null;
 		ResultSet resultSet = null;
@@ -124,20 +129,19 @@ public class DBTransakce {
 	}
 
 	// --------------------------------------------------------------------------------------------------------------//
-	// //
-	// --------- Metody pro úpravu jednotlivých záznamů, ve fxml se používa pro
-	// editaci jednotlivých akcí/buddy/... //
+	//
+	// Metody pro úpravu jednotlivých záznamů, ve fxml se používa pro
+	// editaci jednotlivých akcí/buddy/...
 	// pozn.: po úpravách je nutno opět aktualizovat obsah seznamu v BuddyAplikace
-	// metodami pro získání seznamu //
+	// metodami pro získání seznamu
+	//
 	// --------------------------------------------------------------------------------------------------------------//
 
 	/**
 	 * Metoda pro úpravu buddy studenta, volá se v detailu buddy studenta při
-	 * stisknutí tlačítka pro uložení.
+	 * stisknutí tlačítka pro uložení. ID, email a heslo upravit nelze.
 	 * 
 	 * @param buddy_id
-	 * @param email
-	 * @param heslo
 	 * @param access
 	 * @param jmeno
 	 * @param prijmeni
@@ -150,9 +154,9 @@ public class DBTransakce {
 	 * @param adresa
 	 * @throws SQLException
 	 */
-	public void updateBuddyStudenta(int buddy_id, String email, String heslo, int access, String jmeno, String prijmeni,
-			String datumNarozeni, String telefon, String pohlavi, String statniPrislusnost, String xname, String titul,
-			String adresa) throws SQLException {
+	public void updateBuddyStudenta(int buddy_id, int access, String jmeno, String prijmeni, String datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost, String xname, String titul, String adresa)
+			throws SQLException {
 
 		Connection connection = null;
 		Statement statement = null;
@@ -168,12 +172,11 @@ public class DBTransakce {
 
 			// sql DATE ma tento format -> YYYY-MM-DD
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String sql = "UPDATE `Buddy` SET `buddy_id`='" + buddy_id + "', `adresa`='" + adresa + "', `titul`='"
-					+ titul + "', `xname`='" + xname + "', `jmeno`='" + jmeno + "', `prijmeni`='" + prijmeni
-					+ "', `datumNarozeni`='" + dateFormat.format(datumNarozeniUpdated) + "', `telefon`='" + telefon
-					+ "', `pohlavi`='" + pohlavi + "', `statniPrislusnost`='" + statniPrislusnost + "', `email`='"
-					+ email + "', `heslo`='" + heslo + "', `access`='" + access + "' WHERE `buddy_id`='" + buddy_id
-					+ "'";
+			String sql = "UPDATE `Buddy` SET `adresa`='" + adresa + "', `titul`='" + titul + "', `xname`='" + xname
+					+ "', `jmeno`='" + jmeno + "', `prijmeni`='" + prijmeni + "', `datumNarozeni`='"
+					+ dateFormat.format(datumNarozeniUpdated) + "', `telefon`='" + telefon + "', `pohlavi`='" + pohlavi
+					+ "', `statniPrislusnost`='" + statniPrislusnost + "', `access`='" + access + "' WHERE `buddy_id`='"
+					+ buddy_id + "'";
 
 			statement.executeUpdate(sql);
 			System.out.println("updated");
@@ -191,11 +194,10 @@ public class DBTransakce {
 	}
 
 	/**
-	 * Metoda pro úpravu exchange studenta, volá se v detailu exchange studenta při stisknutí tlačítka pro uložení
+	 * Metoda pro úpravu exchange studenta, volá se v detailu exchange studenta při
+	 * stisknutí tlačítka pro uložení. ID, email a heslo upravit nelze.
 	 * 
 	 * @param exchange_id
-	 * @param email
-	 * @param heslo
 	 * @param access
 	 * @param jmeno
 	 * @param prijmeni
@@ -206,9 +208,8 @@ public class DBTransakce {
 	 * @param adresaCR
 	 * @throws SQLException
 	 */
-	public void updateExchangeStudenta(int exchange_id, String email, String heslo, int access, String jmeno,
-			String prijmeni, String datumNarozeni, String telefon, String pohlavi, String statniPrislusnost,
-			String adresaCR) throws SQLException {
+	public void updateExchangeStudenta(int exchange_id, int access, String jmeno, String prijmeni, String datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost, String adresaCR) throws SQLException {
 
 		Connection connection = null;
 		Statement statement = null;
@@ -224,10 +225,9 @@ public class DBTransakce {
 
 			// sql DATE ma tento format -> YYYY-MM-DD
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String sql = "UPDATE `Exchange` SET `exchange_id`='" + exchange_id + "', `adresaCR`='" + adresaCR
-					+ "', `jmeno`='" + jmeno + "', `prijmeni`='" + prijmeni + "', `datumNarozeni`='"
-					+ dateFormat.format(datumNarozeniUpdated) + "', `telefon`='" + telefon + "', `pohlavi`='" + pohlavi
-					+ "', `statniPrislusnost`='" + statniPrislusnost + "', `email`='" + email + "', `heslo`='" + heslo
+			String sql = "UPDATE `Exchange` SET `adresaCR`='" + adresaCR + "', `jmeno`='" + jmeno + "', `prijmeni`='"
+					+ prijmeni + "', `datumNarozeni`='" + dateFormat.format(datumNarozeniUpdated) + "', `telefon`='"
+					+ telefon + "', `pohlavi`='" + pohlavi + "', `statniPrislusnost`='" + statniPrislusnost
 					+ "', `access`='" + access + "' WHERE `exchange_id`='" + exchange_id + "'";
 
 			statement.executeUpdate(sql);
@@ -246,7 +246,8 @@ public class DBTransakce {
 	}
 
 	/**
-	 * Metoda pro úpravu akce, volá se v detailu akce při stisknutí tlačítka pro uložení
+	 * Metoda pro úpravu akce, volá se v detailu akce při stisknutí tlačítka pro
+	 * uložení. ID upravit nelze.
 	 * 
 	 * @param akce_id
 	 * @param typ
@@ -276,10 +277,10 @@ public class DBTransakce {
 
 			// sql DATETIME ma tento format -> YYYY-MM-DD HH:MI:SS
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String sql = "UPDATE `Akce` SET `akce_id`='" + akce_id + "', `typ`='" + typ + "', `nazev`='" + nazev
-					+ "', `casOd`='" + dateFormat.format(casOdUpdated) + "', `casDo`='"
-					+ dateFormat.format(casDoUpdated) + "', `misto`='" + misto + "', `popis`='" + popis + "', `cena`='"
-					+ cena + "', `maxUcast`='" + maxUcast + "' WHERE `akce_id`='" + akce_id + "'";
+			String sql = "UPDATE `Akce` SET `typ`='" + typ + "', `nazev`='" + nazev + "', `casOd`='"
+					+ dateFormat.format(casOdUpdated) + "', `casDo`='" + dateFormat.format(casDoUpdated)
+					+ "', `misto`='" + misto + "', `popis`='" + popis + "', `cena`='" + cena + "', `maxUcast`='"
+					+ maxUcast + "' WHERE `akce_id`='" + akce_id + "'";
 			statement.executeUpdate(sql);
 			System.out.println("updated");
 		} catch (Exception e) {
@@ -293,7 +294,6 @@ public class DBTransakce {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	// --------------------------------------------------------------------------------------------------------------//
@@ -417,7 +417,8 @@ public class DBTransakce {
 			sql = "INSERT INTO `Exchange` (`exchange_id`, `adresaCR`, `jmeno`, `prijmeni`, `datumNarozeni`, `telefon`, `pohlavi`, `statniPrislusnost`, `email`, `heslo`, `access`) VALUES ('"
 					+ exchange_id + "', '" + adresaCR + "', '" + jmeno + "', '" + prijmeni + "', '"
 					+ dateFormat.format(datumNarozeniUpdated) + "', '" + telefon + "', '" + pohlavi + "', '"
-					+ statniPrislusnost + "', '" + email + "', '" + heslo + "', '" + access + "')";
+					+ statniPrislusnost + "', '" + email + "', '"
+					+ org.apache.commons.codec.digest.DigestUtils.shaHex(heslo) + "', '" + access + "')";
 			statement.executeUpdate(sql);
 			System.out.println("nahrano");
 		} catch (Exception e) {
@@ -483,7 +484,8 @@ public class DBTransakce {
 			sql = "INSERT INTO `Buddy` (`buddy_id`, `adresa`, `titul`, `xname`, `jmeno`, `prijmeni`, `datumNarozeni`, `telefon`, `pohlavi`, `statniPrislusnost`, `email`, `heslo`, `access`) VALUES ('"
 					+ buddy_id + "', '" + adresa + "', '" + titul + "', '" + xname + "', '" + jmeno + "', '" + prijmeni
 					+ "', '" + dateFormat.format(datumNarozeniUpdated) + "', '" + telefon + "', '" + pohlavi + "', '"
-					+ statniPrislusnost + "', '" + email + "', '" + heslo + "', '" + access + "')";
+					+ statniPrislusnost + "', '" + email + "', '"
+					+ org.apache.commons.codec.digest.DigestUtils.shaHex(heslo) + "', '" + access + "')";
 			statement.executeUpdate(sql);
 			System.out.println("nahrano");
 		} catch (Exception e) {
@@ -596,10 +598,11 @@ public class DBTransakce {
 	}
 
 	// --------------------------------------------------------------------------------------------------------------//
-	// //
-	// --------- Metody pro vymazání jednotlivých záznamů, ve fxml se používa pro
-	// odebrání akce/buddy/... //
-	// pozn.: to samé jako nahoře, nutno provést aktualizace seznamu //
+	//
+	// Metody pro vymazání jednotlivých záznamů, ve fxml se používa pro
+	// odebrání akce/buddy/...
+	// pozn.: to samé jako nahoře, nutno provést aktualizace seznamu
+	//
 	// --------------------------------------------------------------------------------------------------------------//
 
 	// ------------------------------------------------------------------------------------------------------------------//
@@ -609,16 +612,110 @@ public class DBTransakce {
 	// //
 	// ------------------------------------------------------------------------------------------------------------------//
 
-	// jestli se shoduje zahashovany retezec z inputu s hashem v db?
-	// Jako tabulka pro dotazování se joinou všechny 3 tabulky s uživateli
-	public boolean logIn(String email, String heslo) {
+	/**
+	 * Metoda slouží k přihlášení do aplikace. Zjistí, jestli je daný uživatel s
+	 * daným heslem v DB. Pokud ano, nastaví aktuálního uživatele v aplikaci a
+	 * metoda vrátí kladonou hodnotu, podle toho, jaká je hodnota atributu "access".
+	 * Pokud ne, vrátí nulovou hodnotu "access" a proces přihlášení se nezdaří.
+	 * Porovnává se zahashovaný řetězec ze vstupu s hashem v DB
+	 * 
+	 * @param email
+	 * @param heslo
+	 * @param aplikace
+	 * @return
+	 */
+	public int logIn(String email, String heslo, BuddyAplikace aplikace) {
 
-		return false;
-	}
+		String shaHashInputHeslo = org.apache.commons.codec.digest.DigestUtils.shaHex(heslo);
+		int access = 0;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
 
-	public boolean logIn() throws SQLException {
+		// zkus najít admina
+		try {
+			// System.out.println("zkousime");
+			String sql = "SELECT `email`, `access`, `heslo` FROM `Admin`";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				if (Objects.equals(email, resultSet.getString("email")) && Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
+					System.out.println("Admin found - logged in");
+					access = resultSet.getInt("access");
+					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
+					aplikace.setAktualniUzivatel(prihlasovany);
+					resultSet.close();
+					statement.close();
+					connection.close();
+					return access;
+				}
+			}
 
-		return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Chyba u ověřování - admin");
+		}
+
+		// zkus najít exchange
+		try {
+			// System.out.println("zkousime");
+			String sql = "SELECT `email`, `access`, `heslo` FROM `Exchange`";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				if (Objects.equals(email, resultSet.getString("email")) && Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
+					System.out.println("Exchange student found - logged in");
+					access = resultSet.getInt("access");
+					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
+					aplikace.setAktualniUzivatel(prihlasovany);
+					resultSet.close();
+					statement.close();
+					connection.close();
+					return access;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Chyba u ověřování - exchange student");
+		}
+
+		// zkus najít buddy
+		try {
+			// System.out.println("zkousime");
+			String sql = "SELECT `email`, `access`, `heslo` FROM `Buddy`";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				if (Objects.equals(email, resultSet.getString("email")) && Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
+					System.out.println("Buddy found - logged in");
+					access = resultSet.getInt("access");
+					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
+					aplikace.setAktualniUzivatel(prihlasovany);
+					resultSet.close();
+					statement.close();
+					connection.close();
+					return access;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Chyba u ověřování - buddy");
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Neplatné jméno nebo heslo");
+		return access;
 	}
 
 	// ------------------------------------------------------------------------------------------------------------------//
