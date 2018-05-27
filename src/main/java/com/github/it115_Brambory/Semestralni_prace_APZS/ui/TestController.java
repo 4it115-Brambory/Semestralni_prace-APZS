@@ -41,8 +41,10 @@ public class TestController extends GridPane implements Observer {
 		//a že se data správně vkládaj do programu
 		textAreaTest.setText("Ahoj, toto je test, že funguje okno\n");
 		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
+		//("dd.MM. HH:mm yyyy")
+		
 		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().insertNovaAkce("Pesi", "Pochodak",
-				"2018-05-27 10:26:27", "2018-05-27 10:26:27", "Bezdez", "pesi vylet", 450, 5);
+				"5.6. 14:30 2018", "5.6. 18:30 2018", "Bezdez", "pesi vylet", 450, 5);
 		
 	}
 	

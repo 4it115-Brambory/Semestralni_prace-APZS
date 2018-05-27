@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Entity
 public class Exchange extends Student{
 
-	private int id;
+	private int exchange_id;
 	//jak se kurva udělá fotka :D, na tu asi prdim :D
 	private String adresaCR;
 	
@@ -27,10 +27,10 @@ public class Exchange extends Student{
      * @param String email, String heslo, int access, String jmeno, String prijmeni, Date datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR.
      */
-	public Exchange(String email, String heslo, int access, String jmeno, String prijmeni, Date datumNarozeni,
-			String telefon, String pohlavi, String statniPrislusnost, int id, String adresaCR) {
+	public Exchange(String email, String heslo, int access, String jmeno, String prijmeni, String datumNarozeni,
+			String telefon, String pohlavi, String statniPrislusnost, int exchange_id, String adresaCR) {
 		super(email, heslo, access, jmeno, prijmeni, datumNarozeni, telefon, pohlavi, statniPrislusnost);
-		this.id = id;
+		this.exchange_id = exchange_id;
 		this.adresaCR = adresaCR;
 	}
 
@@ -41,16 +41,16 @@ public class Exchange extends Student{
      */
 	@Id
 	public int getId() {
-		return id;
+		return exchange_id;
 	}
 	
 	/**
-     * Setter na Id akce.
+     * Setter na Id echange studenta.
      * 
      * @param int id.
      */
 	public void setId(int id) {
-		this.id = id;
+		this.exchange_id = exchange_id;
 	}
 	
 	/**
@@ -78,6 +78,6 @@ public class Exchange extends Student{
      */
 	@Override
 	public String toString() {
-		return "Exchange [id=" + id + ", adresaCR=" + adresaCR + "]";
+		return "Exchange [id=" + exchange_id + ", adresaCR=" + adresaCR + "]";
 	}
 }
