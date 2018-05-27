@@ -139,10 +139,9 @@ public class DBTransakce {
 
 	/**
 	 * Metoda pro úpravu buddy studenta, volá se v detailu buddy studenta při
-	 * stisknutí tlačítka pro uložení. ID, email a heslo upravit nelze.
+	 * stisknutí tlačítka pro uložení. ID, access, email a heslo upravit nelze.
 	 * 
 	 * @param buddy_id
-	 * @param access
 	 * @param jmeno
 	 * @param prijmeni
 	 * @param datumNarozeni
@@ -154,7 +153,7 @@ public class DBTransakce {
 	 * @param adresa
 	 * @throws SQLException
 	 */
-	public void updateBuddyStudenta(int buddy_id, int access, String jmeno, String prijmeni, String datumNarozeni,
+	public void updateBuddyStudenta(int buddy_id, String jmeno, String prijmeni, String datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost, String xname, String titul, String adresa)
 			throws SQLException {
 
@@ -175,7 +174,7 @@ public class DBTransakce {
 			String sql = "UPDATE `Buddy` SET `adresa`='" + adresa + "', `titul`='" + titul + "', `xname`='" + xname
 					+ "', `jmeno`='" + jmeno + "', `prijmeni`='" + prijmeni + "', `datumNarozeni`='"
 					+ dateFormat.format(datumNarozeniUpdated) + "', `telefon`='" + telefon + "', `pohlavi`='" + pohlavi
-					+ "', `statniPrislusnost`='" + statniPrislusnost + "', `access`='" + access + "' WHERE `buddy_id`='"
+					+ "', `statniPrislusnost`='" + statniPrislusnost + "' WHERE `buddy_id`='"
 					+ buddy_id + "'";
 
 			statement.executeUpdate(sql);
@@ -195,10 +194,9 @@ public class DBTransakce {
 
 	/**
 	 * Metoda pro úpravu exchange studenta, volá se v detailu exchange studenta při
-	 * stisknutí tlačítka pro uložení. ID, email a heslo upravit nelze.
+	 * stisknutí tlačítka pro uložení. ID, access, email a heslo upravit nelze.
 	 * 
 	 * @param exchange_id
-	 * @param access
 	 * @param jmeno
 	 * @param prijmeni
 	 * @param datumNarozeni
@@ -208,7 +206,7 @@ public class DBTransakce {
 	 * @param adresaCR
 	 * @throws SQLException
 	 */
-	public void updateExchangeStudenta(int exchange_id, int access, String jmeno, String prijmeni, String datumNarozeni,
+	public void updateExchangeStudenta(int exchange_id, String jmeno, String prijmeni, String datumNarozeni,
 			String telefon, String pohlavi, String statniPrislusnost, String adresaCR) throws SQLException {
 
 		Connection connection = null;
@@ -228,7 +226,7 @@ public class DBTransakce {
 			String sql = "UPDATE `Exchange` SET `adresaCR`='" + adresaCR + "', `jmeno`='" + jmeno + "', `prijmeni`='"
 					+ prijmeni + "', `datumNarozeni`='" + dateFormat.format(datumNarozeniUpdated) + "', `telefon`='"
 					+ telefon + "', `pohlavi`='" + pohlavi + "', `statniPrislusnost`='" + statniPrislusnost
-					+ "', `access`='" + access + "' WHERE `exchange_id`='" + exchange_id + "'";
+					+ "' WHERE `exchange_id`='" + exchange_id + "'";
 
 			statement.executeUpdate(sql);
 			System.out.println("updated");
@@ -606,10 +604,10 @@ public class DBTransakce {
 	// --------------------------------------------------------------------------------------------------------------//
 
 	// ------------------------------------------------------------------------------------------------------------------//
-	// //
-	// --------- Metoda pro přihlášení do aplikace, log in. V případě úspěšného
-	// přihlášení se nastaví aktuální uživatel. //
-	// //
+	// 
+	// Metoda pro přihlášení do aplikace, log in. V případě úspěšného
+	// přihlášení se nastaví aktuální uživatel. 
+	// 
 	// ------------------------------------------------------------------------------------------------------------------//
 
 	/**
@@ -738,7 +736,7 @@ public class DBTransakce {
 			connection = connectionClass.getConnection();
 			statement = connection.createStatement();
 
-			String sql = "UPDATE `VztahBuddyExchange` SET `vztah_id`='" + vztah_id + "', `exchange_id`='" + exchange_id
+			String sql = "UPDATE `VztahBuddyExchange` SET `exchange_id`='" + exchange_id
 					+ "', `buddy_id`='" + buddy_id + "' WHERE `vztah_id`='" + vztah_id;
 
 			statement.executeUpdate(sql);

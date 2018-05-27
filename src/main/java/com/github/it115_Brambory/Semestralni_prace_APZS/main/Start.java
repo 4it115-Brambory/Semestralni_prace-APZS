@@ -2,13 +2,18 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 package com.github.it115_Brambory.Semestralni_prace_APZS.main;
 
+import com.github.it115_Brambory.Semestralni_prace_APZS.App;
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
-import com.github.it115_Brambory.Semestralni_prace_APZS.ui.TestController;
+import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakciexchangeController;
+import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrihlaseniController;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /*******************************************************************************
@@ -29,6 +34,9 @@ public class Start extends Application {
         	System.out.println("Neplatný parametr");
         }
     }
+
+
+	
     /**
 	 * Metoda, ve které se konstruuje okno, kontroler a buddyAplikace,
 	 * která se předává kontroleru
@@ -37,11 +45,12 @@ public class Start extends Application {
 		public void start (Stage primaryStage) throws Exception {
 			FXMLLoader loader = new FXMLLoader();
 			//loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/MainWindow.fxml"));
-			loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/TestWindow.fxml"));
+			//loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/TestWindow.fxml"));
+			loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/prihlaseni.fxml"));
 			
 	    	Parent root = loader.load();
 	
-	    	TestController controller = loader.getController();
+	    	PrihlaseniController controller = loader.getController();
 	    	IBuddyAplikace buddyAplikace = new BuddyAplikace();
 			controller.inicializuj(buddyAplikace);
 	    	
@@ -49,5 +58,10 @@ public class Start extends Application {
 	    	primaryStage.show();
 	    	primaryStage.setTitle("Brambory - aplikace");
 	    	//primaryStage.setResizable(false);
-		}
+	    	}
+    	
+    	
+		
+    	
+    	
 }

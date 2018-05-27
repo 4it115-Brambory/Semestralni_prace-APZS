@@ -1,57 +1,130 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.ui;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
+import com.github.it115_Brambory.Semestralni_prace_APZS.main.*;
+import com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect.*;
 
 import java.util.Observer;
 import java.awt.TextField;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Observable;
-
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 /**
- * Kontroler, který zprostředkovává komunikaci mezi grafikou
- * a logikou - slouží pro načtení detailu buddyho
+ * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
+ * pro načtení detailu buddyho
  * 
  * @author Jan Mandík
  *
  */
 public class PrihlaseniController extends Pane implements Observer {
+
+	private IBuddyAplikace buddyAplikace;
+	private Parent root;
+	private Stage window;
+
+	@FXML
+	private TextField email;
+	@FXML
+	private PasswordField heslo;
+
+
+	/**
+	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
+	 * observery.
+	 * 
+	 * @throws SQLException
+	 *             - to je kvůli těm testům na konci metody
+	 */
+	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+
+		this.buddyAplikace = buddyAplikace;
+		// ToDo
+
+		// ---------------------------------------------------------------------------------------------------------------------------------
+		// Ahoj, tohle mi tady nechte zakomentovaný, jsou to testy, že funguje
+		// databázový připojení
+		// a že se data správně vkládaj do programu
+		// textAreaTest.setText("Ahoj, toto je test, že funguje okno\n");
+		// jmeno.setText(this); Potřeba zíkávat hodnotu jednotlivých fieldů, nevím, jak
+		// to udělat
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
+
+	}
 	
-	private IBuddyAplikace buddyAplikace;	
-	@FXML private TextField email;
-	@FXML private PasswordField cena;
+	@FXML
+	/**
+	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím proč. Myslím, že by ještě měla načítat kontroler		
+	 */
+    private void sceneExchange() throws IOException{
+        System.out.println("Scene changing...");
+        root = FXMLLoader.load(getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/prihlaseni.fxml"));
+        window.setScene(new Scene(root));
+        
+    }
+	
 	
 	/**
-     *  Metoda k inicializaci hry. Načte všechny potřebné prvky
-     *  GUI a přidá observery.
-     *  
-	 * @throws SQLException - to je kvůli těm testům na konci metody
-     */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
-		
-		this.buddyAplikace = buddyAplikace;
-		//ToDo
-		
-		
-		
-		
-		//---------------------------------------------------------------------------------------------------------------------------------
-		//Ahoj, tohle mi tady nechte zakomentovaný, jsou to testy, že funguje databázový připojení
-		//a že se data správně vkládaj do programu
-		//textAreaTest.setText("Ahoj, toto je test, že funguje okno\n");
-		//jmeno.setText(this); Potřeba zíkávat hodnotu jednotlivých fieldů, nevím, jak to udělat
-		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
-		
-	}
+	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím proč. Myslím, že by ještě měla načítat kontroler		
+	 */
+	@FXML
+    private void sceneAdmin() throws IOException{
+        System.out.println("Scene changing...");
+        root = FXMLLoader.load(getClass().getResource("prehledakciadmin.fxml"));
+        window.setScene(new Scene(root));
+    }
 	
+	
+	/**
+	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím proč. Myslím, že by ještě měla načítat kontroler		
+	 */
+	@FXML
+    private void sceneBuddy() throws IOException{
+        System.out.println("Scene changing...");
+        root = FXMLLoader.load(getClass().getResource("prehledakcibuddy.fxml"));
+        window.setScene(new Scene(root));
+    }
+
+	@FXML public void prihlasit() throws IOException 	
+    { 
+		String h = heslo.getText();
+		String e = email.getText();
+		
+		
+		int ukazatel = buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn(h,e); 
+		if (ukazatel == 0) {
+		    System.out.println("Chybné přihlašovací údaje");
+		} else if (ukazatel == 1) {
+		    sceneExchange();/*přepnutí na exchange*/
+		} else if (ukazatel == 2) {
+		    sceneBuddy();/*přepnutí na buddyho*/;
+		} else  {
+			 sceneAdmin();/*přepnutí na admina*/;
+		}
+				;
+			   
+        }
+	
+	
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub  
 	}
-	
+
 }
+
+	
+	
+
