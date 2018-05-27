@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrihlaseniController">
    <children>
@@ -40,11 +42,11 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <PasswordField id="email">
+            <TextField id="email">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor>
-            </PasswordField>
+            </TextField>
             <Label prefHeight="35.0" prefWidth="210.0" text="Heslo">
                <font>
                   <Font size="24.0" />

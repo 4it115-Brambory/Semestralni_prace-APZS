@@ -8,24 +8,39 @@ import java.sql.SQLException;
 import java.util.Observable;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou
- * a logikou - slouží pro načtení detailu buddyho
+ * a logikou - slouží pro načtení přehledu buddy
  * 
- * @author Jan Mandík
+ * @author Samuel Koyš
  *
  */
-public class PrihlaseniController extends Pane implements Observer {
-	
+public class PrehledZadostiController extends Pane implements Observer {
+	//zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;	
-	@FXML private TextField email;
-	@FXML private PasswordField cena;
+	@FXML private TableColumn typ;
+	@FXML private TableColumn nazev;
+	@FXML private TableColumn casDo;
+	@FXML private TableColumn casOd;
+	@FXML private TableColumn misto;
+	@FXML private TableColumn popis;
+	@FXML private TableColumn cena;
 	
+	@FXML private TextField maxucast;
+	@FXML private TextField jmeno;
+	@FXML private TextField prijmeni;
+	@FXML private TextField email;
+	@FXML private TextField pohlavi;
+	@FXML private TextField statniprislusnost;
+	@FXML private TextField adresa;
+	@FXML private TextField datumnarozeni;
+	@FXML private TextArea prihlasen;
+
 	/**
      *  Metoda k inicializaci hry. Načte všechny potřebné prvky
      *  GUI a přidá observery.
@@ -43,7 +58,7 @@ public class PrihlaseniController extends Pane implements Observer {
 		//---------------------------------------------------------------------------------------------------------------------------------
 		//Ahoj, tohle mi tady nechte zakomentovaný, jsou to testy, že funguje databázový připojení
 		//a že se data správně vkládaj do programu
-		//textAreaTest.setText("Ahoj, toto je test, že funguje okno\n");
+		
 		//jmeno.setText(this); Potřeba zíkávat hodnotu jednotlivých fieldů, nevím, jak to udělat
 		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
 		
@@ -55,3 +70,4 @@ public class PrihlaseniController extends Pane implements Observer {
 	}
 	
 }
+
