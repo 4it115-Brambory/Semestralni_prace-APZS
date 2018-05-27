@@ -1,5 +1,6 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.logika;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
@@ -22,8 +23,8 @@ public class Akce {
 	private int akce_id;
 	private String typ;
 	private String nazev;
-	private Date casOd;
-	private Date casDo;
+	private String casOd;
+	private String casDo;
 	private String misto;
 	private String popis;
 	private int cena; //bude to jenom v Kč, ať si to neděláme těžší
@@ -35,7 +36,7 @@ public class Akce {
      * @param int id, String druh, String nazev, Date datumACasOd, Date datumACasDo, String misto, String popis,
 			int cena, int maxUcast.
      */
-	public Akce(int akce_id, String typ, String nazev, Date casOd, Date casDo, String misto, String popis,
+	public Akce(int akce_id, String typ, String nazev, String casOd, String casDo, String misto, String popis,
 			int cena, int maxUcast) {
 		this.akce_id = akce_id;
 		this.typ = typ;
@@ -135,7 +136,7 @@ public class Akce {
      * 
      * @return Date datumACasOd.
      */
-	public Date getCasOd() {
+	public String getCasOd() {
 		return casOd;
 	}
 
@@ -144,7 +145,7 @@ public class Akce {
      * 
      * @param Date casOd.
      */
-	public void setCasOd(Date casOd) {
+	public void setCasOd(String casOd) {
 		this.casOd = casOd;
 	}
 	
@@ -153,7 +154,7 @@ public class Akce {
      * 
      * @return Date casDo.
      */
-	public Date getCasDo() {
+	public String getCasDo() {
 		return casDo;
 	}
 
@@ -162,7 +163,7 @@ public class Akce {
      * 
      * @param Date casDo.
      */
-	public void setCasDo(Date casDo) {
+	public void setCasDo(String casDo) {
 		this.casDo = casDo;
 	}
 	
