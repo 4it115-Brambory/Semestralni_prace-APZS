@@ -419,7 +419,7 @@ public class DBTransakce {
 			}
 		}
 	}
-	
+
 	public void insertNovyVztahStudentu(int exchange_id, int buddy_id) throws SQLException {
 
 		Connection connection = null;
@@ -441,8 +441,8 @@ public class DBTransakce {
 					vztah_id += 1;
 				}
 			}
-			sql = "INSERT INTO `VztahBuddyExchange` (`exchange_id`, `buddy_id`, `vztah_id`) VALUES ('"
-					+ exchange_id + "', '" + buddy_id + "', '" + vztah_id + "')";
+			sql = "INSERT INTO `VztahBuddyExchange` (`exchange_id`, `buddy_id`, `vztah_id`) VALUES ('" + exchange_id
+					+ "', '" + buddy_id + "', '" + vztah_id + "')";
 			statement.executeUpdate(sql);
 			System.out.println("nahrano");
 		} catch (Exception e) {
