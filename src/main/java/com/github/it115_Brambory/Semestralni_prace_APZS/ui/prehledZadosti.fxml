@@ -32,8 +32,8 @@
       <TextField layoutX="499.0" layoutY="217.0" />
       <TextField layoutX="499.0" layoutY="174.0" />
       <TextField layoutX="499.0" layoutY="135.0" />
-      <Button layoutX="466.0" layoutY="71.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
-      <Button layoutX="466.0" layoutY="23.0" mnemonicParsing="false" text="Ohdlásit" />
+      <Button layoutX="468.0" layoutY="71.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
+      <Button layoutX="468.0" layoutY="23.0" mnemonicParsing="false" text="Ohdlásit" />
       <Button layoutX="47.0" layoutY="566.0" mnemonicParsing="false" text="Schválení" />
       <Button layoutX="377.0" layoutY="566.0" mnemonicParsing="false" text="Zamítnutí" />
       <TableView layoutX="108.0" layoutY="310.0" prefHeight="223.0" prefWidth="539.0">
