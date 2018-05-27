@@ -21,14 +21,16 @@ import javafx.scene.layout.Pane;
  *
  */
 public class PrehledakciexchangeController extends Pane implements Observer {
-	//zjistit, jak se používá tableview
-	private IBuddyAplikace buddyAplikace;	
-	@FXML private TableColumn typ;
-	@FXML private TableColumn nazev;
-	@FXML private TableColumn od;
+	
+		private IBuddyAplikace buddyAplikace;	
+		@FXML private TableColumn typ;
+		@FXML private TableColumn nazev;
+		@FXML private TableColumn casDo;
+		@FXML private TableColumn casOd;
+		@FXML private TableColumn misto;
 
-	@FXML private TableColumn cena;
-	@FXML private TextArea prihlasen;
+		@FXML private TableColumn cena;
+		@FXML private TextArea prihlasen;
 
 	/**
      *  Metoda k inicializaci hry. Načte všechny potřebné prvky

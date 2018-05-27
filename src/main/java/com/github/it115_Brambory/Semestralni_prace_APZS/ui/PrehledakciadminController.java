@@ -25,7 +25,9 @@ public class PrehledakciadminController extends Pane implements Observer {
 	private IBuddyAplikace buddyAplikace;	
 	@FXML private TableColumn typ;
 	@FXML private TableColumn nazev;
-	@FXML private TableColumn od;
+	@FXML private TableColumn casDo;
+	@FXML private TableColumn casOd;
+	@FXML private TableColumn misto;
 
 	@FXML private TableColumn cena;
 	@FXML private TextArea prihlasen;

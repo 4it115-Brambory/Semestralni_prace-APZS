@@ -15,7 +15,7 @@
       <TextField id="nazev" layoutX="102.0" layoutY="88.0" />
       <TextField id="cena" layoutX="102.0" layoutY="122.0" />
       <TextField id="typ" layoutX="102.0" layoutY="159.0" />
-      <TextField id="od" layoutX="102.0" layoutY="194.0" />
+      <TextField id="casOd" layoutX="102.0" layoutY="194.0" />
       <TextField id="popis" layoutX="400.0" layoutY="88.0" />
       <TextField id="maxucast" layoutX="400.0" layoutY="122.0" />
       <Label layoutX="59.0" layoutY="92.0" text="Nazev:" />
@@ -24,7 +24,7 @@
       <Label layoutX="78.0" layoutY="198.0" text="Od:" />
       <Label layoutX="361.0" layoutY="92.0" text="Popis:" />
       <Label layoutX="341.0" layoutY="126.0" text="Max ucast:" />
-      <TextField id="do" layoutX="102.0" layoutY="228.0" />
+      <TextField id="casDo" layoutX="102.0" layoutY="228.0" />
       <Label layoutX="78.0" layoutY="232.0" text="Do:" />
    </children>
 </Pane>

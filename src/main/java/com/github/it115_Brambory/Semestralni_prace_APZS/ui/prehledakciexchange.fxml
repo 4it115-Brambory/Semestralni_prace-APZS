@@ -17,8 +17,8 @@
         <columns>
           <TableColumn id="typ" prefWidth="75.0" text="typ" />
             <TableColumn id="nazev" prefWidth="90.0" text="nazev" />
-            <TableColumn id="od" prefWidth="84.0" text="od" />
-          <TableColumn id="do" prefWidth="66.0" text="do" />
+            <TableColumn id="casOd" prefWidth="84.0" text="od" />
+          <TableColumn id="casDo" prefWidth="66.0" text="do" />
             <TableColumn id="misto" prefWidth="107.0" text="misto" />
             <TableColumn id="cena" prefWidth="116.0" text="cena" />
         </columns>
