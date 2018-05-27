@@ -256,10 +256,10 @@ public class DBTransakce {
 	
 	//jestli se shoduje zahashovany retezec z inputu s hashem v db?
 	//Jako tabulka pro dotazování se joinou všechny 3 tabulky s uživateli
-	public boolean logIn (String email, String heslo) {
+	public int logIn (String email, String heslo) {
 		
 		
-		return false;
+		return 0;
 	}
 	
 	public boolean logIn () throws SQLException {

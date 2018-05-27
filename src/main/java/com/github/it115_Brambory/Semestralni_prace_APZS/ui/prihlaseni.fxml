@@ -60,6 +60,6 @@
          </children>
       </VBox>
       <Separator layoutX="5.0" layoutY="88.0" prefHeight="3.0" prefWidth="587.0" />
-      <Button id="prihlasitse" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="333.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0" text="Přihlásit se" wrapText="true" />
+      <Button id="prihlasitse" onMouseClicked="#prihlasit" alignment="CENTER" contentDisplay="CENTER" layoutX="235.0" layoutY="333.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0" text="Přihlásit se" wrapText="true" />
    </children>
 </Pane>
