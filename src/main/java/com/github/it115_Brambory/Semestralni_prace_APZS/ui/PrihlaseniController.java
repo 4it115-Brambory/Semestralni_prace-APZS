@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -97,7 +99,8 @@ public class PrihlaseniController extends Pane implements Observer {
 		int ukazatel = buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn(email.getText(), heslo.getText(),
 				buddyAplikace);
 		if (ukazatel == 0) {
-			System.out.println("Chybné přihlašovací údaje");
+			//vyskočí modální okno
+			ukazAlertBad();			
 		} else if (ukazatel == 1) {
 			sceneExchange();/* přepnutí na exchange */
 		} else if (ukazatel == 2) {
@@ -107,6 +110,17 @@ public class PrihlaseniController extends Pane implements Observer {
 			sceneAdmin();
 			/* přepnutí na admina */;
 		}
+	}
+
+	/**
+	 * Metoda ukáže modální okno s upozorněním
+	 */
+	public void ukazAlertBad() {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Upozornění");
+		alert.setHeaderText(null);
+		alert.setContentText("Neplatné jméno nebo heslo!");
+		alert.showAndWait();
 	}
 
 	@Override
