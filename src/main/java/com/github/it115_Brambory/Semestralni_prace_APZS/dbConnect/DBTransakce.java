@@ -1,11 +1,8 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
@@ -33,18 +30,17 @@ public class DBTransakce {
 
 	private Map<Integer, Buddy> seznamBuddy;
 	private Map<Integer, Exchange> seznamExchange;
-	private Map<Integer, Admin> seznamAdminu;
 	private Map<Integer, Akce> seznamAkci;
 	private Map<Integer, Request> seznamRequestu;
-	private Map<Integer, VztahStudentu> seznamVztahuStudentu;
+	private VztahStudentu vztahStudentu;
 	ConnectionClass connectionClass = new ConnectionClass();
 	Uzivatel prihlasovany;
 
 	// ----------------------------------------------------------------------------------------------------------//
-	// //
-	// --------- Metody pro získávání seznamů, ve fxml se používa pro výpis přehledu
-	// --------- akcí/buddy/... //
-	// //
+	//
+	// Metody pro získávání seznamů, ve fxml se používa pro výpis přehledu
+	// akcí/buddy/... Také jsou zde metody na získávání dalších objektů.
+	//
 	// ----------------------------------------------------------------------------------------------------------//
 
 	public Map<Integer, Buddy> getSeznamBuddy() throws SQLException {
@@ -70,18 +66,19 @@ public class DBTransakce {
 		return seznamAkci;
 	}
 
-	public Map<Integer, Request> getSeznamRequestu() throws SQLException {
+	//pro admina na potvrzeni
+	public Map<Integer, Request> getSeznamRequestuNeschvaleno() throws SQLException {
 		return seznamRequestu;
 	}
 
-	public Map<Integer, VztahStudentu> getSeznamVztahuStudentu() throws SQLException {
-		return seznamVztahuStudentu;
+	//seznam vztahů studentů snad nebude potřeba, je tu tedy jen tato metoda
+	//ta by měla stačit na výpis jména buddy studenta, který je přiřazen k
+	//exchange studentovi. Výpis by měl být potřebný v detailu exchange studenta
+	public VztahStudentu getVztahStudentu(int exchange_id) throws SQLException {
+		return vztahStudentu;
 	}
 
-	public Map<Integer, Admin> getSeznamAdminu() throws SQLException {
-		return seznamAdminu;
-	}
-
+	//pro výpis v detailu akce
 	public Map<Integer, Exchange> getSeznamExchangePrihlasenychNaAkci(int akceID) throws SQLException {
 		// select * from Exchange left join Request where Request.schvaleno = 1
 		return seznamExchange;
@@ -153,9 +150,8 @@ public class DBTransakce {
 	 * @param adresa
 	 * @throws SQLException
 	 */
-	public void updateBuddyStudenta(int buddy_id, String jmeno, String prijmeni, String datumNarozeni,
-			String telefon, String pohlavi, String statniPrislusnost, String xname, String titul, String adresa)
-			throws SQLException {
+	public void updateBuddyStudenta(int buddy_id, String jmeno, String prijmeni, String datumNarozeni, String telefon,
+			String pohlavi, String statniPrislusnost, String xname, String titul, String adresa) throws SQLException {
 
 		Connection connection = null;
 		Statement statement = null;
@@ -174,8 +170,7 @@ public class DBTransakce {
 			String sql = "UPDATE `Buddy` SET `adresa`='" + adresa + "', `titul`='" + titul + "', `xname`='" + xname
 					+ "', `jmeno`='" + jmeno + "', `prijmeni`='" + prijmeni + "', `datumNarozeni`='"
 					+ dateFormat.format(datumNarozeniUpdated) + "', `telefon`='" + telefon + "', `pohlavi`='" + pohlavi
-					+ "', `statniPrislusnost`='" + statniPrislusnost + "' WHERE `buddy_id`='"
-					+ buddy_id + "'";
+					+ "', `statniPrislusnost`='" + statniPrislusnost + "' WHERE `buddy_id`='" + buddy_id + "'";
 
 			statement.executeUpdate(sql);
 			System.out.println("updated");
@@ -500,6 +495,8 @@ public class DBTransakce {
 		}
 	}
 
+	//V controlleru se ptát, jestli už v DB ten stejný student již nežádal. V tom případě
+	//bych mu vypsal, že má smůlu, že jeho minulá žádost byla zamítnuta
 	/**
 	 * Metoda pro vložení nového requestu do databáze - žádost o přihlášení na akci.
 	 * Není potřeba zadávat Id, to se vytvoří samo. Hodnoty atributů "schvaleno" a
@@ -603,11 +600,161 @@ public class DBTransakce {
 	//
 	// --------------------------------------------------------------------------------------------------------------//
 
+	/**
+	 * Metoda na vymazání akce z DB pomocí paramentru - Id akce
+	 * 
+	 * 
+	 * @param akce_id
+	 * @throws SQLException
+	 */
+	public void deleteAkce(int akce_id) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			String sql = "DELETE FROM `Akce` WHERE `akce_id`='" + akce_id + "'";
+			statement.executeUpdate(sql);
+			System.out.println("vymazáno");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nevymazáno");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Metoda na vymazání buddy studenta z DB pomocí paramentru
+	 * 
+	 * @param buddy_id
+	 * @throws SQLException
+	 */
+	public void deleteBuddyStudent(int buddy_id) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			String sql = "DELETE FROM `Buddy` WHERE `buddy_id`='" + buddy_id + "'";
+			statement.executeUpdate(sql);
+			System.out.println("vymazáno");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nevymazáno");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Metoda na vymazání exchange studenta z DB pomocí paramentru
+	 * 
+	 * @param exchange_id
+	 * @throws SQLException
+	 */
+	public void deleteExchangeStudent(int exchange_id) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			String sql = "DELETE FROM `Exchange` WHERE `exchange_id`='" + exchange_id + "'";
+			statement.executeUpdate(sql);
+			System.out.println("vymazáno");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nevymazáno");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Metoda na vymazání vztahu studentů z DB pomocí paramentru - ID vztahu
+	 * 
+	 * @param vztah_id
+	 * @throws SQLException
+	 */
+	public void deleteVztahStudentu(int vztah_id) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			String sql = "DELETE FROM `VztahBuddyExchange` WHERE `vztah_id`='" + vztah_id + "'";
+			statement.executeUpdate(sql);
+			System.out.println("vymazáno");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nevymazáno");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Metoda na vymazání requestu z DB pomocí paramentru - Id
+	 * 
+	 * @param request_id
+	 * @throws SQLException
+	 */
+	public void deleteRequest(int request_id) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			String sql = "DELETE FROM `Request` WHERE `request_id`='" + request_id + "'";
+			statement.executeUpdate(sql);
+			System.out.println("vymazáno");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nevymazáno");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	// ------------------------------------------------------------------------------------------------------------------//
-	// 
+	//
 	// Metoda pro přihlášení do aplikace, log in. V případě úspěšného
-	// přihlášení se nastaví aktuální uživatel. 
-	// 
+	// přihlášení se nastaví aktuální uživatel.
+	//
 	// ------------------------------------------------------------------------------------------------------------------//
 
 	/**
@@ -638,7 +785,8 @@ public class DBTransakce {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
-				if (Objects.equals(email, resultSet.getString("email")) && Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
+				if (Objects.equals(email, resultSet.getString("email"))
+						&& Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
 					System.out.println("Admin found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
@@ -663,7 +811,8 @@ public class DBTransakce {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
-				if (Objects.equals(email, resultSet.getString("email")) && Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
+				if (Objects.equals(email, resultSet.getString("email"))
+						&& Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
 					System.out.println("Exchange student found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
@@ -688,7 +837,8 @@ public class DBTransakce {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
-				if (Objects.equals(email, resultSet.getString("email")) && Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
+				if (Objects.equals(email, resultSet.getString("email"))
+						&& Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
 					System.out.println("Buddy found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
@@ -717,27 +867,31 @@ public class DBTransakce {
 	}
 
 	// ------------------------------------------------------------------------------------------------------------------//
-	// //
-	// --------- Metody k nastavení stavu žádosti -> schváleno/zamítnuto a
+	//
+	// Metody k nastavení stavu žádosti -> schváleno/zamítnuto a
 	// zaplaceno/nezaplaceno. Kontrola plnosti akce //
-	// //
+	//
 	// ------------------------------------------------------------------------------------------------------------------//
 
-	// INSPIRACE
-
+	/**
+	 * Metoda upraví vztah dvou studentů
+	 * 
+	 * @param vztah_id
+	 * @param exchange_id
+	 * @param buddy_id
+	 * @throws SQLException
+	 */
 	public void updateVztahuStudentu(int vztah_id, int exchange_id, int buddy_id) throws SQLException {
 
 		Connection connection = null;
 		Statement statement = null;
 
 		try {
-			// System.out.println("zkousime");
-			// výpočet proměnné, která se dosadí do podmínky
 			connection = connectionClass.getConnection();
 			statement = connection.createStatement();
 
-			String sql = "UPDATE `VztahBuddyExchange` SET `exchange_id`='" + exchange_id
-					+ "', `buddy_id`='" + buddy_id + "' WHERE `vztah_id`='" + vztah_id;
+			String sql = "UPDATE `VztahBuddyExchange` SET `exchange_id`='" + exchange_id + "', `buddy_id`='" + buddy_id
+					+ "' WHERE `vztah_id`='" + vztah_id;
 
 			statement.executeUpdate(sql);
 			System.out.println("updated");
@@ -756,23 +910,23 @@ public class DBTransakce {
 
 	// stačí jen metoda na set zaplaceno, protože default hodnota je false, protože
 	// hned po přihlášení student zaplaceno nemá.
-	public boolean setRequestZaplaceno(int requestID) throws SQLException {
+	public void setRequestZaplaceno(int requestID) throws SQLException {
 		// todo
-		return false;
 	}
 
 	// defaultní hodnota je null, proto je potřeba nastavit hodnotu atributu
 	// "schváleno" na true nebo false
-	public boolean setRequestSchvaleno(int requestID) throws SQLException {
+	public void setRequestSchvaleno(int requestID) throws SQLException {
 		// todo
-		return false;
+	}
+	
+	// defaultní hodnota je null, proto je potřeba nastavit hodnotu atributu
+	// "schváleno" na true nebo false
+	public void setRequestZamitnuto(int requestID) throws SQLException {
+		// todo
 	}
 
-	public boolean setRequestZamitnuto(int requestID) throws SQLException {
-		// todo
-		return false;
-	}
-
+	//metoda volá v controlleru před tím, než admin schválí žádost o přihlášení
 	public boolean zjistiObsazenostAkce(int requestID) throws SQLException {
 		// todo
 		// počet schválených přihlášených na akci / celkový počet. Nemůže být

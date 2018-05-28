@@ -54,7 +54,8 @@ public class TestController extends GridPane implements Observer {
 		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn("lucifer@peklo.de", "rumplcimprcampr", this.buddyAplikace.getBuddyAplikace());
 		System.out.println(this.buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		*/
-		
+		//mazání
+		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteAkce(1);
 		
 		
 		
