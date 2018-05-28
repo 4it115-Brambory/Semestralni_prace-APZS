@@ -154,7 +154,7 @@ public class Student extends Uzivatel{
 	public String toString() {
 		return "Student [jmeno=" + jmeno + ", prijmeni=" + prijmeni + ", datumNarozeni="
 				+ datumNarozeni + ", telefon=" + telefon + ", pohlavi=" + pohlavi + ", statniPrislusnost="
-				+ statniPrislusnost + "]";
+				+ statniPrislusnost + "] super -> " + super.toString();
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -32,7 +33,7 @@ public class DBTransakce {
 	private Map<Integer, Exchange> seznamExchange;
 	private Map<Integer, Akce> seznamAkci;
 	private Map<Integer, Request> seznamRequestu;
-	private VztahStudentu vztahStudentu;
+	private Buddy prirazenyBuddy;
 	ConnectionClass connectionClass = new ConnectionClass();
 	Uzivatel prihlasovany;
 
@@ -43,49 +44,294 @@ public class DBTransakce {
 	//
 	// ----------------------------------------------------------------------------------------------------------//
 
+	/**
+	 * Metoda vrací seznam buddy studentů, které jsou v DB.
+	 * 
+	 * @return Map<Integer, Buddy>
+	 * @throws SQLException
+	 */
 	public Map<Integer, Buddy> getSeznamBuddy() throws SQLException {
 
-		// takhle se selectuje z db
-		String sql = "SELECT * FROM Buddy";
-		Connection connection = connectionClass.getConnection();
-		Statement statement = connection.createStatement();
-		ResultSet resultSet = statement.executeQuery(sql);
-		while (resultSet.next()) {
-			System.out.println(resultSet.getString(1));
+		seznamBuddy = new HashMap<Integer, Buddy>();
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			String sql = "SELECT * FROM Buddy";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+
+				// formátování - datum narození
+				DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
+				String datum = pozadovanyFormat.format(resultSet.getDate(7)).toString();
+
+				Buddy buddyStudent = new Buddy(resultSet.getString(11), resultSet.getString(12), resultSet.getInt(13),
+						resultSet.getString(5), resultSet.getString(6), datum, resultSet.getString(8),
+						resultSet.getString(9), resultSet.getString(10), resultSet.getInt(1), resultSet.getString(4),
+						resultSet.getString(3), resultSet.getString(2));
+				seznamBuddy.put(resultSet.getInt(1), buddyStudent);
+				// System.out.println(buddyStudent.toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		connection.close();
 		return seznamBuddy;
 	}
 
+	/**
+	 * Metoda vrací seznam exchange studentů, kteří jsou v DB.
+	 * 
+	 * @return Map<Interger, Exchange>
+	 * @throws SQLException
+	 */
 	public Map<Integer, Exchange> getSeznamExchange() throws SQLException {
 
+		seznamExchange = new HashMap<Integer, Exchange>();
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			String sql = "SELECT * FROM Exchange";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+
+				// formátování - datum narození
+				DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
+				String datum = pozadovanyFormat.format(resultSet.getDate(5)).toString();
+
+				Exchange exchangeStudent = new Exchange(resultSet.getString(9), resultSet.getString(10),
+						resultSet.getInt(11), resultSet.getString(3), resultSet.getString(4), datum,
+						resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getInt(1),
+						resultSet.getString(2));
+				seznamExchange.put(resultSet.getInt(1), exchangeStudent);
+				// System.out.println(exchangeStudent.toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return seznamExchange;
 	}
 
+	/**
+	 * Metoda vrací seznam akcí, kreré jsou v DB.
+	 * 
+	 * @return Map<Integer, Akce>
+	 * @throws SQLException
+	 */
 	public Map<Integer, Akce> getSeznamAkci() throws SQLException {
+
+		seznamAkci = new HashMap<Integer, Akce>();
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			String sql = "SELECT * FROM Akce";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+
+				// formátování - datum narození
+				DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. HH:mm yyyy");
+				String casOd = pozadovanyFormat.format(resultSet.getDate(4)).toString();
+				String casDo = pozadovanyFormat.format(resultSet.getDate(5)).toString();
+
+				Akce akce = new Akce(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), casOd, casDo,
+						resultSet.getString(6), resultSet.getString(7), resultSet.getInt(8), resultSet.getInt(9));
+				seznamAkci.put(resultSet.getInt(1), akce);
+				// System.out.println(akce.toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return seznamAkci;
 	}
 
-	// pro admina na potvrzeni
-	public Map<Integer, Request> getSeznamRequestuNeschvaleno() throws SQLException {
+	/**
+	 * Metoda pro získání seznamu všech requestů. Použití v admin controlleru pro
+	 * zobrazení přehledu žádostí.
+	 * 
+	 * @return Map<Integer, Request>
+	 * @throws SQLException
+	 */
+	public Map<Integer, Request> getSeznamRequestu() throws SQLException {
+
+		seznamRequestu = new HashMap<Integer, Request>();
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			String sql = "SELECT * FROM Request";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+
+				Request request = new Request(resultSet.getInt(1), resultSet.getInt(2), resultSet.getInt(3));
+				if (resultSet.getInt(4) == 1) {
+					request.setZaplaceno();
+				}
+				if (resultSet.getInt(5) == 1) {
+					request.setSchvaleno();
+				}
+				seznamRequestu.put(resultSet.getInt(1), request);
+				System.out.println(request.toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return seznamRequestu;
 	}
 
-	// seznam vztahů studentů snad nebude potřeba, je tu tedy jen tato metoda
-	// ta by měla stačit na výpis jména buddy studenta, který je přiřazen k
-	// exchange studentovi. Výpis by měl být potřebný v detailu exchange studenta
-	public VztahStudentu getVztahStudentu(int exchange_id) throws SQLException {
-		return vztahStudentu;
+	/**
+	 * Metoda vrací buddy studenta, který je přiřazen danému exchange studentovi.
+	 * Seznam vztahů by neměl být potřeba v programu. Bude stačit toto k výpisu
+	 * jména buddy studenta v controlleru pro detail exchange studenta.
+	 * 
+	 * @param exchange_id
+	 * @return Buddy
+	 * @throws SQLException
+	 */
+	public Buddy getPrirazenehoBuddyStudenta(int exchange_id) throws SQLException {
+
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			String sql = "SELECT Buddy.* FROM Buddy LEFT JOIN VztahBuddyExchange ON Buddy.buddy_id=VztahBuddyExchange.buddy_id WHERE VztahBuddyExchange.exchange_id = '"
+					+ exchange_id + "'";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+
+			while (resultSet.next()) {
+
+				// změna string parametru času do java date, aby se mohl preformatovat pro sql
+				DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
+				String datum = pozadovanyFormat.format(resultSet.getDate(7)).toString();
+
+				prirazenyBuddy = new Buddy(resultSet.getString(11), resultSet.getString(12), resultSet.getInt(13),
+						resultSet.getString(5), resultSet.getString(6), datum, resultSet.getString(8),
+						resultSet.getString(9), resultSet.getString(10), resultSet.getInt(1), resultSet.getString(4),
+						resultSet.getString(3), resultSet.getString(2));
+				// System.out.println(prirazenyBuddy.toString());
+			}
+
+			System.out.println("nalezeno");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("nenalezeno");
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return prirazenyBuddy;
 	}
 
-	// pro výpis v detailu akce
-	public Map<Integer, Exchange> getSeznamExchangePrihlasenychNaAkci(int akceID) throws SQLException {
+	/**
+	 * Metoda slouží pro získání seznamu exchange studentů, kteří mají podanou
+	 * žádost na danou akci. Metoda se využíva pro výpis v detailu akce.
+	 * 
+	 * @param akce_id
+	 * @return Map<Integer, Exchange>
+	 * @throws SQLException
+	 */
+	public Map<Integer, Exchange> getSeznamExchangeSZadostiNaAkci(int akce_id) throws SQLException {
 		// select * from Exchange left join Request where Request.schvaleno = 1
+		seznamExchange = new HashMap<Integer, Exchange>();
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			String sql = "SELECT Exchange.* FROM Exchange LEFT JOIN Request ON Exchange.exchange_id=Request.exchange_id WHERE Request.akce_id = '"
+					+ akce_id + "'";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+
+				// formátování - datum narození
+				DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
+				String datum = pozadovanyFormat.format(resultSet.getDate(5)).toString();
+
+				Exchange exchangeStudent = new Exchange(resultSet.getString(9), resultSet.getString(10),
+						resultSet.getInt(11), resultSet.getString(3), resultSet.getString(4), datum,
+						resultSet.getString(6), resultSet.getString(7), resultSet.getString(8), resultSet.getInt(1),
+						resultSet.getString(2));
+				seznamExchange.put(resultSet.getInt(1), exchangeStudent);
+				// System.out.println(exchangeStudent.toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return seznamExchange;
 	}
 
-	// zde vzít inspiraci pro vkládání datumu z sql do javy
-
+	/**
+	 * Metoda slouží jako inspirace pro práci s formátováním časů atd.
+	 * 
+	 * @throws SQLException
+	 */
 	public void printTime() throws SQLException {
 		Connection connection = null;
 		ResultSet resultSet = null;
@@ -290,10 +536,12 @@ public class DBTransakce {
 	}
 
 	// --------------------------------------------------------------------------------------------------------------//
-	// //
-	// --------- Metody pro vkládání jednotlivých záznamů, ve fxml se používa pro
-	// přidávání akcí/buddy/... //
-	// pozn.: to samé jako nahoře, nutno provést aktualizace seznamu //
+	//
+	// Metody pro vkládání jednotlivých záznamů, ve fxml se používa pro
+	// přidávání akcí/buddy/... Obsahuje i metodu pro kontrolu již existující
+	// žádosti k dané akci a exchange studentovi.
+	// pozn.: to samé jako nahoře, nutno provést aktualizace seznamu
+	//
 	// --------------------------------------------------------------------------------------------------------------//
 
 	/**
@@ -327,12 +575,10 @@ public class DBTransakce {
 			connection = connectionClass.getConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
-			if (resultSet.next()) {
-				while (resultSet.next()) {
-					// System.out.println("mame result set");
-					akce_id = resultSet.getInt("akce_id");
-					akce_id += 1;
-				}
+			while (resultSet.next()) {
+				// System.out.println("mame result set");
+				akce_id = resultSet.getInt(1);
+				akce_id += 1;
 			}
 			// změna string parametru času do java date, aby se mohl preformatovat pro sql
 			DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. HH:mm yyyy");
@@ -394,12 +640,10 @@ public class DBTransakce {
 			connection = connectionClass.getConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
-			if (resultSet.next()) {
-				while (resultSet.next()) {
-					// System.out.println("mame result set");
-					exchange_id = resultSet.getInt("exchange_id");
-					exchange_id += 1;
-				}
+			while (resultSet.next()) {
+				// System.out.println("mame result set");
+				exchange_id = resultSet.getInt(1);
+				exchange_id += 1;
 			}
 			// změna string parametru času do java date, aby se mohl preformatovat pro sql
 			DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
@@ -461,12 +705,10 @@ public class DBTransakce {
 			connection = connectionClass.getConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
-			if (resultSet.next()) {
-				while (resultSet.next()) {
-					// System.out.println("mame result set");
-					buddy_id = resultSet.getInt("buddy_id");
-					buddy_id += 1;
-				}
+			while (resultSet.next()) {
+				// System.out.println("mame result set");
+				buddy_id = resultSet.getInt(1);
+				buddy_id += 1;
 			}
 			// změna string parametru času do java date, aby se mohl preformatovat pro sql
 			DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
@@ -495,9 +737,6 @@ public class DBTransakce {
 		}
 	}
 
-	// V controlleru se ptát, jestli už v DB ten stejný student již nežádal. V tom
-	// případě
-	// bych mu vypsal, že má smůlu, že jeho minulá žádost byla zamítnuta
 	/**
 	 * Metoda pro vložení nového requestu do databáze - žádost o přihlášení na akci.
 	 * Není potřeba zadávat Id, to se vytvoří samo. Hodnoty atributů "schvaleno" a
@@ -521,12 +760,10 @@ public class DBTransakce {
 			connection = connectionClass.getConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
-			if (resultSet.next()) {
-				while (resultSet.next()) {
-					// System.out.println("mame result set");
-					request_id = resultSet.getInt("request_id");
-					request_id += 1;
-				}
+			while (resultSet.next()) {
+				// System.out.println("mame result set");
+				request_id = resultSet.getInt(1);
+				request_id += 1;
 			}
 			sql = "INSERT INTO `Request` (`request_id`, `exchange_id`, `akce_id`, `zaplaceno`, `schvaleno`) VALUES ('"
 					+ request_id + "', '" + exchange_id + "', '" + akce_id + "', '0', '0')";
@@ -544,6 +781,52 @@ public class DBTransakce {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * Metoda slouží ke kontrole, zda-li daný exchange student již žádost o
+	 * přihlášení nepodal. V případě, že exchange již podanou žádost na akci má,
+	 * vrátí metoda "true". Pokud žádost k dané akci ještě nemá, vrátí "false". V
+	 * controlleru pak může student podat na akci žádost.
+	 * 
+	 * @param akce_id
+	 * @param exchange_id
+	 * @return boolean
+	 * @throws SQLException
+	 */
+	public boolean zjistiExistujiciRequestProExchange(int akce_id, int exchange_id) throws SQLException {
+
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+		boolean check = false;
+
+		try {
+			String sql = "SELECT * FROM Request WHERE `exchange_id`= '" + exchange_id + "' AND `akce_id` = '" + akce_id
+					+ "'";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				check = true;
+				System.out.println("request nalezen, exchange student nemůže znovu podat žádost na stejnou akci");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("chyba ve zjišťování existujícího requestu");
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (!check) {
+			System.out.println("request nenalezen, je možno podat žádost");
+		}
+		return check;
 	}
 
 	/**
@@ -568,12 +851,10 @@ public class DBTransakce {
 			connection = connectionClass.getConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
-			if (resultSet.next()) {
-				while (resultSet.next()) {
-					// System.out.println("mame result set");
-					vztah_id = resultSet.getInt("vztah_id");
-					vztah_id += 1;
-				}
+			while (resultSet.next()) {
+				// System.out.println("mame result set");
+				vztah_id = resultSet.getInt(1);
+				vztah_id += 1;
 			}
 			sql = "INSERT INTO `VztahBuddyExchange` (`exchange_id`, `buddy_id`, `vztah_id`) VALUES ('" + exchange_id
 					+ "', '" + buddy_id + "', '" + vztah_id + "')";
@@ -590,6 +871,99 @@ public class DBTransakce {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	// metoda kontroluje, zda-li již v DB není vztah jednoho, nebo druhého studenta
+	// zaznamenán. Jeden buddy může mít pouze jednoho exchange a naopak.
+
+	/**
+	 * Metoda slouží ke kontrole, zda-li již daný buddy student nemá přiřazeného
+	 * exchange studenta. Vrací true, pokud vztah již existuje.
+	 * 
+	 * @param buddy_id
+	 * @return boolean
+	 */
+	public boolean checkExistenciVztahuProBuddy(int buddy_id) {
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int vztah = 0;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "SELECT COUNT(buddy_id) FROM VztahBuddyExchange WHERE buddy_id = '" + buddy_id + "'";
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				vztah = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("někde je chyba");
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (vztah == 1) {
+			System.out.println("vracím true - buddy student už má přiřazeného exchange studenta");
+			return true;
+		} else {
+			System.out.println("vracím false - buddy student se zatím o níkoho nestará");
+			return false;
+		}
+	}
+
+	/**
+	 * Metoda slouží ke kontrole, zda-li již daný exchange student nemá přiřazeného
+	 * buddy studenta. Vrací true, pokud vztah již existuje.
+	 * 
+	 * @param exchange_id
+	 * @return boolean
+	 */
+	public boolean checkExistenciVztahuProExchange(int exchange_id) {
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		int vztah = 0;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "SELECT COUNT(buddy_id) FROM VztahBuddyExchange WHERE exchange_id = '" + exchange_id + "'";
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				vztah = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("někde je chyba");
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (vztah == 1) {
+			System.out.println("vracím true - exchange student už má přiřazeného buddy studenta");
+			return true;
+		} else {
+			System.out.println("vracím false - o exchange studenta se zatím nikdo nestará");
+			return false;
 		}
 	}
 
@@ -1017,12 +1391,18 @@ public class DBTransakce {
 	 * obsazena, nedovolí mu se na akci přihlásit. Pokud je akce již plná, metoda
 	 * vrací hodnotu true, pokud je ještě místo, vrací false.
 	 * 
+	 * Dále se metoda používá v admin controlleru pro seznam requestů kvůli
+	 * kontrole. Admin nemůže schválit request, jestli je na akci již schválen plný
+	 * počet účastníků. Může ho pak buďto nechat bez reakce anebo ho zamítnout. Tato
+	 * situace může nastat, pokud více studentů zažádá a admin je schválí až
+	 * dodatečně.
+	 * 
 	 * 
 	 * @param akce_id
 	 * @return boolean
 	 * @throws SQLException
 	 */
-	public boolean zjistiObsazenaAkce(int akce_id) throws SQLException {
+	public boolean zjistiObsazenaAkceProExchange(int akce_id) throws SQLException {
 
 		int pocetPrihlasenychNaAkci = 0;
 		int maxKapacitaAkce = 0;
