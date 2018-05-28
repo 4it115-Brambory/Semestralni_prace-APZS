@@ -10,9 +10,9 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledzahranicnichController">
    <children>
       <Button id="prehledzadosti" onAction="#scenePrehledZadosti" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" text="Přehled žádostí" />
-      <Button id="prehledakci" onAction=#sceneAdmin" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" text="Přehled akcí" />
-      <Button id="prehledceskych" onAction=#scenePrehledCeskych" layoutX="231.0" layoutY="48.0" mnemonicParsing="false" text="Přehled českých buddy" />
-      <Button id="prehledzahranicnich" onAction=#scenePrehledZahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
+      <Button id="prehledakci" onAction="#sceneAdmin" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" text="Přehled akcí" />
+      <Button id="prehledceskych" onAction="#scenePrehledCeskych" layoutX="231.0" layoutY="48.0" mnemonicParsing="false" text="Přehled českých buddy" />
+      <Button id="prehledzahranicnich" onAction="#scenePrehledZahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
       <Button layoutX="509.0" layoutY="14.0" mnemonicParsing="false" text="Odhlásit" />
       <TextArea id="prihlasen" layoutX="113.0" layoutY="7.0" prefHeight="36.0" prefWidth="156.0" />
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
@@ -26,7 +26,7 @@
             <TableColumn id="telefon" prefWidth="116.0" text="telefon" />
         </columns>
       </TableView>
-      <Button id="pridatstudenta" onAction=#scenePridatZahranicniho layoutX="40.0" layoutY="333.0" mnemonicParsing="false" text="Pridat studenta" />
-      <Button id="detailstudenta" onAction=#sceneDetailStudenta layoutX="164.0" layoutY="333.0" mnemonicParsing="false" text="Detail studenta" />
+      <Button id="pridatstudenta" onAction="#scenePridatZahranicniho" layoutX="40.0" layoutY="333.0" mnemonicParsing="false" text="Pridat studenta" />
+      <Button id="detailstudenta" onAction="#sceneDetailStudenta" layoutX="164.0" layoutY="333.0" mnemonicParsing="false" text="Detail studenta" />
    </children>
 </Pane>

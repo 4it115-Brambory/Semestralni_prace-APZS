@@ -151,6 +151,19 @@ public class PrehledzahranicnichController extends Pane implements Observer {
     	Pridatzahranicniho.show();
     	Pridatzahranicniho.setTitle("Přidání zahraničního studenta");
 	}
+	//detail studenta, todo
+	@FXML
+	private void sceneDetailStudenta() throws Exception {
+		
+    	
+	}
+	
+	//ohlašovací metoda, hádám, že bude stačit zabít celou aplikaci
+		@FXML
+		private void odhlasit() throws Exception {
+	    	
+		}
+		
 	
 	
 	

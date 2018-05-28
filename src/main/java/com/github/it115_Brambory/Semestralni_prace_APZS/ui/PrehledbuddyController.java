@@ -58,6 +58,10 @@ public class PrehledbuddyController extends Pane implements Observer {
 		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
 		
 	}
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+	}
 	
 	@FXML
 	private void sceneAdmin() throws Exception {
@@ -132,10 +136,32 @@ public class PrehledbuddyController extends Pane implements Observer {
     	Prehledaexchange.show();
     	Prehledaexchange.setTitle("Přehled zahraničních studnetů");
 	}
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+	
+	@FXML
+	private void scenePridatBuddyho() throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(getClass().getResource("pridanibuddyho.fxml"));    	
+    	Parent root = loader.load();
+    	PridanibuddyhoController controller = new PridanibuddyhoController();
+    	controller = loader.getController(); 
+    	controller.inicializuj(buddyAplikace);
+    	Stage Pridanibuddyho = new Stage();    	
+    	Pridanibuddyho.setScene(new Scene(root));
+    	Pridanibuddyho.show();
+    	Pridanibuddyho.setTitle("Přidání buddyho");
+	}
+	//detail buddyho, todo
+	@FXML
+	private void sceneDetailBuddyho() throws Exception {
+		
+    	
 	}
 	
+	//ohlašovací metoda, hádám, že bude stačit zabít celou aplikaci
+		@FXML
+		private void odhlasit() throws Exception {
+	    	
+		}
+		
 }
 
