@@ -5,7 +5,6 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.main.*;
 import com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect.*;
 
 import java.util.Observer;
-import java.awt.TextField;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Observable;
@@ -20,6 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.TextField;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
@@ -49,7 +49,6 @@ public class PrihlaseniController extends Pane implements Observer {
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
 
 		this.buddyAplikace = buddyAplikace;
-		// ToDo
 
 	}
 
@@ -85,13 +84,17 @@ public class PrihlaseniController extends Pane implements Observer {
 	private void sceneBuddy() throws IOException {
 		System.out.println("Scene changing...");
 		root = FXMLLoader.load(getClass().getResource("prehledakcibuddy.fxml"));
-		window.setScene(new Scene(root));
+		window.getScene().setRoot(root);
 	}
 
 	@FXML
 	public void prihlasit() throws IOException {
 
-		int ukazatel = buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn(heslo.getText(), email.getText(),
+		//kontrolní výpis emailu a hesla
+		System.out.println("Kontrolní výpis emailu -->" + email.getText() + "<--");
+		System.out.println("Kontrolní výpis hesla -->" + heslo.getText() + "<--");
+
+		int ukazatel = buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn(email.getText(), heslo.getText(),
 				buddyAplikace);
 		if (ukazatel == 0) {
 			System.out.println("Chybné přihlašovací údaje");
