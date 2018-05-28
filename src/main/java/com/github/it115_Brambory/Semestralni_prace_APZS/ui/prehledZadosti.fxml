@@ -11,9 +11,9 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledZadostiController">
    <children>
-      <Button layoutX="167.0" layoutY="71.0" mnemonicParsing="false" text="Přehled akcí" />
-      <Button layoutX="27.0" layoutY="71.0" mnemonicParsing="false" text="Přehled žádostí" />
-      <Button layoutX="279.0" layoutY="71.0" mnemonicParsing="false" text="Přehled českých buddy" />
+      <Button onAction="#sceneAdmin" layoutX="167.0" layoutY="71.0" mnemonicParsing="false" text="Přehled akcí" />
+      <Button onAction="#scenePrehledZadosti" layoutX="27.0" layoutY="71.0" mnemonicParsing="false" text="Přehled žádostí" />
+      <Button onAction=#scenePrehledCeskych"  layoutX="279.0" layoutY="71.0" mnemonicParsing="false" text="Přehled českých buddy" />
       <TextArea layoutX="156.0" layoutY="15.0" prefHeight="46.0" prefWidth="200.0" />
       <Label layoutX="41.0" layoutY="28.0" text="Příhlášen jako:" />
       <Label layoutX="91.0" layoutY="140.0" text="Typ:" />
@@ -32,10 +32,10 @@
       <TextField layoutX="499.0" layoutY="217.0" />
       <TextField layoutX="499.0" layoutY="174.0" />
       <TextField layoutX="499.0" layoutY="135.0" />
-      <Button layoutX="466.0" layoutY="71.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
-      <Button layoutX="466.0" layoutY="23.0" mnemonicParsing="false" text="Ohdlásit" />
-      <Button layoutX="47.0" layoutY="566.0" mnemonicParsing="false" text="Schválení" />
-      <Button layoutX="377.0" layoutY="566.0" mnemonicParsing="false" text="Zamítnutí" />
+      <Button onAction=#scenePrehledZahranicnich" layoutX="466.0" layoutY="71.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
+      <Button onAction=#odhlasit" layoutX="466.0" layoutY="23.0" mnemonicParsing="false" text="Ohdlásit" />
+      <Button onAction=#schvaleni" layoutX="47.0" layoutY="566.0" mnemonicParsing="false" text="Schválení" />
+      <Button onAction=#odmitnuti" layoutX="377.0" layoutY="566.0" mnemonicParsing="false" text="Zamítnutí" />
       <TableView layoutX="108.0" layoutY="310.0" prefHeight="223.0" prefWidth="539.0">
          <columns>
             <TableColumn id="email" prefWidth="75.0" text="email" />

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Observable;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -59,12 +60,18 @@ public class PrihlaseniController extends Pane implements Observer {
 	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím
 	 * proč. Myslím, že by ještě měla načítat kontroler
 	 */
-	private void sceneExchange() throws IOException {
-		System.out.println("Scene changing...");
-		root = FXMLLoader
-				.load(getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/prihlaseni.fxml"));
-		window.setScene(new Scene(root));
-
+	private void sceneExchange () throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(getClass().getResource("Prehledakciexchange.fxml"));    	
+    	Parent root = loader.load();
+    	PrehledakciexchangeController controller = new PrehledakciexchangeController();
+    	controller = loader.getController(); 
+    	controller.inicializuj(buddyAplikace);
+    	Stage Prehledakciexchange = new Stage();    	
+    	Prehledakciexchange.setScene(new Scene(root));
+    	Prehledakciexchange.show();
+    	Prehledakciexchange.setTitle("Přehled akcí");
+    	
 	}
 
 	/**
@@ -72,10 +79,18 @@ public class PrihlaseniController extends Pane implements Observer {
 	 * proč. Myslím, že by ještě měla načítat kontroler
 	 */
 	@FXML
-	private void sceneAdmin() throws IOException {
-		System.out.println("Scene changing...");
-		root = FXMLLoader.load(getClass().getResource("prehledakciadmin.fxml"));
-		window.setScene(new Scene(root));
+	private void sceneAdmin() throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(getClass().getResource("Prehledakciadmin.fxml"));    	
+    	Parent root = loader.load();
+    	PrehledakciadminController controller = new PrehledakciadminController();
+    	controller = loader.getController(); 
+    	controller.inicializuj(buddyAplikace);
+    	Stage Prehledakciadmin = new Stage();    	
+    	Prehledakciadmin.setScene(new Scene(root));
+    	Prehledakciadmin.show();
+    	Prehledakciadmin.setTitle("Přehled akcí");
+    	
 	}
 
 	/**
@@ -83,14 +98,22 @@ public class PrihlaseniController extends Pane implements Observer {
 	 * proč. Myslím, že by ještě měla načítat kontroler
 	 */
 	@FXML
-	private void sceneBuddy() throws IOException {
-		System.out.println("Scene changing...");
-		root = FXMLLoader.load(getClass().getResource("prehledakcibuddy.fxml"));
-		window.getScene().setRoot(root);
+	private void sceneBuddy() throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(getClass().getResource("Prehledakcibuddy.fxml"));    	
+    	Parent root = loader.load();
+    	PrehledakcibuddyController controller = new PrehledakcibuddyController();
+    	controller = loader.getController(); 
+    	controller.inicializuj(buddyAplikace);
+    	Stage Prehledakcibuddy = new Stage();    	
+    	Prehledakcibuddy.setScene(new Scene(root));
+    	Prehledakcibuddy.show();
+    	Prehledakcibuddy.setTitle("Přehled akcí");
+    	
 	}
 
 	@FXML
-	public void prihlasit() throws IOException {
+	public void prihlasit() throws Exception {
 
 		//kontrolní výpis emailu a hesla
 		System.out.println("Kontrolní výpis emailu -->" + email.getText() + "<--");

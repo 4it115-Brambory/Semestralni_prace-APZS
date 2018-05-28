@@ -8,10 +8,14 @@ import java.sql.SQLException;
 import java.util.Observable;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou
@@ -30,7 +34,7 @@ public class PrehledakciexchangeController extends Pane implements Observer {
 		@FXML private TableColumn misto;
 
 		@FXML private TableColumn cena;
-		@FXML private TextArea prihlasen;
+		@FXML private TextField prihlasen;
 
 	/**
      *  Metoda k inicializaci hry. Načte všechny potřebné prvky
@@ -38,10 +42,12 @@ public class PrehledakciexchangeController extends Pane implements Observer {
      *  
 	 * @throws SQLException - to je kvůli těm testům na konci metody
      */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+	public void inicializuj(IBuddyAplikace buddyAplikace)  {
 		
 		this.buddyAplikace = buddyAplikace;
 		//ToDo
+		
+		this.prihlasen.setText("value");
 		
 		
 		
@@ -59,6 +65,8 @@ public class PrehledakciexchangeController extends Pane implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 	}
+	
+	
 	
 }
 
