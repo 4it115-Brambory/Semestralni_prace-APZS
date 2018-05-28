@@ -909,8 +909,15 @@ public class DBTransakce {
 		}
 	}
 
-	// stačí jen metoda na set zaplaceno, protože default hodnota je false, protože
-	// hned po přihlášení student zaplaceno nemá.
+	/**
+	 * Metoda k nastavení stavu žádosti exchange studenta na zaplacenou, ve sloupci
+	 * v DB "zaplaceno" bude hodnota 1. Stačí pouze tato metoda na nastavení
+	 * zaplacení, protože při vytvoření requestu je defaultně v DB nastavena 0 jako
+	 * nezaplaceno.
+	 * 
+	 * @param request_id
+	 * @throws SQLException
+	 */
 	public void setRequestZaplaceno(int request_id) throws SQLException {
 
 		Connection connection = null;
@@ -937,8 +944,14 @@ public class DBTransakce {
 		}
 	}
 
-	// defaultní hodnota je null, proto je potřeba nastavit hodnotu atributu
-	// "schváleno" na true nebo false
+	/**
+	 * Metoda pro nastavení žádosti na schválenou - od admina. V DB se u requestu ve
+	 * sloupci "schvaleno" nastaví hodnota 1. Defaultně je nastavena hodnota NULL,
+	 * protože admin může žádost i zamítnout - hodnota 0.
+	 * 
+	 * @param request_id
+	 * @throws SQLException
+	 */
 	public void setRequestSchvaleno(int request_id) throws SQLException {
 		Connection connection = null;
 		Statement statement = null;
@@ -964,8 +977,14 @@ public class DBTransakce {
 		}
 	}
 
-	// defaultní hodnota je null, proto je potřeba nastavit hodnotu atributu
-	// "schváleno" na true nebo false
+	/**
+	 * Metoda pro nastavení žádosti na zamítnutou - od admina. V DB se u requestu ve
+	 * sloupci "schvaleno" nastaví hodnota 0. Defaultně je nastavena hodnota NULL,
+	 * protože admin může žádost i schválit - hodnota 1.
+	 * 
+	 * @param request_id
+	 * @throws SQLException
+	 */
 	public void setRequestZamitnuto(int request_id) throws SQLException {
 
 		Connection connection = null;
@@ -991,10 +1010,6 @@ public class DBTransakce {
 			}
 		}
 	}
-
-	// metoda volá v controlleru před tím, než admin schválí žádost o přihlášení
-	// konkrétně v kontroleru detailu akce pro exchange studenta
-	// vrací true, pokud je akce obsazená a false, pokud se na ni lze přihlásit
 
 	/**
 	 * Metoda se volá v cotrolleru pro detail akce exchange studenta a to před tím,
