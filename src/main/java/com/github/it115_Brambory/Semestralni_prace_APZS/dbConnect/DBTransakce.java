@@ -66,19 +66,19 @@ public class DBTransakce {
 		return seznamAkci;
 	}
 
-	//pro admina na potvrzeni
+	// pro admina na potvrzeni
 	public Map<Integer, Request> getSeznamRequestuNeschvaleno() throws SQLException {
 		return seznamRequestu;
 	}
 
-	//seznam vztahů studentů snad nebude potřeba, je tu tedy jen tato metoda
-	//ta by měla stačit na výpis jména buddy studenta, který je přiřazen k
-	//exchange studentovi. Výpis by měl být potřebný v detailu exchange studenta
+	// seznam vztahů studentů snad nebude potřeba, je tu tedy jen tato metoda
+	// ta by měla stačit na výpis jména buddy studenta, který je přiřazen k
+	// exchange studentovi. Výpis by měl být potřebný v detailu exchange studenta
 	public VztahStudentu getVztahStudentu(int exchange_id) throws SQLException {
 		return vztahStudentu;
 	}
 
-	//pro výpis v detailu akce
+	// pro výpis v detailu akce
 	public Map<Integer, Exchange> getSeznamExchangePrihlasenychNaAkci(int akceID) throws SQLException {
 		// select * from Exchange left join Request where Request.schvaleno = 1
 		return seznamExchange;
@@ -495,8 +495,9 @@ public class DBTransakce {
 		}
 	}
 
-	//V controlleru se ptát, jestli už v DB ten stejný student již nežádal. V tom případě
-	//bych mu vypsal, že má smůlu, že jeho minulá žádost byla zamítnuta
+	// V controlleru se ptát, jestli už v DB ten stejný student již nežádal. V tom
+	// případě
+	// bych mu vypsal, že má smůlu, že jeho minulá žádost byla zamítnuta
 	/**
 	 * Metoda pro vložení nového requestu do databáze - žádost o přihlášení na akci.
 	 * Není potřeba zadávat Id, to se vytvoří samo. Hodnoty atributů "schvaleno" a
@@ -874,7 +875,7 @@ public class DBTransakce {
 	// ------------------------------------------------------------------------------------------------------------------//
 
 	/**
-	 * Metoda upraví vztah dvou studentů
+	 * Metoda upraví vztah dvou studentů. Id vztahu upravit nelze.
 	 * 
 	 * @param vztah_id
 	 * @param exchange_id
@@ -891,7 +892,7 @@ public class DBTransakce {
 			statement = connection.createStatement();
 
 			String sql = "UPDATE `VztahBuddyExchange` SET `exchange_id`='" + exchange_id + "', `buddy_id`='" + buddy_id
-					+ "' WHERE `vztah_id`='" + vztah_id;
+					+ "' WHERE `vztah_id`='" + vztah_id + "'";
 
 			statement.executeUpdate(sql);
 			System.out.println("updated");
@@ -910,27 +911,151 @@ public class DBTransakce {
 
 	// stačí jen metoda na set zaplaceno, protože default hodnota je false, protože
 	// hned po přihlášení student zaplaceno nemá.
-	public void setRequestZaplaceno(int requestID) throws SQLException {
-		// todo
+	public void setRequestZaplaceno(int request_id) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "UPDATE `Request` SET `zaplaceno`= 1 WHERE `request_id`='" + request_id + "'";
+
+			statement.executeUpdate(sql);
+			System.out.println("updated zaplaceno");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("not updated");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// defaultní hodnota je null, proto je potřeba nastavit hodnotu atributu
 	// "schváleno" na true nebo false
-	public void setRequestSchvaleno(int requestID) throws SQLException {
-		// todo
-	}
-	
-	// defaultní hodnota je null, proto je potřeba nastavit hodnotu atributu
-	// "schváleno" na true nebo false
-	public void setRequestZamitnuto(int requestID) throws SQLException {
-		// todo
+	public void setRequestSchvaleno(int request_id) throws SQLException {
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "UPDATE `Request` SET `schvaleno`= 1 WHERE `request_id`='" + request_id + "'";
+
+			statement.executeUpdate(sql);
+			System.out.println("updated schvaleno");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("not updated");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-	//metoda volá v controlleru před tím, než admin schválí žádost o přihlášení
-	public boolean zjistiObsazenostAkce(int requestID) throws SQLException {
-		// todo
-		// počet schválených přihlášených na akci / celkový počet. Nemůže být
-		// větší jak jedna. To už se nedá ani přihlásit a ani schválit žádost
-		return false;
+	// defaultní hodnota je null, proto je potřeba nastavit hodnotu atributu
+	// "schváleno" na true nebo false
+	public void setRequestZamitnuto(int request_id) throws SQLException {
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "UPDATE `Request` SET `schvaleno`= 0 WHERE `request_id`='" + request_id + "'";
+
+			statement.executeUpdate(sql);
+			System.out.println("updated zamítnuto");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("not updated");
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
+
+	// metoda volá v controlleru před tím, než admin schválí žádost o přihlášení
+	// konkrétně v kontroleru detailu akce pro exchange studenta
+	// vrací true, pokud je akce obsazená a false, pokud se na ni lze přihlásit
+
+	/**
+	 * Metoda se volá v cotrolleru pro detail akce exchange studenta a to před tím,
+	 * než student podá žádost o přihlášení na akci. Pokud by akce již byla
+	 * obsazena, nedovolí mu se na akci přihlásit. Pokud je akce již plná, metoda
+	 * vrací hodnotu true, pokud je ještě místo, vrací false.
+	 * 
+	 * 
+	 * @param akce_id
+	 * @return boolean
+	 * @throws SQLException
+	 */
+	public boolean zjistiObsazenaAkce(int akce_id) throws SQLException {
+
+		int pocetPrihlasenychNaAkci = 0;
+		int maxKapacitaAkce = 0;
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "SELECT COUNT(akce_id) FROM `Request` WHERE `schvaleno` = 1 AND `akce_id`='" + akce_id + "'";
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				pocetPrihlasenychNaAkci = resultSet.getInt(1);
+			}
+			resultSet.close();
+
+			sql = "SELECT maxUcast FROM `Akce` WHERE `akce_id`='" + akce_id + "'";
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				maxKapacitaAkce = resultSet.getInt(1);
+			}
+
+			System.out.println("Počet přihlášených - " + pocetPrihlasenychNaAkci);
+			System.out.println("Kapacita akce - " + maxKapacitaAkce);
+			System.out.println("čísla uloženy do proměnných");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("někde je chyba");
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (maxKapacitaAkce > pocetPrihlasenychNaAkci) {
+			System.out.println("vracím false - akce má místo");
+			return false;
+		} else {
+			System.out.println("vracím true - akce je plná");
+			return true;
+		}
+	}
+
 }

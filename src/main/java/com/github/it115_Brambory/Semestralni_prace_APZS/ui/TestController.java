@@ -40,25 +40,40 @@ public class TestController extends GridPane implements Observer {
 		// databázový připojení
 		// a že se data správně vkládají do programu
 		textAreaTest.setText("Ahoj, toto je test, že funguje okno\n");
+
+		// testování vkládání a upravování akcí - funguje
 		/*
-		 * testování vkládání a upravování akcí
-		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().insertNovaAkce("Pesi", "Pochodak", "5.6. 14:30 2018",
-				"5.6. 18:30 2018", "Bezdez", "pesi vylet", 450, 5);
-		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateAkci(1, "Na kole", "Cyklovylet",
-				"5.6. 14:30 2018", "5.6. 18:30 2018", "Bezdez", "pesi vylet", 450, 5);
-		*/
+		 * this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().insertNovaAkce(
+		 * "Pesi", "Pochodak", "5.6. 14:30 2018", "5.6. 18:30 2018", "Bezdez",
+		 * "pesi vylet", 450, 5);
+		 */
 		/*
-		testování přihlášení
-		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn("yvvlado@mid.ru", "LcKe8d2", this.buddyAplikace.getBuddyAplikace());
-		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn("guitarmage@jazzfusion.com", "g11Rm9oL", this.buddyAplikace.getBuddyAplikace());
-		this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn("lucifer@peklo.de", "rumplcimprcampr", this.buddyAplikace.getBuddyAplikace());
-		System.out.println(this.buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
-		*/
-		//mazání
-		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteAkce(1);
-		
-		
-		
+		 * this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateAkci(1,
+		 * "Na kole", "Cyklovylet", "5.6. 14:30 2018", "5.6. 18:30 2018", "Bezdez",
+		 * "pesi vylet", 450, 5);
+		 */
+
+		// testování přihlášení - funguje
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn("yvvlado@mid.ru",
+		// "LcKe8d2", this.buddyAplikace.getBuddyAplikace());
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn("guitarmage@jazzfusion.com",
+		// "g11Rm9oL", this.buddyAplikace.getBuddyAplikace());
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn("lucifer@peklo.de",
+		// "rumplcimprcampr", this.buddyAplikace.getBuddyAplikace());
+		// System.out.println(this.buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+
+		// mazání - funguje
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteAkce(1);
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().zjistiObsazenaAkce(2);
+
+		// updatování requestu - funguje
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().setRequestSchvaleno(3);
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().setRequestZamitnuto(3);
+		// this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().setRequestZaplaceno(2);
+
+		// get - zjisti obsazenost akce - funguje
+		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().zjistiObsazenaAkce(3);
+
 	}
 
 	@Override
