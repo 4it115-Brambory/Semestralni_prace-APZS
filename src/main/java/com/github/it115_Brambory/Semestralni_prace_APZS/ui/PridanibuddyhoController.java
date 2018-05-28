@@ -143,15 +143,15 @@ public class PridanibuddyhoController extends Pane implements Observer {
 	@FXML
 	private void sceneDetailStudenta() throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-    	loader.setLocation(getClass().getResource("prehledzahranicnich.fxml"));    	
+    	loader.setLocation(getClass().getResource("detailzahranicniho.fxml"));    	
     	Parent root = loader.load();
     	DetailzahranicnihoController controller = new DetailzahranicnihoController();
     	controller = loader.getController(); 
     	controller.inicializuj(buddyAplikace);
-    	Stage Prehledaexchange = new Stage();    	
-    	Prehledaexchange.setScene(new Scene(root));
-    	Prehledaexchange.show();
-    	Prehledaexchange.setTitle("Přehled zahraničních studnetů");
+    	Stage Detailzahranicniho = new Stage();    	
+    	Detailzahranicniho.setScene(new Scene(root));
+    	Detailzahranicniho.show();
+    	Detailzahranicniho.setTitle("Detail zahraničního studenta");
 	}
 	
 	
