@@ -26,7 +26,7 @@
             <TableColumn id="telefon" prefWidth="116.0" text="telefon" />
         </columns>
       </TableView>
-      <Button id="pridatstudenta" layoutX="40.0" layoutY="333.0" mnemonicParsing="false" text="Pridat studenta" />
-      <Button id="detailstudenta" layoutX="164.0" layoutY="333.0" mnemonicParsing="false" text="Detail studenta" />
+      <Button id="pridatstudenta" onAction=#scenePridatZahranicniho layoutX="40.0" layoutY="333.0" mnemonicParsing="false" text="Pridat studenta" />
+      <Button id="detailstudenta" onAction=#sceneDetailStudenta layoutX="164.0" layoutY="333.0" mnemonicParsing="false" text="Detail studenta" />
    </children>
 </Pane>

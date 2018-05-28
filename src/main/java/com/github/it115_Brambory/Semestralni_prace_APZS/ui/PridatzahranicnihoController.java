@@ -132,6 +132,18 @@ public class PridatzahranicnihoController extends Pane implements Observer {
     	Prehledaexchange.setTitle("Přehled zahraničních studnetů");
 	}
 	
+	//ohlašovací metoda, hádám, že bude stačit zabít celou aplikaci
+			@FXML
+			private void odhlasit() throws Exception {
+		    	
+			}
+			
+			//ToDo: Metoda pro smzani studenta
+					@FXML
+					private void schvaleni() throws Exception {
+				    	
+					}
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

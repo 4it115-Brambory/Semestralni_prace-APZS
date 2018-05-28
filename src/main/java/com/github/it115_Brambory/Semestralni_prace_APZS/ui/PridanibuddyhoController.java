@@ -140,4 +140,19 @@ public class PridanibuddyhoController extends Pane implements Observer {
     	Prehledaexchange.setTitle("Přehled zahraničních studnetů");
 	}
 	
+	@FXML
+	private void sceneDetailStudenta() throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(getClass().getResource("prehledzahranicnich.fxml"));    	
+    	Parent root = loader.load();
+    	DetailzahranicnihoController controller = new DetailzahranicnihoController();
+    	controller = loader.getController(); 
+    	controller.inicializuj(buddyAplikace);
+    	Stage Prehledaexchange = new Stage();    	
+    	Prehledaexchange.setScene(new Scene(root));
+    	Prehledaexchange.show();
+    	Prehledaexchange.setTitle("Přehled zahraničních studnetů");
+	}
+	
+	
 }
