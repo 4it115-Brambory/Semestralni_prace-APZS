@@ -1144,7 +1144,7 @@ public class DBTransakce {
 	 * @param aplikace
 	 * @return
 	 */
-	public int logIn(String email, String heslo, BuddyAplikace aplikace) {
+	public int logIn(String email, String heslo, IBuddyAplikace aplikace) {
 
 		String shaHashInputHeslo = org.apache.commons.codec.digest.DigestUtils.shaHex(heslo);
 		int access = 0;
@@ -1165,7 +1165,7 @@ public class DBTransakce {
 					System.out.println("Admin found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
-					aplikace.setAktualniUzivatel(prihlasovany);
+					aplikace.getBuddyAplikace().setAktualniUzivatel(prihlasovany);
 					resultSet.close();
 					statement.close();
 					connection.close();
@@ -1191,7 +1191,7 @@ public class DBTransakce {
 					System.out.println("Exchange student found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
-					aplikace.setAktualniUzivatel(prihlasovany);
+					aplikace.getBuddyAplikace().setAktualniUzivatel(prihlasovany);
 					resultSet.close();
 					statement.close();
 					connection.close();
@@ -1217,7 +1217,7 @@ public class DBTransakce {
 					System.out.println("Buddy found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
-					aplikace.setAktualniUzivatel(prihlasovany);
+					aplikace.getBuddyAplikace().setAktualniUzivatel(prihlasovany);
 					resultSet.close();
 					statement.close();
 					connection.close();
