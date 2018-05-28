@@ -120,6 +120,6 @@ public class Buddy extends Student{
      */
 	@Override
 	public String toString() {
-		return "Buddy [id=" + id + ", xname=" + xname + ", titul=" + titul + ", adresa=" + adresa + "]";
+		return "Buddy [id=" + id + ", xname=" + xname + ", titul=" + titul + ", adresa=" + adresa + "] super -> " + super.toString();
 	}
 }

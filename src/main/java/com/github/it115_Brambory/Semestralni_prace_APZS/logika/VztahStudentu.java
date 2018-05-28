@@ -16,19 +16,19 @@ import javax.persistence.Id;
 public class VztahStudentu {
 
 	private int id;
-	private Exchange exchange;
-	private Buddy buddy;
+	private int exchange_id;
+	private int buddy_id;
 	
 	/**
      * Konstruktor pro definici relace buddy a exchange studenta.
      * 
      * @param int id, Exchange exchange, Buddy buddy.
      */
-	public VztahStudentu(int id, Exchange exchange, Buddy buddy) {
+	public VztahStudentu(int id, int exchange_id, int buddy_id) {
 		super();
 		this.id = id;
-		this.exchange = exchange;
-		this.buddy = buddy;
+		this.exchange_id = exchange_id;
+		this.buddy_id = buddy_id;
 	}
 
 	/**
@@ -55,8 +55,8 @@ public class VztahStudentu {
      * 
      * @return Exchange exchange.
      */
-	public Exchange getExchange() {
-		return exchange;
+	public Integer getExchangeId() {
+		return exchange_id;
 	}
 	
 	/**
@@ -64,8 +64,8 @@ public class VztahStudentu {
      * 
      * @param Exchange exchange.
      */
-	public void setExchange(Exchange exchange) {
-		this.exchange = exchange;
+	public void setExchangeId(int exchange_id) {
+		this.exchange_id = exchange_id;
 	}
 	
 	/**
@@ -73,8 +73,8 @@ public class VztahStudentu {
      * 
      * @return Buddy buddy.
      */
-	public Buddy getBuddy() {
-		return buddy;
+	public int getBuddyId() {
+		return buddy_id;
 	}
 	
 	/**
@@ -82,8 +82,8 @@ public class VztahStudentu {
      * 
      * @param Buddy buddy.
      */
-	public void setBuddy(Buddy buddy) {
-		this.buddy = buddy;
+	public void setBuddyId(int buddy_id) {
+		this.buddy_id = buddy_id;
 	}
 
 	/**
@@ -93,6 +93,6 @@ public class VztahStudentu {
      */
 	@Override
 	public String toString() {
-		return "VztahStudentu [id=" + id + ", exchange=" + exchange + ", buddy=" + buddy + "]";
+		return "VztahStudentu [id=" + id + ", exchange_id=" + exchange_id + ", buddy_id=" + buddy_id + "]";
 	}
 }

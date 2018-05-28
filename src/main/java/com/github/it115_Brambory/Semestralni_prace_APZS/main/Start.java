@@ -6,6 +6,7 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.App;
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakciexchangeController;
 import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrihlaseniController;
+import com.github.it115_Brambory.Semestralni_prace_APZS.ui.TestController;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -45,10 +46,12 @@ public class Start extends Application {
 		public void start (Stage primaryStage) throws Exception {
 			FXMLLoader loader = new FXMLLoader();
 			//loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/MainWindow.fxml"));
+			//loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/TestWindow.fxml"));
 			loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/prihlaseni.fxml"));
 			
 	    	Parent root = loader.load();
 	
+	    	//TestController controller = loader.getController();
 	    	PrihlaseniController controller = loader.getController();
 	    	IBuddyAplikace buddyAplikace = new BuddyAplikace();
 			controller.inicializuj(buddyAplikace);

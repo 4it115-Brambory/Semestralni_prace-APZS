@@ -1,6 +1,5 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.logika;
 
-
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,10 +12,10 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect.DBTransakce;
  * 
  * @author Libor Zíka
  *
- * Hlavní třída logiky, která si drží data
+ *         Hlavní třída logiky, která si drží data
  */
 public class BuddyAplikace implements IBuddyAplikace {
-	
+
 	private boolean konecBuddyAplikace = false;
 	private Map<Integer, Buddy> seznamBuddy;
 	private Map<Integer, Exchange> seznamExchange;
@@ -24,21 +23,25 @@ public class BuddyAplikace implements IBuddyAplikace {
 	private Map<Integer, Akce> seznamAkci;
 	private Map<Integer, Request> seznamRequestu;
 	private Map<Integer, VztahStudentu> seznamVztahuStudentu;
-	//zde stačí typ uživatel, protože stačí email, heslo a access
-	//protože email a heslo je potřeba k přihlášení a access určuje tabulku, ze které uživatel pochází - tedy "práva" pro provádění akcí
-	//tedy jestli je to buddy, exchange nebo admin. Jak provedete kontrolu oprávnění nechám na vás :)
+	// zde stačí typ uživatel, protože stačí email, heslo a access
+	// protože email a heslo je potřeba k přihlášení a access určuje tabulku, ze
+	// které uživatel pochází - tedy "práva" pro provádění akcí
+	// tedy jestli je to buddy, exchange nebo admin. Jak provedete kontrolu
+	// oprávnění nechám na vás :)
 	private Uzivatel aktualniUzivatel;
-	private DBTransakce databazeOperace; //<- odsud používejte ty metody, jsou to v podstatě sql dotazy
-	//jsou tam metody na přidávání, úpravu, mazání a get(select), takže s daty pracujte přes tyto metody,
-	//ať se to rovnou mění v databázi a není starost z dalším ukládáním
-	
+	private DBTransakce databazeOperace; // <- odsud používejte ty metody, jsou to v podstatě sql dotazy
+	// jsou tam metody na přidávání, úpravu, mazání a get(select), takže s daty
+	// pracujte přes tyto metody,
+	// ať se to rovnou mění v databázi a není starost z dalším ukládáním
+
 	/**
-     *  Konstruktor buddyAplikace. Načte data z databáze do patřičných seznamů.
-	 * @throws SQLException 
-     *  
-     */
-	public BuddyAplikace() /*throws SQLException*/ {
-		
+	 * Konstruktor buddyAplikace. Načte data z databáze do patřičných seznamů.
+	 * 
+	 * @throws SQLException
+	 * 
+	 */
+	public BuddyAplikace() /* throws SQLException */ {
+
 		seznamBuddy = new HashMap();
 		seznamExchange = new HashMap();
 		seznamAdminu = new HashMap();
@@ -46,166 +49,150 @@ public class BuddyAplikace implements IBuddyAplikace {
 		seznamRequestu = new HashMap();
 		seznamVztahuStudentu = new HashMap();
 		databazeOperace = new DBTransakce();
-		
+
 		// TODO - něco sem napište :D asi něco k inicializaci, aby to fungovalo no :D
-		
-		//data z databáze se budou načítat asi až v jednotlivých FXML, zavolá se metoda pro určitý SQL příkaz a pak se
-		//přiřadí do proměnné této třídy, na ně jsou pak gettery.
-		//takto - databazeOperace.metoda(parametry);
-		
+
+		// data z databáze se budou načítat asi až v jednotlivých FXML, zavolá se metoda
+		// pro určitý SQL příkaz a pak se
+		// přiřadí do proměnné této třídy, na ně jsou pak gettery.
+		// takto - databazeOperace.metoda(parametry);
+
 	}
-	
-	
-	//----------------------------------------------------------------------------
-	//			Metody pro přihlášení a odhlášení
-	//----------------------------------------------------------------------------
+
+	// ----------------------------------------------------------------------------
+	// Metody pro přihlášení a odhlášení
+	//
+	// Metoda sloužící k přihlášení uživatele do aplikace je implementována
+	// ve třídě DBTransakce, protože je zapotřebí komunikace s DB.
+	// ----------------------------------------------------------------------------
+
 	/**
-     *  Metoda sloužící k přihlášení uživatele do aplikace. Pokud přihlášení proběhne
-     *  úspěšně, takto přihlášený uživatel bude v promenně aktualniUzivatel
-     *  
-     *  @param String email, String heslo
-     *  
-     *  @return boolean
-     */
-	public boolean logIn(String email, String heslo){
-		
-		//TODO - z metody, která udělá join všech 3 tabulek - buddy, exchange a admin - se vybere jen jmeno, heslo a access
-		//pak se ptame jestli existuji takove prihlasovaci udaje v tom selectu, jestli ano tak nastavime aktualniho uzivatele
-		//jestli ne tak hodit hlasku, ze neplatne jmeno nebo heslo a nechat v puvodnim stavu jako na zacatku
-		
-		//nastaveni promenne aktualniUzivatel = new Uzivatel(email, heslo, access);
-		
-			return false;
-		
-	}
-	
-	/**
-     *  Metoda odhlásí přihlášeného uživatele
-     *  
-     *  @return boolean
-     */
-	public boolean logOut(){
-		//TODO
-		//dotaz na uložení neproběhne, protože se data do databáze ukládají při kliknutí na tlačítko uložit
-		//a jeste by bylo dobre vratit se na prvni fxml, uvodni prihlasovaci obrazovka.
-		//Do teto metody by se mohla vlozit metoda z databazeOperace.metoda(parametry); na odhlaseni
+	 * Metoda odhlásí přihlášeného uživatele tak, že nastaví hodnotu proměnné
+	 * aktualniUzivatel na null. Je nutné přímo v controlleru nastavit aktuální okno
+	 * na přihlašování.
+	 * 
+	 * @return boolean
+	 */
+	public void logOut() {
 		aktualniUzivatel = null;
-		return true;
 	}
-	
-	//----------------------------------------------------------------------------
-	//		Gettery na databazeOperace, abychom v controllerech mohli používat DB metody
-	//----------------------------------------------------------------------------
+
+	// ----------------------------------------------------------------------------
+	// Gettery na databazeOperace, abychom v controllerech mohli používat DB metody
+	// ----------------------------------------------------------------------------
 	/**
-     *  Getter na databazeOperace.
-     *  Nezapomenout se v UI ptát na hodnotu atributu access, jen pro jistotu...
-     *  Stejně by měl každej uživatel mít svoje FXML, kde se mu nabízej ty akce,
-     *  asi jsem jen trochu paranoidní už :D
-     *  
-     *  @return Uzivatel aktualniUzivatel
-     */
+	 * Getter na databazeOperace. Nezapomenout se v UI ptát na hodnotu atributu
+	 * access, jen pro jistotu... Stejně by měl každej uživatel mít svoje FXML, kde
+	 * se mu nabízej ty akce, asi jsem jen trochu paranoidní už :D
+	 * 
+	 * @return Uzivatel aktualniUzivatel
+	 */
 	public DBTransakce getDatabazeOperace() {
 		return databazeOperace;
 	}
-	
-	//----------------------------------------------------------------------------
-	//		Gettery na seznamy + getter na aktuálního uživatele
-	//----------------------------------------------------------------------------
+
+	// ----------------------------------------------------------------------------
+	// Gettery na seznamy + getter na aktuálního uživatele
+	// ----------------------------------------------------------------------------
 	/**
-     *  Getter na aktualne prihlaseneho uzivatele.
-     *  V UI se pak schvaluje akce na základě jeho accessu.
-     *  
-     *  @return Uzivatel aktualniUzivatel
-     */
+	 * Getter na aktualne prihlaseneho uzivatele. V UI se pak schvaluje akce na
+	 * základě jeho accessu.
+	 * 
+	 * @return Uzivatel aktualniUzivatel
+	 */
 	public Uzivatel getAktualniUzivatel() {
 		return aktualniUzivatel;
 	}
-	
+
+	public void setAktualniUzivatel(Uzivatel uzivatel) {
+		aktualniUzivatel = uzivatel;
+	}
+
 	/**
-     *  Getter na seznam requestů - zpráv/upozornění pro admina,
-     *  že se exchange student přihlásil na nějakou akci.
-     *  
-     *  @return Map<Integer, Request> seznamRequestu
-     */
+	 * Getter na seznam requestů - zpráv/upozornění pro admina, že se exchange
+	 * student přihlásil na nějakou akci.
+	 * 
+	 * @return Map<Integer, Request> seznamRequestu
+	 */
 	public Map<Integer, Request> getSeznamRequestu() {
 		return seznamRequestu;
 	}
-	
+
 	/**
-     *  Getter na seznam akcí.
-     *  
-     *  @return Map<Integer, Akce> seznamAkci
-     */
+	 * Getter na seznam akcí.
+	 * 
+	 * @return Map<Integer, Akce> seznamAkci
+	 */
 	public Map<Integer, Akce> getSeznamAkci() {
 		return seznamAkci;
 	}
-	
+
 	/**
-     *  Getter na seznam buddy studentů.
-     *  
-     *  @return Map<Integer, Buddy> seznamBuddy
-     */
+	 * Getter na seznam buddy studentů.
+	 * 
+	 * @return Map<Integer, Buddy> seznamBuddy
+	 */
 	public Map<Integer, Buddy> getSeznamBuddy() {
 		return seznamBuddy;
 	}
-	
+
 	/**
-     *  Getter na seznam exchange studentů.
-     *  
-     *  @return Map<Integer, Exchange> seznamExchange
-     */
+	 * Getter na seznam exchange studentů.
+	 * 
+	 * @return Map<Integer, Exchange> seznamExchange
+	 */
 	public Map<Integer, Exchange> getSeznamExchange() {
 		return seznamExchange;
 	}
-	
+
 	/**
-     *  Getter na seznam adminů.
-     *  
-     *  @return Map<Integer, Admin> seznamAdminu
-     */
+	 * Getter na seznam adminů.
+	 * 
+	 * @return Map<Integer, Admin> seznamAdminu
+	 */
 	public Map<Integer, Admin> getSeznamAdminu() {
 		return seznamAdminu;
 	}
-	
+
 	/**
-     *  Getter na seznam vztahů mezi studenty - buddy a exchange.
-     *  
-     *  @return Map<Integer, VztahStudentu> seznamVztahuStudentu
-     */
+	 * Getter na seznam vztahů mezi studenty - buddy a exchange.
+	 * 
+	 * @return Map<Integer, VztahStudentu> seznamVztahuStudentu
+	 */
 	public Map<Integer, VztahStudentu> getSeznamVztahuStudentu() {
 		return seznamVztahuStudentu;
 	}
-		
-	//----------------------------------------------------------------------------
-	//		Zbytek, nastavení konce aplikace, getter na zjištění konce aplikace
-	//----------------------------------------------------------------------------
+
+	// ----------------------------------------------------------------------------
+	// Zbytek, nastavení konce aplikace, getter na zjištění konce aplikace
+	// ----------------------------------------------------------------------------
 	/**
-     *  Nastaví, že je konec aplikace,
-     *  mohou ji použít i další implementace rozhraní (?asi?snad?) IBuddyAplikace.
-     *  hodnota true = konec aplikace, false = aplikace pokračuje
-     */
-    public void setKonecBuddyAplikace() {
-        konecBuddyAplikace = true;
-    }
-	
-    /**
-     *  Tento getter je asi k ničemu :D, ale kdyby náhodou :D
-     *  
-     *  @return BuddyAplikace this.
-     */
+	 * Nastaví, že je konec aplikace, mohou ji použít i další implementace rozhraní
+	 * (?asi?snad?) IBuddyAplikace. hodnota true = konec aplikace, false = aplikace
+	 * pokračuje
+	 */
+	public void setKonecBuddyAplikace() {
+		konecBuddyAplikace = true;
+	}
+
+	/**
+	 * Tento getter je asi k ničemu :D, ale kdyby náhodou :D
+	 * 
+	 * @return BuddyAplikace this.
+	 */
 	@Override
 	public BuddyAplikace getBuddyAplikace() {
 		return this;
 	}
 
-	//tohle asi pak dát do observera kvůli konci programu. Před koncem ať ještě
-	//vyskočí okno, že doporučujete uložit data před koncem aplikace
+	// tohle asi pak dát do observera kvůli konci programu. Před koncem ať ještě
+	// vyskočí okno, že doporučujete uložit data před koncem aplikace
 	/**
-     *  Getter pro zjištění, jestli je konec aplikace, nebo ještě ne.
-     *  Je to stejné, jako v adventuře -> hodnota true = konec aplikace, false = aplikace pokračuje
-     *  
-     *  @return boolean konecBuddyAplikace.
-     */
+	 * Getter pro zjištění, jestli je konec aplikace, nebo ještě ne. Je to stejné,
+	 * jako v adventuře -> hodnota true = konec aplikace, false = aplikace pokračuje
+	 * 
+	 * @return boolean konecBuddyAplikace.
+	 */
 	@Override
 	public boolean konecBuddyAplikace() {
 		return konecBuddyAplikace;

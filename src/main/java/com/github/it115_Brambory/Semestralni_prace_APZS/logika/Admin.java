@@ -92,7 +92,7 @@ public class Admin extends Uzivatel{
      */
 	@Override
 	public String toString() {
-		return "Student [jmeno=" + jmeno + ", prijmeni=" + prijmeni + "]";
+		return "Student [jmeno=" + jmeno + ", prijmeni=" + prijmeni + "] super -> " + super.toString();
 	}
 	
 }
