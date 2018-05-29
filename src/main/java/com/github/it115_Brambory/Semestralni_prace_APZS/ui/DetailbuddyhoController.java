@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 public class DetailbuddyhoController extends Pane implements Observer {
 	
 	private IBuddyAplikace buddyAplikace;	
+	private Buddy vybranyBuddy;
 	@FXML private TextField jmeno;
 	@FXML private TextField prijmeni;
 	@FXML private TextField email;
@@ -40,10 +41,19 @@ public class DetailbuddyhoController extends Pane implements Observer {
      *  
 	 * @throws SQLException - to je kvůli těm testům na konci metody
      */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+	public void inicializuj(IBuddyAplikace buddyAplikace, Buddy vybranyBuddy) throws SQLException {
 		
 		this.buddyAplikace = buddyAplikace;
-		//ToDo
+		jmeno.setText(vybranyBuddy.getJmeno());
+		prijmeni.setText(vybranyBuddy.getPrijmeni());
+		email.setText(vybranyBuddy.getEmail());
+		pohlavi.setText(vybranyBuddy.getPohlavi());
+		statniprislusnost.setText(vybranyBuddy.getStatniPrislusnost());
+		adresa.setText(vybranyBuddy.getAdresa());
+		datumnarozeni.setText(vybranyBuddy.getDatumNarozeni());
+		xname.setText(vybranyBuddy.getXname());
+		titul.setText(vybranyBuddy.getTitul());
+		
 		
 		
 		

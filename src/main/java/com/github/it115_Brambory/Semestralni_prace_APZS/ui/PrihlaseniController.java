@@ -123,15 +123,21 @@ public class PrihlaseniController extends Pane implements Observer {
 				buddyAplikace);
 		if (ukazatel == 0) {
 			//vyskočí modální okno
-			ukazAlertBad();			
+			ukazAlertBad();
 		} else if (ukazatel == 1) {
-			sceneExchange();/* přepnutí na exchange */
+			Stage curretStage = (Stage) email.getScene().getWindow();
+			sceneExchange(); /* přepnutí na exchange */
+			curretStage.close(); 
+			
 		} else if (ukazatel == 2) {
-			sceneBuddy();
-			/* přepnutí na buddyho */;
+			Stage curretStage = (Stage) email.getScene().getWindow();
+			sceneBuddy();  /* přepnutí na buddyho */
+			curretStage.close();
+			;
 		} else {
-			sceneAdmin();
-			/* přepnutí na admina */;
+			Stage curretStage = (Stage) email.getScene().getWindow();
+			sceneAdmin();   /* přepnutí na admina */;
+			curretStage.close();
 		}
 	}
 
