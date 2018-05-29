@@ -2,6 +2,7 @@ package com.github.it115_Brambory.Semestralni_prace_APZS.ui;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 
+
 import java.util.Observer;
 import java.awt.TextField;
 import java.sql.SQLException;
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 public class PrehledbuddyController extends Pane implements Observer {
 	//zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;	
+	private Buddy vybranyBuddy;
 	@FXML private TableColumn jmeno;
 	@FXML private TableColumn prijmeni;
 	@FXML private TableColumn email;
@@ -153,7 +155,16 @@ public class PrehledbuddyController extends Pane implements Observer {
 	//detail buddyho, todo
 	@FXML
 	private void sceneDetailBuddyho() throws Exception {
-		
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(getClass().getResource("detailbuddyho.fxml"));    	
+    	Parent root = loader.load();
+    	DetailbuddyhoController controller = new DetailbuddyhoController();
+    	controller = loader.getController(); 
+    	controller.inicializuj(buddyAplikace,vybranyBuddy);
+    	Stage Detailbuddyho = new Stage();    	
+    	Detailbuddyho.setScene(new Scene(root));
+    	Detailbuddyho.show();
+    	Detailbuddyho.setTitle("Detail buddyho");
     	
 	}
 	
