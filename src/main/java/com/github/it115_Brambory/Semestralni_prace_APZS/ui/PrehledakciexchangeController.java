@@ -36,7 +36,7 @@ public class PrehledakciexchangeController extends Pane implements Observer {
 		@FXML private TableColumn misto;
 
 		@FXML private TableColumn cena;
-		@FXML private TextField prihlasen;
+		@FXML private TextArea prihlasen;
 
 	/**
      *  Metoda k inicializaci hry. Načte všechny potřebné prvky
@@ -49,7 +49,7 @@ public class PrehledakciexchangeController extends Pane implements Observer {
 		this.buddyAplikace = buddyAplikace;
 		//ToDo
 		
-		this.prihlasen.setText("value");
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		
 		
 		

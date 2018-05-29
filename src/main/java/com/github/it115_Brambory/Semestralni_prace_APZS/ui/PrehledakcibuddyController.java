@@ -44,7 +44,7 @@ public class PrehledakcibuddyController extends Pane implements Observer {
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
 		
 		this.buddyAplikace = buddyAplikace;
-		//ToDo
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		
 		
 		
