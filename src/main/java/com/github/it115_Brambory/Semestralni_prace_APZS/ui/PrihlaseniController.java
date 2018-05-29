@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Observable;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -156,5 +157,12 @@ public class PrihlaseniController extends Pane implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 	}
+	
+	//odhlašovací metoda, hádám, že bude stačit zabít celou aplikaci
+		@FXML
+		private void odhlasit() throws Exception {
+			Platform.exit();
+			Start.main(null); //tohle by mělo aplikaci zas spustit, ale nějak se to neděje, tak na to kašlu. Hlavně, že se to zavře
+		}
 
 }
