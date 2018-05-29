@@ -1,6 +1,8 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.logika;
 
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,6 +136,10 @@ public class BuddyAplikace implements IBuddyAplikace {
 	 */
 	public Map<Integer, Buddy> getSeznamBuddy() {
 		return seznamBuddy;
+	}
+	
+	public Collection<Buddy> getSeznamBuddyKolekce() {
+		return Collections.unmodifiableCollection (seznamBuddy.values());
 	}
 
 	/**

@@ -2,31 +2,21 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledbuddyController">
    <children>
-     <Button id="prehledzadosti" onAction="#scenePrehledZadosti" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" text="Přehled žádostí" />
-      <Button id="prehledakci" onAction="#sceneAdmin" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" text="Přehled akcí" />
-      <Button id="prehledceskych" onAction="#scenePrehledCeskych" layoutX="231.0" layoutY="48.0" mnemonicParsing="false" text="Přehled českých buddy" />
-      <Button id="prehledzahranicnich" onAction="#scenePrehledZahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
-      <Button onAction="#odhlasit"  layoutX="509.0" layoutY="14.0" mnemonicParsing="false" text="Odhlásit" />
+     <Button id="prehledzadosti" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledZadosti" text="Přehled žádostí" />
+      <Button id="prehledakci" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" onAction="#sceneAdmin" text="Přehled akcí" />
+      <Button id="prehledceskych" layoutX="231.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledCeskych" text="Přehled českých buddy" />
+      <Button id="prehledzahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledZahranicnich" text="Přehled zahraničních studentů" />
+      <Button layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
       <TextArea id="prihlasen" layoutX="113.0" layoutY="5.0" prefHeight="38.0" prefWidth="216.0" />
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
-      <TableView layoutX="25.0" layoutY="86.0" prefHeight="223.0" prefWidth="539.0">
-        <columns>
-          <TableColumn id="email" prefWidth="75.0" text="email" />
-            <TableColumn id="jmeno" prefWidth="90.0" text="jmeno" />
-            <TableColumn id="prijmeni" prefWidth="84.0" text="prijmeni" />
-          <TableColumn id="xname" prefWidth="66.0" text="xname" />
-            <TableColumn id="datum narozeni" prefWidth="107.0" text="datum narozeni" />
-            <TableColumn id="telefon" prefWidth="116.0" text="telefon" />
-        </columns>
-      </TableView>
-      <Button id="pridatstudenta" onAction="#scenePridatBuddyho" layoutX="40.0" layoutY="333.0" mnemonicParsing="false" text="Pridat studenta" />
-      <Button id="detailstudenta" onAction="#sceneDetailBuddyho" layoutX="164.0" layoutY="333.0" mnemonicParsing="false" text="Detail studenta" />
+      <Button id="pridatstudenta" layoutX="40.0" layoutY="333.0" mnemonicParsing="false" onAction="#scenePridatBuddyho" text="Pridat studenta" />
+      <Button id="detailstudenta" fx:id="detailStudenta" layoutX="164.0" layoutY="333.0" mnemonicParsing="false" onAction="#sceneDetailBuddyho" text="Detail studenta" />
+      <ListView fx:id="seznamBuddy" layoutX="46.0" layoutY="100.0" prefHeight="200.0" prefWidth="492.0" />
    </children>
 </Pane>

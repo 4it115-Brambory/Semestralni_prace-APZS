@@ -6,6 +6,7 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 import java.util.Observer;
 import java.awt.TextField;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Observable;
 
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 /**
@@ -36,6 +38,7 @@ public class PrehledbuddyController extends Pane implements Observer {
 	@FXML private TableColumn statniprislusnost;
 	@FXML private TableColumn adresa;
 	@FXML private TableColumn datumnarozeni;
+	@FXML private ListView<Buddy> seznamBuddy;
 	@FXML private TextArea prihlasen;
 
 	/**
@@ -47,7 +50,8 @@ public class PrehledbuddyController extends Pane implements Observer {
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
 		
 		this.buddyAplikace = buddyAplikace;
-		//ToDo
+		seznamBuddy.getItems().addAll(buddyAplikace.getBuddyAplikace().getSeznamBuddyKolekce());
+		
 		
 		
 		
@@ -164,8 +168,15 @@ public class PrehledbuddyController extends Pane implements Observer {
     	Stage Detailbuddyho = new Stage();    	
     	Detailbuddyho.setScene(new Scene(root));
     	Detailbuddyho.show();
-    	Detailbuddyho.setTitle("Detail buddyho");
+    	Detailbuddyho.setTitle("Detail buddyho");  
     	
+	}
+	
+	
+	private void detailStudenta() throws Exception {
+		vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();;
+		sceneDetailBuddyho();
+
 	}
 	
 	//ohlašovací metoda, hádám, že bude stačit zabít celou aplikaci
