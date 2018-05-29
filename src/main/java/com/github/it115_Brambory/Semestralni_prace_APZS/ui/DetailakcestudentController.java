@@ -1,12 +1,14 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.ui;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
+import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 
 import java.util.Observer;
 import java.awt.TextField;
 import java.sql.SQLException;
 import java.util.Observable;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -59,5 +61,12 @@ public class DetailakcestudentController extends Pane implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 	}
+	
+	//odhlašovací metoda, hádám, že bude stačit zabít celou aplikaci
+		@FXML
+		private void odhlasit() throws Exception {
+			Platform.exit();
+			Start.main(null); //tohle by mělo aplikaci zas spustit, ale nějak se to neděje, tak na to kašlu. Hlavně, že se to zavře
+		}
 	
 }

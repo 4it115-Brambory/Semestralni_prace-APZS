@@ -1,12 +1,14 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.ui;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
+import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 
 import java.util.Observer;
 import java.awt.TextField;
 import java.sql.SQLException;
 import java.util.Observable;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -158,10 +160,11 @@ public class PrehledzahranicnichController extends Pane implements Observer {
     	
 	}
 	
-	//ohlašovací metoda, hádám, že bude stačit zabít celou aplikaci
+	//odhlašovací metoda, hádám, že bude stačit zabít celou aplikaci
 		@FXML
 		private void odhlasit() throws Exception {
-	    	
+			Platform.exit();
+			Start.main(null); //tohle by mělo aplikaci zas spustit, ale nějak se to neděje, tak na to kašlu. Hlavně, že se to zavře
 		}
 		
 	
