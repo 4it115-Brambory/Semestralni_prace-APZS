@@ -51,6 +51,7 @@ public class PrehledakciadminController extends Pane implements Observer {
 		this.buddyAplikace = buddyAplikace;
 		
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+		prihlasen.setEditable(false);
 		
 		
 	}
@@ -73,6 +74,7 @@ public class PrehledakciadminController extends Pane implements Observer {
     	Prehledakciadmin.setScene(new Scene(root));
     	Prehledakciadmin.show();
     	Prehledakciadmin.setTitle("Přehled akcí");
+    	
     	
 	}
 	

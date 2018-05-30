@@ -44,8 +44,10 @@ public class PridatzahranicnihoController extends Pane implements Observer {
 	 * @throws SQLException - to je kvůli těm testům na konci metody
      */
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		
 		this.buddyAplikace = buddyAplikace;
+		prihlasen.setEditable(false);
 		//ToDo
 		
 		
@@ -72,6 +74,7 @@ public class PridatzahranicnihoController extends Pane implements Observer {
     	Prehledakciadmin.setScene(new Scene(root));
     	Prehledakciadmin.show();
     	Prehledakciadmin.setTitle("Přehled akcí");
+    	
     	
 	}
 	

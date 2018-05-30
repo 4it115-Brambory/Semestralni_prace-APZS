@@ -45,6 +45,7 @@ public class PrehledakcibuddyController extends Pane implements Observer {
 		
 		this.buddyAplikace = buddyAplikace;
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+		prihlasen.setEditable(false);
 		
 		
 		

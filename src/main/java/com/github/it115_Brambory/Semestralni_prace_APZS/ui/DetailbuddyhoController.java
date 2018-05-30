@@ -44,6 +44,7 @@ public class DetailbuddyhoController extends Pane implements Observer {
 	 * @throws SQLException - to je kvůli těm testům na konci metody
      */
 	public void inicializuj(IBuddyAplikace buddyAplikace, Buddy vybranyBuddy) throws SQLException {
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		
 		this.buddyAplikace = buddyAplikace;
 		jmeno.setText(vybranyBuddy.getJmeno());
@@ -55,6 +56,7 @@ public class DetailbuddyhoController extends Pane implements Observer {
 		datumnarozeni.setText(vybranyBuddy.getDatumNarozeni());
 		xname.setText(vybranyBuddy.getXname());
 		titul.setText(vybranyBuddy.getTitul());
+		prihlasen.setEditable(false);
 		
 		
 		

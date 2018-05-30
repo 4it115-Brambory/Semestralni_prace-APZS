@@ -53,7 +53,7 @@ public class PrihlaseniController extends Pane implements Observer {
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
 
 		this.buddyAplikace = buddyAplikace;
-
+		
 	}
 
 	@FXML
