@@ -59,7 +59,7 @@ public class PrehledAkciProBuddyStudentaController extends Pane implements Obser
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+	public void inicializuj(IBuddyAplikace buddyAplikace){
 		this.buddyAplikace = buddyAplikace;
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
@@ -99,5 +99,21 @@ public class PrehledAkciProBuddyStudentaController extends Pane implements Obser
 		window.show();
 
 	}
-
+	
+	@FXML	
+	private void sceneDetailAkce (ActionEvent event) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(this.getClass().getResource("Detailakcebuddy.fxml"));
+		Parent tableViewParent = loader.load();
+    	
+		Scene tableViewScene = new Scene(tableViewParent);
+		
+		DetailAkceProBuddyController controller = loader.getController();
+		controller.inicializuj(buddyAplikace);
+		
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+	
 }
