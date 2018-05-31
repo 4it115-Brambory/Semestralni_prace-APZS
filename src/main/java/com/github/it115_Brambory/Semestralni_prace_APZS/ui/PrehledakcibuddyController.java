@@ -64,11 +64,9 @@ public class PrehledakcibuddyController extends Pane implements Observer {
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
 
-		//nacti data do tabulky
+		// nacti data do tabulky
 		typ.setCellValueFactory(new PropertyValueFactory("firstName"));
-		
-		
-		
+
 	}
 
 	@Override
@@ -76,27 +74,30 @@ public class PrehledakcibuddyController extends Pane implements Observer {
 		// TODO Auto-generated method stub
 	}
 
-	// odhlašovací metoda, hádám, že bude stačit zabít celou aplikaci
-	// -------- a nebo, musi se nastavit aktualniUzivatel v buddyAplikaci na null
-	// -------- a vratit se na prihlasovaci okno. Zkusim tuhle cestu, protoze zatim
-	// -------- vam zmena okna nikde nefunguje, tak at to pak zkopirujete
+	/**
+	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální
+	 * uživatel se nastaví na null a scéna se změní na přihlášení.
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	public void odhlasit(ActionEvent event) throws Exception {
-		
+
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
-    	
+
 		Scene tableViewScene = new Scene(tableViewParent);
-		
+
 		PrihlaseniController controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
-		
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
 		window.show();
-		
+
 	}
 
 }

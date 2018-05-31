@@ -13,7 +13,7 @@
       <Button id="prehledakci" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" text="Přehled akcí" />
       <Button id="prehledceskych" layoutX="231.0" layoutY="48.0" mnemonicParsing="false" text="Přehled českých buddy" />
       <Button id="prehledzahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
-      <Button layoutX="509.0" layoutY="14.0" mnemonicParsing="false" text="Odhlásit" />
+      <Button fx:id="odhlasit" onAction="#odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" text="Odhlásit" />
       <TextArea id="prihlasen" layoutX="113.0" layoutY="14.0" fx:id="prihlasen" />
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
       <TextField id="jmeno" layoutX="102.0" layoutY="88.0" />

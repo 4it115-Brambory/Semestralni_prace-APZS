@@ -6,14 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.NovaAkceController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.NovaAkceController">
    <children>
       <Button layoutX="177.0" layoutY="81.0" mnemonicParsing="false" text="Přehled akcí" />
       <Button layoutX="37.0" layoutY="81.0" mnemonicParsing="false" text="Přehled žádostí" />
       <Button layoutX="289.0" layoutY="81.0" mnemonicParsing="false" text="Přehled českých buddy" />
       <Button layoutX="476.0" layoutY="81.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
-      <TextArea layoutX="175.0" layoutY="15.0" prefHeight="46.0" prefWidth="200.0" fx:id="prihlasen" />
+      <TextArea fx:id="prihlasen" layoutX="175.0" layoutY="15.0" prefHeight="46.0" prefWidth="200.0" />
       <Label layoutX="37.0" layoutY="38.0" text="Příhlášen jako:" />
       <Button layoutX="37.0" layoutY="313.0" mnemonicParsing="false" text="Zpět" />
       <Button layoutX="289.0" layoutY="313.0" mnemonicParsing="false" text="Uložit" />
@@ -33,5 +32,6 @@
       <TextField layoutX="445.0" layoutY="265.0" />
       <TextField layoutX="445.0" layoutY="224.0" />
       <TextField layoutX="445.0" layoutY="181.0" />
+      <Button id="odhlasit" fx:id="odhlasit" layoutX="602.0" layoutY="15.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
    </children>
 </Pane>

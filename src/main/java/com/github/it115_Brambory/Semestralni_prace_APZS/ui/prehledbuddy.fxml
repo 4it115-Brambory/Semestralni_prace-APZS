@@ -11,7 +11,7 @@
      <Button id="prehledzadosti" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledZadosti" text="Přehled žádostí" />
       <Button id="prehledakci" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" onAction="#sceneAdmin" text="Přehled akcí" />
       <Button id="prehledzahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledZahranicnich" text="Přehled zahraničních studentů" />
-      <Button layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
+      <Button fx:id="odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
 <<<<<<< HEAD
       <TextArea id="prihlasen" fx:id="prihlasenJako" layoutX="113.0" layoutY="5.0" prefHeight="38.0" prefWidth="216.0" />
 =======

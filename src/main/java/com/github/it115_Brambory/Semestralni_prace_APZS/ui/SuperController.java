@@ -9,8 +9,10 @@ import java.sql.SQLException;
 import java.util.Observable;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -57,11 +59,30 @@ public class SuperController extends Pane implements Observer {
 		// TODO Auto-generated method stub
 	}
 
-	//odhlašovací metoda, hádám, že bude stačit zabít celou aplikaci
+	/**
+	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální
+	 * uživatel se nastaví na null a scéna se změní na přihlášení.
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
-	private void odhlasit() throws Exception {
-		Platform.exit();
-		Start.main(null); //tohle by mělo aplikaci zas spustit, ale nějak se to neděje, tak na to kašlu. Hlavně, že se to zavře
+	public void odhlasit(ActionEvent event) throws Exception {
+
+		this.buddyAplikace.getBuddyAplikace().logOut();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		Parent tableViewParent = loader.load();
+
+		Scene tableViewScene = new Scene(tableViewParent);
+
+		PrihlaseniController controller = loader.getController();
+		controller.inicializuj(buddyAplikace);
+
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+
 	}
 	
 }
