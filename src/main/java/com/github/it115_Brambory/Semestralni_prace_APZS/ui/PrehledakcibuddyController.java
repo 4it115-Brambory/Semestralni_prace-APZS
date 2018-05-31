@@ -65,7 +65,7 @@ public class PrehledakcibuddyController extends Pane implements Observer {
 		prihlasen.setEditable(false);
 
 		// nacti data do tabulky
-		typ.setCellValueFactory(new PropertyValueFactory("firstName"));
+		//typ.setCellValueFactory(new PropertyValueFactory("firstName"));
 
 	}
 
