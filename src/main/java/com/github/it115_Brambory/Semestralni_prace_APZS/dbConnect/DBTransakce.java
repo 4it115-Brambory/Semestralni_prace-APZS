@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.Observable;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
-import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakcibuddyController;;
+
 
 
 /**
