@@ -60,7 +60,7 @@ public class PrihlaseniController extends Pane implements Observer {
 	 */
 	private void sceneExchange (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prehledakciexchange.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledAkciProExchange.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -82,7 +82,7 @@ public class PrihlaseniController extends Pane implements Observer {
 	@FXML
 	private void sceneAdmin(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prehledakciadmin.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledAkciProAdmina.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -104,7 +104,7 @@ public class PrihlaseniController extends Pane implements Observer {
 	@FXML
 	private void sceneBuddy(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prehledakcibuddy.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledAkciProBuddy.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);

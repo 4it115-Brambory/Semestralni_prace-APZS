@@ -71,7 +71,7 @@ public class SuperController extends Pane implements Observer {
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);
