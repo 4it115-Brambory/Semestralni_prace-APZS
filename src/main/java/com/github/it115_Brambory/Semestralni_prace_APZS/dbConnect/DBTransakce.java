@@ -9,8 +9,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Observable;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
+import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakcibuddyController;;
 
 
 /**
@@ -30,7 +32,7 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
  *         záznamu - v databázi primární klíč.
  */
 
-public class DBTransakce {
+public class DBTransakce extends Observable{
 
 	private Map<Integer, Buddy> seznamBuddy;
 	private Map<Integer, Exchange> seznamExchange;
@@ -1034,6 +1036,8 @@ public class DBTransakce {
 			String sql = "DELETE FROM `Buddy` WHERE `buddy_id`='" + buddy_id + "'";
 			statement.executeUpdate(sql);
 			System.out.println("vymazáno");
+			setChanged();
+		    notifyObservers();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("nevymazáno");

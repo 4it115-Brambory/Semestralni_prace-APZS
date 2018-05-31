@@ -12,12 +12,10 @@
       <Button id="prehledakci" layoutX="160.0" layoutY="53.0" mnemonicParsing="false" text="Přehled akcí" />
       <Button id="prehledceskych" layoutX="270.0" layoutY="53.0" mnemonicParsing="false" text="Přehled českých buddy" />
       <Button id="prehledzahranicnich" layoutX="450.0" layoutY="53.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
-      <Button fx:id="odhlasit" onAction="#odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" text="Odhlásit" />
-<<<<<<< HEAD
-      <TextArea id="prihlasen" fx:id="prihlasenJako" layoutX="130.0" layoutY="3.0" prefHeight="47.0" prefWidth="186.0" />
-=======
-      <TextArea id="prihlasen" layoutX="130.0" layoutY="3.0" prefHeight="47.0" prefWidth="186.0" fx:id="prihlasen" />
->>>>>>> 0f5836817b471772d156f5cd0cc2af63c611dc7d
+      <Button fx:id="odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
+
+      <TextArea id="prihlasen" fx:id="prihlasen" layoutX="130.0" layoutY="3.0" prefHeight="47.0" prefWidth="186.0" />
+
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
       <TextField id="jmeno" fx:id="jmeno" layoutX="102.0" layoutY="88.0" />
       <TextField id="prijmeni" fx:id="prijmeni" layoutX="102.0" layoutY="122.0" />
@@ -34,7 +32,7 @@
       <Label layoutX="300.0" layoutY="92.0" text="Statni prislusnost:" />
       <Label layoutX="349.0" layoutY="126.0" text="Adresa:" />
       <Button id="ulozit" fx:id="uloz" layoutX="113.0" layoutY="288.0" mnemonicParsing="false" onAction="#uloz" text="Ulozit" />
-      <Button layoutX="377.0" layoutY="288.0" mnemonicParsing="false" text="Odstranit" />
+      <Button layoutX="377.0" layoutY="288.0" mnemonicParsing="false" onAction="#odstran" text="Odstranit" />
       <TextField id="xname" layoutX="430.0" layoutY="194.0" fx:id="xname" />
       <TextField id="titul" fx:id="titul" layoutX="102.0" layoutY="228.0" />
       <Label layoutX="63.0" layoutY="232.0" text="Titul:" />

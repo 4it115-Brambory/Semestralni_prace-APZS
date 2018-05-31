@@ -117,14 +117,19 @@ public class DetailbuddyhoController extends Pane implements Observer {
 	}
 
 	public void uloz() throws SQLException {
-		System.out.print(
-				detailBuddy.getId() + " " + jmeno.getText() + " " + prijmeni.getText() + " " + telefon.getText() + " "
-						+ pohlavi.getText() + " " + datumnarozeni.getText() + " " + statniprislusnost.getText() + " "
-						+ xname.getText() + " " + titul.getText() + " " + adresa.getText() + " " + email.getText());
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateBuddyStudenta(detailBuddy.getId(), jmeno.getText(),
 				prijmeni.getText(), datumnarozeni.getText(), telefon.getText(), pohlavi.getText(),
 				statniprislusnost.getText(), xname.getText(), titul.getText(), adresa.getText(), email.getText());
 
+	}
+	
+	public void odstran() throws SQLException {
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteBuddyStudent(detailBuddy.getId());
+		Stage curretStage = (Stage) email.getScene().getWindow();
+		curretStage.close();
+		
+		
+		
 	}
 
 }

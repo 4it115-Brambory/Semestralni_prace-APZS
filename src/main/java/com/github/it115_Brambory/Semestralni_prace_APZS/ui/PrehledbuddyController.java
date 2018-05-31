@@ -70,12 +70,20 @@ public class PrehledbuddyController extends Pane implements Observer {
 		seznamBuddy.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamBuddyKolekce());
 
 		prihlasen.setEditable(false);
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().addObserver(this);
 
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		this.buddyAplikace = buddyAplikace;
+		seznamBuddy.getItems().clear();
+		try {
+			seznamBuddy.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamBuddyKolekce());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
