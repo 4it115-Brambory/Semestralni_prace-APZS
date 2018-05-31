@@ -8,10 +8,6 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.DetailBuddyStudentaController">
    <children>
-      <Button id="prehledzadosti" layoutX="28.0" layoutY="53.0" mnemonicParsing="false" text="Přehled žádostí" />
-      <Button id="prehledakci" layoutX="160.0" layoutY="53.0" mnemonicParsing="false" text="Přehled akcí" />
-      <Button id="prehledceskych" layoutX="270.0" layoutY="53.0" mnemonicParsing="false" text="Přehled českých buddy" />
-      <Button id="prehledzahranicnich" layoutX="450.0" layoutY="53.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
       <Button fx:id="odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
 
       <TextArea id="prihlasen" fx:id="prihlasen" layoutX="130.0" layoutY="3.0" prefHeight="47.0" prefWidth="186.0" />
