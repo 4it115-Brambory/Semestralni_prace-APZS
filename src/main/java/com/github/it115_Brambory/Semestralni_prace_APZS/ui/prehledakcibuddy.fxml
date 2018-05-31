@@ -7,21 +7,21 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakcibuddyController">
+<Pane fx:id="thisPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakcibuddyController">
    <children>
-      <Button id="odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" text="Odhlásit"  />
-      <TextArea id="prihlasen" layoutX="113.0" layoutY="7.0" prefHeight="36.0" prefWidth="156.0" fx:id="prihlasen" />
+      <Button id="odhlasit" fx:id="odhlasit" layoutX="504.0" layoutY="6.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
+      <TextArea id="prihlasen" fx:id="prihlasen" layoutX="113.0" layoutY="7.0" prefHeight="36.0" prefWidth="156.0" />
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
-      <TableView layoutX="25.0" layoutY="86.0" prefHeight="223.0" prefWidth="539.0">
+      <Button id="detailakce" layoutX="28.0" layoutY="332.0" mnemonicParsing="false" text="Detail akce" />
+      <TableView fx:id="tableView" layoutX="25.0" layoutY="86.0" prefHeight="223.0" prefWidth="539.0">
         <columns>
-          <TableColumn id="typ" prefWidth="75.0" text="typ" />
-            <TableColumn id="nazev" prefWidth="90.0" text="nazev" />
-            <TableColumn id="casOd" prefWidth="84.0" text="od" />
-          <TableColumn id="casDo" prefWidth="66.0" text="do" />
-            <TableColumn id="misto" prefWidth="107.0" text="misto" />
-            <TableColumn id="cena" prefWidth="116.0" text="cena" />
+          <TableColumn id="typ" fx:id="typ" prefWidth="75.0" text="typ" />
+            <TableColumn id="nazev" fx:id="nazev" prefWidth="90.0" text="nazev" />
+            <TableColumn id="casOd" fx:id="casOd" prefWidth="84.0" text="od" />
+          <TableColumn id="casDo" fx:id="casDo" prefWidth="66.0" text="do" />
+            <TableColumn id="misto" fx:id="misto" prefWidth="107.0" text="misto" />
+            <TableColumn id="cena" fx:id="cena" prefWidth="116.0" text="cena" />
         </columns>
       </TableView>
-      <Button id="detailakce" layoutX="28.0" layoutY="332.0" mnemonicParsing="false" text="Detail akce" />
    </children>
 </Pane>
