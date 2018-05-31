@@ -132,6 +132,23 @@ public class PrehledZadostiController extends Pane implements Observer {
 		window.show();
 	}
 
+	@FXML	
+	private void scenePrehledZahranicnich (ActionEvent event) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(this.getClass().getResource("PrehledExchangeStudentuProAdmina.fxml"));
+		Parent tableViewParent = loader.load();
+    	
+		Scene tableViewScene = new Scene(tableViewParent);
+		
+		PrehledExchangeStudentuController controller = loader.getController();
+		controller.inicializuj(buddyAplikace);
+		
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+	
+	
 	/**
 	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální
 	 * uživatel se nastaví na null a scéna se změní na přihlášení.

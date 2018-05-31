@@ -104,7 +104,7 @@ public class PrihlaseniController extends Pane implements Observer {
 	@FXML
 	private void sceneBuddy(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("PrehledAkciProBuddy.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledAkciProBuddyho.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
