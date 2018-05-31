@@ -1193,8 +1193,8 @@ public class DBTransakce {
 		try {
 			// System.out.println("zkousime");
 			String sql = "SELECT `email`, `access`, `heslo` FROM `Exchange`";
-			connection = connectionClass.getConnection();
-			statement = connection.createStatement();
+			//connection = connectionClass.getConnection();
+			//statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
 				if (Objects.equals(email, resultSet.getString("email"))
@@ -1219,8 +1219,8 @@ public class DBTransakce {
 		try {
 			// System.out.println("zkousime");
 			String sql = "SELECT `email`, `access`, `heslo` FROM `Buddy`";
-			connection = connectionClass.getConnection();
-			statement = connection.createStatement();
+			//connection = connectionClass.getConnection();
+			//statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
 				if (Objects.equals(email, resultSet.getString("email"))
