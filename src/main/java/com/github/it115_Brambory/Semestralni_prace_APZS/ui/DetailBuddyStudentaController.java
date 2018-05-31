@@ -79,6 +79,7 @@ public class DetailBuddyStudentaController extends Pane implements Observer {
 		datumnarozeni.setText(detailBuddy.getDatumNarozeni());
 		xname.setText(detailBuddy.getXname());
 		titul.setText(detailBuddy.getTitul());
+		telefon.setText(detailBuddy.getTelefon());
 
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);

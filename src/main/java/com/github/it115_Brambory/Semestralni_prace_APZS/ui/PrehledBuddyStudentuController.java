@@ -18,8 +18,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -34,20 +36,7 @@ import javafx.stage.Stage;
 public class PrehledBuddyStudentuController extends Pane implements Observer {
 	// zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;
-	@FXML
-	private TableColumn jmeno;
-	@FXML
-	private TableColumn prijmeni;
-	@FXML
-	private TableColumn email;
-	@FXML
-	private TableColumn pohlavi;
-	@FXML
-	private TableColumn statniprislusnost;
-	@FXML
-	private TableColumn adresa;
-	@FXML
-	private TableColumn datumnarozeni;
+
 	@FXML
 	private ListView<Buddy> seznamBuddy;
 	@FXML
@@ -181,17 +170,18 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 			Stage Detailbuddyho = new Stage();
 			Detailbuddyho.setScene(new Scene(root));
 			Detailbuddyho.show();
-			Detailbuddyho.setTitle("Detail buddyho");
-		} else
-			System.out.print("nemáš vybraného");
+			Detailbuddyho.setTitle("Detail Buddy studenta");
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+		    alert.setTitle("Upozornění");
+		    alert.setHeaderText(null);
+		    alert.setContentText("Nemáš vybraného studenta");
+		    alert.showAndWait();
+		}
 
 	}
 
-	private void detailStudenta() throws Exception {
-		// vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();
-		sceneDetailBuddyho();
 
-	}
 
 	/**
 	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální

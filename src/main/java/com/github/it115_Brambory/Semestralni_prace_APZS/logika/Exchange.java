@@ -79,6 +79,7 @@ public class Exchange extends Student{
      */
 	@Override
 	public String toString() {
-		return "Exchange [id=" + exchange_id + ", adresaCR=" + adresaCR + "] super -> " + super.toString();
+		//return "Exchange [id=" + exchange_id + ", adresaCR=" + adresaCR + "] super -> " + super.toString();
+		return super.getJmeno() +" "+ super.getPrijmeni() +"   "+ super.getEmail();
 	}
 }

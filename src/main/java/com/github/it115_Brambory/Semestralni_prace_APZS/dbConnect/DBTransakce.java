@@ -148,6 +148,13 @@ public class DBTransakce extends Observable{
 		}
 		return seznamExchange;
 	}
+	
+	public Collection<Exchange>  getSeznamExchangeKolekce () throws SQLException 
+    {
+		getSeznamExchange();
+		//System.out.println(getSeznamExchange());
+    	return Collections.unmodifiableCollection (seznamExchange.values());
+    }
 
 	/**
 	 * Metoda vrací seznam akcí, kreré jsou v DB.
@@ -193,6 +200,12 @@ public class DBTransakce extends Observable{
 		}
 		return seznamAkci;
 	}
+	
+	public Collection<Akce>  getSeznamAkciKolekce () throws SQLException 
+    {
+		getSeznamAkci();
+    	return Collections.unmodifiableCollection (seznamAkci.values());
+    }
 
 	/**
 	 * Metoda pro získání seznamu všech requestů. Použití v admin controlleru pro
@@ -409,6 +422,8 @@ public class DBTransakce extends Observable{
 	 * @param adresa
 	 * @throws SQLException
 	 */
+	
+	//todo dodělat změnu emailu +++++++++++++++++++++++++++++++++++++++++
 	public void updateBuddyStudenta(int buddy_id, String jmeno, String prijmeni, String datumNarozeni, String telefon,
 			String pohlavi, String statniPrislusnost, String xname, String titul, String adresa, String email) throws SQLException {
 
@@ -432,6 +447,8 @@ public class DBTransakce extends Observable{
 					+ "', `statniPrislusnost`='" + statniPrislusnost + "' WHERE `buddy_id`='" + buddy_id + "'";
 
 			statement.executeUpdate(sql);
+			setChanged();
+		    notifyObservers();
 			//System.out.println("updated");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -460,8 +477,10 @@ public class DBTransakce extends Observable{
 	 * @param adresaCR
 	 * @throws SQLException
 	 */
+	
+	//todo dodělat změnu emailu +++++++++++++++++++++++++++++++++++++++++
 	public void updateExchangeStudenta(int exchange_id, String jmeno, String prijmeni, String datumNarozeni,
-			String telefon, String pohlavi, String statniPrislusnost, String adresaCR) throws SQLException {
+			String telefon, String pohlavi, String statniPrislusnost, String adresaCR, String email) throws SQLException {
 
 		Connection connection = null;
 		Statement statement = null;
@@ -483,6 +502,8 @@ public class DBTransakce extends Observable{
 					+ "' WHERE `exchange_id`='" + exchange_id + "'";
 
 			statement.executeUpdate(sql);
+			setChanged();
+		    notifyObservers();
 			//System.out.println("updated");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1036,7 +1057,7 @@ public class DBTransakce extends Observable{
 			String sql = "DELETE FROM `Buddy` WHERE `buddy_id`='" + buddy_id + "'";
 			statement.executeUpdate(sql);
 
-			System.out.println("vymazáno");
+			//System.out.println("vymazáno");
 			setChanged();
 		    notifyObservers();
 
@@ -1071,6 +1092,8 @@ public class DBTransakce extends Observable{
 			statement = connection.createStatement();
 			String sql = "DELETE FROM `Exchange` WHERE `exchange_id`='" + exchange_id + "'";
 			statement.executeUpdate(sql);
+			setChanged();
+		    notifyObservers();
 			//System.out.println("vymazáno");
 		} catch (Exception e) {
 			e.printStackTrace();

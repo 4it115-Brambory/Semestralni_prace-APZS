@@ -15,9 +15,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -32,20 +35,9 @@ import javafx.stage.Stage;
 public class PrehledExchangeStudentuController extends Pane implements Observer {
 	// zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;
+
 	@FXML
-	private TableColumn jmeno;
-	@FXML
-	private TableColumn prijmeni;
-	@FXML
-	private TableColumn email;
-	@FXML
-	private TableColumn pohlavi;
-	@FXML
-	private TableColumn statniprislusnost;
-	@FXML
-	private TableColumn adresa;
-	@FXML
-	private TableColumn datumnarozeni;
+	private ListView<Exchange> seznamExchange;
 	@FXML
 	private TextArea prihlasen;
 	@FXML
@@ -59,17 +51,23 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 	 *             - to je kvůli těm testům na konci metody
 	 */
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
-		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
-
 		this.buddyAplikace = buddyAplikace;
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
-		// ToDo
-
+		seznamExchange.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamExchangeKolekce());
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().addObserver(this);
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		this.buddyAplikace = buddyAplikace;
+		seznamExchange.getItems().clear();
+		try {
+			seznamExchange.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamExchangeKolekce());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@FXML	
@@ -139,6 +137,26 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 	// detail studenta, todo
 	@FXML
 	private void sceneDetailStudenta() throws Exception {
+		Exchange vybranyExchange = seznamExchange.getSelectionModel().getSelectedItem();
+		if (vybranyExchange != null) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("DetailExchangeProAdmina.fxml"));
+			Parent root = loader.load();
+			DetailExchangeStudentaController controller = new DetailExchangeStudentaController();
+			controller = loader.getController();
+
+			controller.inicializuj(buddyAplikace, vybranyExchange);
+			Stage DetailExchange = new Stage();
+			DetailExchange.setScene(new Scene(root));
+			DetailExchange.show();
+			DetailExchange.setTitle("Detail Exchange studenta");
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+		    alert.setTitle("Upozornění");
+		    alert.setHeaderText(null);
+		    alert.setContentText("Nemáš vybraného studenta");
+		    alert.showAndWait();
+		}
 
 	}
 

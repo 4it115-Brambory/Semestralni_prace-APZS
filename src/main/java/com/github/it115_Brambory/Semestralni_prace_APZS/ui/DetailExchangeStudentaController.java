@@ -4,7 +4,6 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 
 import java.util.Observer;
-import java.awt.TextField;
 import java.sql.SQLException;
 import java.util.Observable;
 
@@ -17,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -30,6 +30,7 @@ import javafx.stage.Stage;
  */
 public class DetailExchangeStudentaController extends Pane implements Observer {
 
+	private Exchange detailExchange;
 	private IBuddyAplikace buddyAplikace;
 	@FXML
 	private TextField jmeno;
@@ -37,6 +38,8 @@ public class DetailExchangeStudentaController extends Pane implements Observer {
 	private TextField prijmeni;
 	@FXML
 	private TextField email;
+	@FXML
+	private TextField telefon;
 	@FXML
 	private TextField pohlavi;
 	@FXML
@@ -57,12 +60,20 @@ public class DetailExchangeStudentaController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
-		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
-
+	public void inicializuj(IBuddyAplikace buddyAplikace, Exchange vybranyExchange) throws SQLException {
 		this.buddyAplikace = buddyAplikace;
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
-		// ToDo
+		
+		detailExchange = vybranyExchange;
+		jmeno.setText(detailExchange.getJmeno());
+		prijmeni.setText(detailExchange.getPrijmeni());
+		email.setText(detailExchange.getEmail());
+		pohlavi.setText(detailExchange.getPohlavi());
+		statniprislusnost.setText(detailExchange.getStatniPrislusnost());
+		adresa.setText(detailExchange.getAdresa());
+		datumnarozeni.setText(detailExchange.getDatumNarozeni());
+		telefon.setText(detailExchange.getTelefon());
 
 	}
 
@@ -87,30 +98,19 @@ public class DetailExchangeStudentaController extends Pane implements Observer {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální
-	 * uživatel se nastaví na null a scéna se změní na přihlášení.
-	 * 
-	 * @param event
-	 * @throws Exception
-	 */
-	@FXML
-	public void odhlasit(ActionEvent event) throws Exception {
 
-		this.buddyAplikace.getBuddyAplikace().logOut();
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
-		Parent tableViewParent = loader.load();
+	
+	public void uloz() throws SQLException {
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateExchangeStudenta(detailExchange.getId(), jmeno.getText(),
+				prijmeni.getText(), datumnarozeni.getText(),telefon.getText(), pohlavi.getText(),
+				statniprislusnost.getText(), adresa.getText(), email.getText());
 
-		Scene tableViewScene = new Scene(tableViewParent);
-
-		PrihlaseniController controller = loader.getController();
-		controller.inicializuj(buddyAplikace);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(tableViewScene);
-		window.show();
-
+	}
+	
+	public void odstran() throws SQLException {
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteExchangeStudent(detailExchange.getId());
+		Stage curretStage = (Stage) email.getScene().getWindow();
+		curretStage.close();
 	}
 
 }
