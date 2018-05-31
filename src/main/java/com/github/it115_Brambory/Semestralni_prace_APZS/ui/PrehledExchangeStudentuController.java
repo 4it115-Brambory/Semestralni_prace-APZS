@@ -75,7 +75,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 	@FXML	
 	private void scenePrehledAkci (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prehledakciadmin.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledAkciProAdmina.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -91,7 +91,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 	@FXML	
 	private void scenePrehledZadosti (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prehledZadosti.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledZadostiProAdmina.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -107,7 +107,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 	@FXML	
 	private void scenePrehledCeskych (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prehledbuddy.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledBuddyStudentuProAdmina.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -123,7 +123,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 	@FXML	
 	private void scenePridatZahranicniho (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("pridanizahranicniho.fxml"));
+		loader.setLocation(this.getClass().getResource("PridaniNovehoExchange.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -154,7 +154,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);

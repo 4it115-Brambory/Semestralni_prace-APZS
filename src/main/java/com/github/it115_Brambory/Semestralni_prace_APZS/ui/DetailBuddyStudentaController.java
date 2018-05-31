@@ -90,6 +90,22 @@ public class DetailBuddyStudentaController extends Pane implements Observer {
 		// TODO Auto-generated method stub
 	}
 
+	@FXML	
+	private void sceneZpetNaPrehledBuddyStudentu (ActionEvent event) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(this.getClass().getResource("PrehledBuddyStudentuProAdmina.fxml"));
+		Parent tableViewParent = loader.load();
+    	
+		Scene tableViewScene = new Scene(tableViewParent);
+		
+		PrehledBuddyStudentuController controller = loader.getController();
+		controller.inicializuj(buddyAplikace);
+		
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+	
 	/**
 	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální
 	 * uživatel se nastaví na null a scéna se změní na přihlášení.
@@ -102,7 +118,7 @@ public class DetailBuddyStudentaController extends Pane implements Observer {
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);

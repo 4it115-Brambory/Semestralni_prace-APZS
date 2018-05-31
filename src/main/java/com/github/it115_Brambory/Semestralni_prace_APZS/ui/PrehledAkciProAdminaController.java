@@ -74,7 +74,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 	@FXML
 	private void sceneDetailAkce() throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("detailakceadminadmin.fxml"));
+		loader.setLocation(getClass().getResource("DetailAkceProAdmina.fxml"));
 		Parent root = loader.load();
 		DetailAkceProAdminController controller = new DetailAkceProAdminController();
 		controller = loader.getController();
@@ -89,7 +89,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 	@FXML	
 	private void scenePrehledZadosti (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prehledzadosti.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledZadostiProAdmina.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -105,7 +105,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 	@FXML	
 	private void scenePrehledCeskych (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prehledbuddy.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledBuddyStudentuProAdmina.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -121,7 +121,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 	@FXML	
 	private void scenePrehledZahranicnich (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prehledzahranicnich.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledExchangeStudentuProAdmina.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
@@ -133,17 +133,6 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		window.setScene(tableViewScene);
 		window.show();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	/**
 	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální
@@ -157,7 +146,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);

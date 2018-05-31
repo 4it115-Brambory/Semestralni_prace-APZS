@@ -65,78 +65,20 @@ public class DetailAkceProAdminController extends Pane implements Observer {
 
 	}
 
-	@FXML
-	private void sceneAdmin() throws Exception {
+	@FXML	
+	private void sceneZpetNaPrehledAkci (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("Prehledakciadmin.fxml"));
-		Parent root = loader.load();
-		PrehledAkciProAdminaController controller = new PrehledAkciProAdminaController();
-		controller = loader.getController();
+		loader.setLocation(this.getClass().getResource("PrehledAkciProAdmina.fxml"));
+		Parent tableViewParent = loader.load();
+    	
+		Scene tableViewScene = new Scene(tableViewParent);
+		
+		PrehledAkciProAdminaController controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
-		Stage Prehledakciadmin = new Stage();
-		Prehledakciadmin.setScene(new Scene(root));
-		Prehledakciadmin.show();
-		Prehledakciadmin.setTitle("Přehled akcí");
-
-	}
-
-	@FXML
-	private void sceneDetailAkce() throws Exception {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("detailakceadminadmin.fxml"));
-		Parent root = loader.load();
-		DetailAkceProAdminController controller = new DetailAkceProAdminController();
-		controller = loader.getController();
-		controller.inicializuj(buddyAplikace);
-		Stage Detailakceadminadmin = new Stage();
-		Detailakceadminadmin.setScene(new Scene(root));
-		Detailakceadminadmin.show();
-		Detailakceadminadmin.setTitle("Detail akce");
-
-	}
-
-	@FXML
-	private void scenePrehledZadosti() throws Exception {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("prehledZadosti.fxml"));
-		Parent root = loader.load();
-		PrehledZadostiController controller = new PrehledZadostiController();
-		controller = loader.getController();
-		controller.inicializuj(buddyAplikace);
-		Stage prehledZadosti = new Stage();
-		prehledZadosti.setScene(new Scene(root));
-		prehledZadosti.show();
-		prehledZadosti.setTitle("Přehled žádostí");
-
-	}
-
-	@FXML
-	private void scenePrehledCeskych() throws Exception {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("prehledbuddy.fxml"));
-		Parent root = loader.load();
-		PrehledBuddyStudentuController controller = new PrehledBuddyStudentuController();
-		controller = loader.getController();
-		controller.inicializuj(buddyAplikace);
-		Stage Prehledbuddy = new Stage();
-		Prehledbuddy.setScene(new Scene(root));
-		Prehledbuddy.show();
-		Prehledbuddy.setTitle("Přehled českých studentů");
-
-	}
-
-	@FXML
-	private void scenePrehledZahranicnich() throws Exception {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("prehledzahranicnich.fxml"));
-		Parent root = loader.load();
-		PrehledExchangeStudentuController controller = new PrehledExchangeStudentuController();
-		controller = loader.getController();
-		controller.inicializuj(buddyAplikace);
-		Stage Prehledaexchange = new Stage();
-		Prehledaexchange.setScene(new Scene(root));
-		Prehledaexchange.show();
-		Prehledaexchange.setTitle("Přehled zahraničních studnetů");
+		
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
 	}
 
 	@Override
@@ -156,7 +98,7 @@ public class DetailAkceProAdminController extends Pane implements Observer {
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);
