@@ -127,12 +127,12 @@ public class PrihlaseniController extends Pane implements Observer {
 			ukazAlertBad();
 		} else if (ukazatel == 1) {
 			Stage curretStage = (Stage) email.getScene().getWindow();
-			sceneExchange(); /* přepnutí na exchange */
+			sceneBuddy();  /* přepnutí na buddyho */
 			curretStage.close(); 
 			
 		} else if (ukazatel == 2) {
 			Stage curretStage = (Stage) email.getScene().getWindow();
-			sceneBuddy();  /* přepnutí na buddyho */
+			sceneExchange(); /* přepnutí na exchange */
 			curretStage.close();
 			;
 		} else {
