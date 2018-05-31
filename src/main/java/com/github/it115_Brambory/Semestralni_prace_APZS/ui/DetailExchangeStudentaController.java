@@ -28,22 +28,23 @@ import javafx.stage.Stage;
  * @author Jan Mandík
  *
  */
-public class DetailakcestudentController extends Pane implements Observer {
+public class DetailExchangeStudentaController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TextField nazev;
+	private TextField jmeno;
 	@FXML
-	private TextField cena;
+	private TextField prijmeni;
 	@FXML
-	private TextField typ;
+	private TextField email;
 	@FXML
-	private TextField casOd;
+	private TextField pohlavi;
 	@FXML
-	private TextField casDo;
+	private TextField statniprislusnost;
 	@FXML
-	private TextField maxucast;
-
+	private TextField adresa;
+	@FXML
+	private TextField datumnarozeni;
 	@FXML
 	private TextArea prihlasen;
 	@FXML

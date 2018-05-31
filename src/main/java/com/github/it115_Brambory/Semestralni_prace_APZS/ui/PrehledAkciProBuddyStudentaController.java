@@ -1,63 +1,56 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.ui;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
-import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
-
 import java.util.Observer;
 
+import javax.persistence.Table;
+import javafx.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.Observable;
-
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
- * pro načtení detailu buddyho
+ * pro načtení přehledu buddy
  * 
  * @author Jan Mandík
  *
  */
-public class DetailbuddyhoController extends Pane implements Observer {
+public class PrehledAkciProBuddyStudentaController extends Pane implements Observer {
 
+	// zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;
-	private Buddy detailBuddy;
 	@FXML
-	private TextField jmeno;
-	@FXML
-	private TextField prijmeni;
-	@FXML
-	private TextField email;
-	@FXML
-	private TextField telefon;
-	@FXML
-	private TextField pohlavi;
-	@FXML
-	private TextField statniprislusnost;
-	@FXML
-	private TextField adresa;
-	@FXML
-	private TextField datumnarozeni;
-	@FXML
-	private TextField xname;
-	@FXML
-	private TextField titul;
-	@FXML
-	private TextArea prihlasen;
-	// @FXML private TextArea textAreaTest;
+	private Pane thisPane;
 	@FXML
 	private Button odhlasit;
+	@FXML
+	private TableView<Table> tableView;
+	@FXML
+	private TableColumn<Table, String> typ;
+	@FXML
+	private TableColumn<Table, String> nazev;
+	@FXML
+	private TableColumn<Table, String> casOd;
+	@FXML
+	private TableColumn<Table, String> casDo;
+	@FXML
+	private TableColumn<Table, String> misto;
+	@FXML
+	private TableColumn<Table, Integer> cena;
+	@FXML
+	private TextArea prihlasen;
 
 	/**
 	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
@@ -66,22 +59,13 @@ public class DetailbuddyhoController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace, Buddy vybranyBuddy) throws SQLException {
-
+	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
 		this.buddyAplikace = buddyAplikace;
-		detailBuddy = vybranyBuddy;
-		jmeno.setText(detailBuddy.getJmeno());
-		prijmeni.setText(detailBuddy.getPrijmeni());
-		email.setText(detailBuddy.getEmail());
-		pohlavi.setText(detailBuddy.getPohlavi());
-		statniprislusnost.setText(detailBuddy.getStatniPrislusnost());
-		adresa.setText(detailBuddy.getAdresa());
-		datumnarozeni.setText(detailBuddy.getDatumNarozeni());
-		xname.setText(detailBuddy.getXname());
-		titul.setText(detailBuddy.getTitul());
-
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
+
+		// nacti data do tabulky
+		//typ.setCellValueFactory(new PropertyValueFactory("firstName"));
 
 	}
 
@@ -113,17 +97,6 @@ public class DetailbuddyhoController extends Pane implements Observer {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
 		window.show();
-
-	}
-
-	public void uloz() throws SQLException {
-		System.out.print(
-				detailBuddy.getId() + " " + jmeno.getText() + " " + prijmeni.getText() + " " + telefon.getText() + " "
-						+ pohlavi.getText() + " " + datumnarozeni.getText() + " " + statniprislusnost.getText() + " "
-						+ xname.getText() + " " + titul.getText() + " " + adresa.getText() + " " + email.getText());
-		buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateBuddyStudenta(detailBuddy.getId(), jmeno.getText(),
-				prijmeni.getText(), datumnarozeni.getText(), telefon.getText(), pohlavi.getText(),
-				statniprislusnost.getText(), xname.getText(), titul.getText(), adresa.getText(), email.getText());
 
 	}
 

@@ -16,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -24,26 +23,27 @@ import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
- * pro načtení přehledu buddy
+ * pro načtení detailu buddyho
  * 
  * @author Jan Mandík
  *
  */
-public class PrehledakciadminController extends Pane implements Observer {
-	// zjistit, jak se používá tableview
+public class DetailAkceProAdminController extends Pane implements Observer {
+
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TableColumn typ;
+	private TextField nazev;
 	@FXML
-	private TableColumn nazev;
+	private TextField cena;
 	@FXML
-	private TableColumn casDo;
+	private TextField typ;
 	@FXML
-	private TableColumn casOd;
+	private TextField casOd;
 	@FXML
-	private TableColumn misto;
+	private TextField casDo;
 	@FXML
-	private TableColumn cena;
+	private TextField maxucast;
+
 	@FXML
 	private TextArea prihlasen;
 	@FXML
@@ -56,19 +56,13 @@ public class PrehledakciadminController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-
-	public void inicializuj(IBuddyAplikace buddyAplikace) {
+	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 
 		this.buddyAplikace = buddyAplikace;
-
-		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
+		// ToDo
 
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
 	}
 
 	@FXML
@@ -76,7 +70,7 @@ public class PrehledakciadminController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Prehledakciadmin.fxml"));
 		Parent root = loader.load();
-		PrehledakciadminController controller = new PrehledakciadminController();
+		PrehledAkciProAdminaController controller = new PrehledAkciProAdminaController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledakciadmin = new Stage();
@@ -91,7 +85,7 @@ public class PrehledakciadminController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("detailakceadminadmin.fxml"));
 		Parent root = loader.load();
-		DetailakceadminController controller = new DetailakceadminController();
+		DetailAkceProAdminController controller = new DetailAkceProAdminController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Detailakceadminadmin = new Stage();
@@ -121,7 +115,7 @@ public class PrehledakciadminController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledbuddy.fxml"));
 		Parent root = loader.load();
-		PrehledbuddyController controller = new PrehledbuddyController();
+		PrehledBuddyStudentuController controller = new PrehledBuddyStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledbuddy = new Stage();
@@ -136,14 +130,18 @@ public class PrehledakciadminController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledzahranicnich.fxml"));
 		Parent root = loader.load();
-		PrehledzahranicnichController controller = new PrehledzahranicnichController();
+		PrehledExchangeStudentuController controller = new PrehledExchangeStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledaexchange = new Stage();
 		Prehledaexchange.setScene(new Scene(root));
 		Prehledaexchange.show();
 		Prehledaexchange.setTitle("Přehled zahraničních studnetů");
+	}
 
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
 	}
 
 	/**

@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -23,28 +24,26 @@ import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
- * pro načtení detailu buddyho
+ * pro načtení přehledu buddy
  * 
  * @author Jan Mandík
  *
  */
-public class PridatzahranicnihoController extends Pane implements Observer {
-
+public class PrehledAkciProAdminaController extends Pane implements Observer {
+	// zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TextField jmeno;
+	private TableColumn typ;
 	@FXML
-	private TextField prijmeni;
+	private TableColumn nazev;
 	@FXML
-	private TextField email;
+	private TableColumn casDo;
 	@FXML
-	private TextField pohlavi;
+	private TableColumn casOd;
 	@FXML
-	private TextField statniprislusnost;
+	private TableColumn misto;
 	@FXML
-	private TextField adresa;
-	@FXML
-	private TextField datumnarozeni;
+	private TableColumn cena;
 	@FXML
 	private TextArea prihlasen;
 	@FXML
@@ -57,13 +56,19 @@ public class PridatzahranicnihoController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
-		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+
+	public void inicializuj(IBuddyAplikace buddyAplikace) {
 
 		this.buddyAplikace = buddyAplikace;
-		prihlasen.setEditable(false);
-		// ToDo
 
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+		prihlasen.setEditable(false);
+
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
 	}
 
 	@FXML
@@ -71,7 +76,7 @@ public class PridatzahranicnihoController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Prehledakciadmin.fxml"));
 		Parent root = loader.load();
-		PrehledakciadminController controller = new PrehledakciadminController();
+		PrehledAkciProAdminaController controller = new PrehledAkciProAdminaController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledakciadmin = new Stage();
@@ -86,7 +91,7 @@ public class PridatzahranicnihoController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("detailakceadminadmin.fxml"));
 		Parent root = loader.load();
-		DetailakceadminController controller = new DetailakceadminController();
+		DetailAkceProAdminController controller = new DetailAkceProAdminController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Detailakceadminadmin = new Stage();
@@ -116,7 +121,7 @@ public class PridatzahranicnihoController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledbuddy.fxml"));
 		Parent root = loader.load();
-		PrehledbuddyController controller = new PrehledbuddyController();
+		PrehledBuddyStudentuController controller = new PrehledBuddyStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledbuddy = new Stage();
@@ -131,13 +136,14 @@ public class PridatzahranicnihoController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledzahranicnich.fxml"));
 		Parent root = loader.load();
-		PrehledzahranicnichController controller = new PrehledzahranicnichController();
+		PrehledExchangeStudentuController controller = new PrehledExchangeStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledaexchange = new Stage();
 		Prehledaexchange.setScene(new Scene(root));
 		Prehledaexchange.show();
 		Prehledaexchange.setTitle("Přehled zahraničních studnetů");
+
 	}
 
 	/**
@@ -164,17 +170,6 @@ public class PridatzahranicnihoController extends Pane implements Observer {
 		window.setScene(tableViewScene);
 		window.show();
 
-	}
-
-	// ToDo: Metoda pro smzani studenta
-	@FXML
-	private void schvaleni() throws Exception {
-
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
 	}
 
 }

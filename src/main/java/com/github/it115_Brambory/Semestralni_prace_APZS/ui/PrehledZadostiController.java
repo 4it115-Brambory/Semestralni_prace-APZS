@@ -89,7 +89,7 @@ public class PrehledZadostiController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Prehledakciadmin.fxml"));
 		Parent root = loader.load();
-		PrehledakciadminController controller = new PrehledakciadminController();
+		PrehledAkciProAdminaController controller = new PrehledAkciProAdminaController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledakciadmin = new Stage();
@@ -104,7 +104,7 @@ public class PrehledZadostiController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("detailakceadminadmin.fxml"));
 		Parent root = loader.load();
-		DetailakceadminController controller = new DetailakceadminController();
+		DetailAkceProAdminController controller = new DetailAkceProAdminController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Detailakceadminadmin = new Stage();
@@ -134,7 +134,7 @@ public class PrehledZadostiController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledbuddy.fxml"));
 		Parent root = loader.load();
-		PrehledbuddyController controller = new PrehledbuddyController();
+		PrehledBuddyStudentuController controller = new PrehledBuddyStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledbuddy = new Stage();
@@ -149,7 +149,7 @@ public class PrehledZadostiController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledzahranicnich.fxml"));
 		Parent root = loader.load();
-		PrehledzahranicnichController controller = new PrehledzahranicnichController();
+		PrehledExchangeStudentuController controller = new PrehledExchangeStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledaexchange = new Stage();

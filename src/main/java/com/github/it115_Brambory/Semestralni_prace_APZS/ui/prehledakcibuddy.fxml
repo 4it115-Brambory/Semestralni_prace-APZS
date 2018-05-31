@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="thisPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakcibuddyController">
+<Pane fx:id="thisPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledAkciProBuddyStudentaController">
    <children>
       <Button id="odhlasit" fx:id="odhlasit" layoutX="504.0" layoutY="6.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
       <TextArea id="prihlasen" fx:id="prihlasen" layoutX="113.0" layoutY="7.0" prefHeight="36.0" prefWidth="156.0" />

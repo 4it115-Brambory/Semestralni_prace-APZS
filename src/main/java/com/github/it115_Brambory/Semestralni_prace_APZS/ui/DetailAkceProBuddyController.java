@@ -1,14 +1,12 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.ui;
 
-import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
-import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
-
-import java.util.Observer;
 import java.awt.TextField;
 import java.sql.SQLException;
 import java.util.Observable;
+import java.util.Observer;
 
-import javafx.application.Platform;
+import com.github.it115_Brambory.Semestralni_prace_APZS.logika.IBuddyAplikace;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -28,23 +25,22 @@ import javafx.stage.Stage;
  * @author Jan Mandík
  *
  */
-public class DetailzahranicnihoController extends Pane implements Observer {
+public class DetailAkceProBuddyController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TextField jmeno;
+	private TextField nazev;
 	@FXML
-	private TextField prijmeni;
+	private TextField cena;
 	@FXML
-	private TextField email;
+	private TextField typ;
 	@FXML
-	private TextField pohlavi;
+	private TextField casOd;
 	@FXML
-	private TextField statniprislusnost;
+	private TextField casDo;
 	@FXML
-	private TextField adresa;
-	@FXML
-	private TextField datumnarozeni;
+	private TextField maxucast;
+
 	@FXML
 	private TextArea prihlasen;
 	@FXML

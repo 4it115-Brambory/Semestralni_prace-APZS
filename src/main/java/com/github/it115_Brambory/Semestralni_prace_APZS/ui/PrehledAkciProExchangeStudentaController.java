@@ -1,12 +1,15 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.ui;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
-import java.util.Observer;
+import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 
-import javax.persistence.Table;
-import javafx.event.ActionEvent;
+import java.util.Observer;
+import java.awt.TextField;
 import java.sql.SQLException;
 import java.util.Observable;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,9 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -27,28 +29,23 @@ import javafx.stage.Stage;
  * @author Jan Mandík
  *
  */
-public class PrehledakcibuddyController extends Pane implements Observer {
+public class PrehledAkciProExchangeStudentaController extends Pane implements Observer {
 
-	// zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private Pane thisPane;
+	private TableColumn typ;
+	@FXML
+	private TableColumn nazev;
+	@FXML
+	private TableColumn casDo;
+	@FXML
+	private TableColumn casOd;
+	@FXML
+	private TableColumn misto;
 	@FXML
 	private Button odhlasit;
 	@FXML
-	private TableView<Table> tableView;
-	@FXML
-	private TableColumn<Table, String> typ;
-	@FXML
-	private TableColumn<Table, String> nazev;
-	@FXML
-	private TableColumn<Table, String> casOd;
-	@FXML
-	private TableColumn<Table, String> casDo;
-	@FXML
-	private TableColumn<Table, String> misto;
-	@FXML
-	private TableColumn<Table, Integer> cena;
+	private TableColumn cena;
 	@FXML
 	private TextArea prihlasen;
 
@@ -59,13 +56,13 @@ public class PrehledakcibuddyController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+	public void inicializuj(IBuddyAplikace buddyAplikace) {
+
 		this.buddyAplikace = buddyAplikace;
+		// ToDo
+
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
-
-		// nacti data do tabulky
-		//typ.setCellValueFactory(new PropertyValueFactory("firstName"));
 
 	}
 

@@ -28,7 +28,7 @@ import javafx.stage.Stage;
  * @author Jan Mandík
  *
  */
-public class DetailakceabuddyController extends Pane implements Observer {
+public class DetailAkceProExchangeController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
 	@FXML

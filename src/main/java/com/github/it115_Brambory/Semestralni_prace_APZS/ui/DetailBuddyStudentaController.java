@@ -4,7 +4,7 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 
 import java.util.Observer;
-import java.awt.TextField;
+
 import java.sql.SQLException;
 import java.util.Observable;
 
@@ -16,38 +16,48 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
- * pro načtení přehledu buddy
+ * pro načtení detailu buddyho
  * 
  * @author Jan Mandík
  *
  */
-public class PrehledakciexchangeController extends Pane implements Observer {
+public class DetailBuddyStudentaController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
+	private Buddy detailBuddy;
 	@FXML
-	private TableColumn typ;
+	private TextField jmeno;
 	@FXML
-	private TableColumn nazev;
+	private TextField prijmeni;
 	@FXML
-	private TableColumn casDo;
+	private TextField email;
 	@FXML
-	private TableColumn casOd;
+	private TextField telefon;
 	@FXML
-	private TableColumn misto;
+	private TextField pohlavi;
 	@FXML
-	private Button odhlasit;
+	private TextField statniprislusnost;
 	@FXML
-	private TableColumn cena;
+	private TextField adresa;
+	@FXML
+	private TextField datumnarozeni;
+	@FXML
+	private TextField xname;
+	@FXML
+	private TextField titul;
 	@FXML
 	private TextArea prihlasen;
+	// @FXML private TextArea textAreaTest;
+	@FXML
+	private Button odhlasit;
 
 	/**
 	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
@@ -56,10 +66,19 @@ public class PrehledakciexchangeController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace) {
+	public void inicializuj(IBuddyAplikace buddyAplikace, Buddy vybranyBuddy) throws SQLException {
 
 		this.buddyAplikace = buddyAplikace;
-		// ToDo
+		detailBuddy = vybranyBuddy;
+		jmeno.setText(detailBuddy.getJmeno());
+		prijmeni.setText(detailBuddy.getPrijmeni());
+		email.setText(detailBuddy.getEmail());
+		pohlavi.setText(detailBuddy.getPohlavi());
+		statniprislusnost.setText(detailBuddy.getStatniPrislusnost());
+		adresa.setText(detailBuddy.getAdresa());
+		datumnarozeni.setText(detailBuddy.getDatumNarozeni());
+		xname.setText(detailBuddy.getXname());
+		titul.setText(detailBuddy.getTitul());
 
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
@@ -94,6 +113,17 @@ public class PrehledakciexchangeController extends Pane implements Observer {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
 		window.show();
+
+	}
+
+	public void uloz() throws SQLException {
+		System.out.print(
+				detailBuddy.getId() + " " + jmeno.getText() + " " + prijmeni.getText() + " " + telefon.getText() + " "
+						+ pohlavi.getText() + " " + datumnarozeni.getText() + " " + statniprislusnost.getText() + " "
+						+ xname.getText() + " " + titul.getText() + " " + adresa.getText() + " " + email.getText());
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateBuddyStudenta(detailBuddy.getId(), jmeno.getText(),
+				prijmeni.getText(), datumnarozeni.getText(), telefon.getText(), pohlavi.getText(),
+				statniprislusnost.getText(), xname.getText(), titul.getText(), adresa.getText(), email.getText());
 
 	}
 

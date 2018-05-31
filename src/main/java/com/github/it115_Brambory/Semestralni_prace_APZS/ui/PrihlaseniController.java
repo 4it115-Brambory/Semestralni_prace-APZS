@@ -65,7 +65,7 @@ public class PrihlaseniController extends Pane implements Observer {
     	
 		Scene tableViewScene = new Scene(tableViewParent);
 		
-		PrehledakciexchangeController controller = loader.getController();
+		PrehledAkciProExchangeStudentaController controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -87,7 +87,7 @@ public class PrihlaseniController extends Pane implements Observer {
     	
 		Scene tableViewScene = new Scene(tableViewParent);
 		
-		PrehledakciadminController controller = loader.getController();
+		PrehledAkciProAdminaController controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -109,7 +109,7 @@ public class PrihlaseniController extends Pane implements Observer {
     	
 		Scene tableViewScene = new Scene(tableViewParent);
 		
-		PrehledakcibuddyController controller = loader.getController();
+		PrehledAkciProBuddyStudentaController controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();

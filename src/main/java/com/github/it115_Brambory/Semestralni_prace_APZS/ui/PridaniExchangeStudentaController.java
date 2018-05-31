@@ -28,22 +28,23 @@ import javafx.stage.Stage;
  * @author Jan Mandík
  *
  */
-public class DetailakceadminController extends Pane implements Observer {
+public class PridaniExchangeStudentaController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TextField nazev;
+	private TextField jmeno;
 	@FXML
-	private TextField cena;
+	private TextField prijmeni;
 	@FXML
-	private TextField typ;
+	private TextField email;
 	@FXML
-	private TextField casOd;
+	private TextField pohlavi;
 	@FXML
-	private TextField casDo;
+	private TextField statniprislusnost;
 	@FXML
-	private TextField maxucast;
-
+	private TextField adresa;
+	@FXML
+	private TextField datumnarozeni;
 	@FXML
 	private TextArea prihlasen;
 	@FXML
@@ -70,7 +71,7 @@ public class DetailakceadminController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Prehledakciadmin.fxml"));
 		Parent root = loader.load();
-		PrehledakciadminController controller = new PrehledakciadminController();
+		PrehledAkciProAdminaController controller = new PrehledAkciProAdminaController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledakciadmin = new Stage();
@@ -85,7 +86,7 @@ public class DetailakceadminController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("detailakceadminadmin.fxml"));
 		Parent root = loader.load();
-		DetailakceadminController controller = new DetailakceadminController();
+		DetailAkceProAdminController controller = new DetailAkceProAdminController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Detailakceadminadmin = new Stage();
@@ -115,7 +116,7 @@ public class DetailakceadminController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledbuddy.fxml"));
 		Parent root = loader.load();
-		PrehledbuddyController controller = new PrehledbuddyController();
+		PrehledBuddyStudentuController controller = new PrehledBuddyStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledbuddy = new Stage();
@@ -130,18 +131,13 @@ public class DetailakceadminController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledzahranicnich.fxml"));
 		Parent root = loader.load();
-		PrehledzahranicnichController controller = new PrehledzahranicnichController();
+		PrehledExchangeStudentuController controller = new PrehledExchangeStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledaexchange = new Stage();
 		Prehledaexchange.setScene(new Scene(root));
 		Prehledaexchange.show();
 		Prehledaexchange.setTitle("Přehled zahraničních studnetů");
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -168,6 +164,17 @@ public class DetailakceadminController extends Pane implements Observer {
 		window.setScene(tableViewScene);
 		window.show();
 
+	}
+
+	// ToDo: Metoda pro smzani studenta
+	@FXML
+	private void schvaleni() throws Exception {
+
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
 	}
 
 }

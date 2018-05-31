@@ -6,6 +6,7 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 import java.util.Observer;
 import java.awt.TextField;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.Observable;
 
 import javafx.application.Platform;
@@ -15,44 +16,42 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
- * pro načtení detailu buddyho
+ * pro načtení přehledu buddy
  * 
  * @author Jan Mandík
  *
  */
-public class PridanibuddyhoController extends Pane implements Observer {
-
+public class PrehledBuddyStudentuController extends Pane implements Observer {
+	// zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TextField jmeno;
+	private TableColumn jmeno;
 	@FXML
-	private TextField prijmeni;
+	private TableColumn prijmeni;
 	@FXML
-	private TextField email;
+	private TableColumn email;
 	@FXML
-	private TextField pohlavi;
+	private TableColumn pohlavi;
 	@FXML
-	private TextField statniprislusnost;
+	private TableColumn statniprislusnost;
 	@FXML
-	private TextField adresa;
+	private TableColumn adresa;
 	@FXML
-	private TextField datumnarozeni;
+	private TableColumn datumnarozeni;
 	@FXML
-	private TextField xname;
-	@FXML
-	private TextField titul;
+	private ListView<Buddy> seznamBuddy;
 	@FXML
 	private TextArea prihlasen;
-	@FXML
-	private TextArea textAreaTest;
 	@FXML
 	private Button odhlasit;
 
@@ -67,8 +66,10 @@ public class PridanibuddyhoController extends Pane implements Observer {
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 
 		this.buddyAplikace = buddyAplikace;
+
+		seznamBuddy.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamBuddyKolekce());
+
 		prihlasen.setEditable(false);
-		// ToDo
 
 	}
 
@@ -82,7 +83,7 @@ public class PridanibuddyhoController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Prehledakciadmin.fxml"));
 		Parent root = loader.load();
-		PrehledakciadminController controller = new PrehledakciadminController();
+		PrehledAkciProAdminaController controller = new PrehledAkciProAdminaController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledakciadmin = new Stage();
@@ -97,7 +98,7 @@ public class PridanibuddyhoController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("detailakceadminadmin.fxml"));
 		Parent root = loader.load();
-		DetailakceadminController controller = new DetailakceadminController();
+		DetailAkceProAdminController controller = new DetailAkceProAdminController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Detailakceadminadmin = new Stage();
@@ -127,7 +128,7 @@ public class PridanibuddyhoController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledbuddy.fxml"));
 		Parent root = loader.load();
-		PrehledbuddyController controller = new PrehledbuddyController();
+		PrehledBuddyStudentuController controller = new PrehledBuddyStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledbuddy = new Stage();
@@ -142,7 +143,7 @@ public class PridanibuddyhoController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("prehledzahranicnich.fxml"));
 		Parent root = loader.load();
-		PrehledzahranicnichController controller = new PrehledzahranicnichController();
+		PrehledExchangeStudentuController controller = new PrehledExchangeStudentuController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		Stage Prehledaexchange = new Stage();
@@ -152,17 +153,46 @@ public class PridanibuddyhoController extends Pane implements Observer {
 	}
 
 	@FXML
-	private void sceneDetailStudenta() throws Exception {
+	private void scenePridatBuddyho() throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("detailzahranicniho.fxml"));
+		loader.setLocation(getClass().getResource("pridanibuddyho.fxml"));
 		Parent root = loader.load();
-		DetailzahranicnihoController controller = new DetailzahranicnihoController();
+		PridaniBuddyStudentaController controller = new PridaniBuddyStudentaController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
-		Stage Detailzahranicniho = new Stage();
-		Detailzahranicniho.setScene(new Scene(root));
-		Detailzahranicniho.show();
-		Detailzahranicniho.setTitle("Detail zahraničního studenta");
+		Stage Pridanibuddyho = new Stage();
+		Pridanibuddyho.setScene(new Scene(root));
+		Pridanibuddyho.show();
+		Pridanibuddyho.setTitle("Přidání buddyho");
+	}
+
+	// detail buddyho, todo
+	@FXML
+	private void sceneDetailBuddyho() throws Exception {
+		Buddy vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();
+		System.out.print(vybranyBuddy);
+		System.out.print(vybranyBuddy.toString());
+		if (vybranyBuddy != null) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("detailbuddyho.fxml"));
+			Parent root = loader.load();
+			DetailBuddyStudentaController controller = new DetailBuddyStudentaController();
+			controller = loader.getController();
+
+			controller.inicializuj(buddyAplikace, vybranyBuddy);
+			Stage Detailbuddyho = new Stage();
+			Detailbuddyho.setScene(new Scene(root));
+			Detailbuddyho.show();
+			Detailbuddyho.setTitle("Detail buddyho");
+		} else
+			System.out.print("nemáš vybraného");
+
+	}
+
+	private void detailStudenta() throws Exception {
+		// vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();
+		sceneDetailBuddyho();
+
 	}
 
 	/**
