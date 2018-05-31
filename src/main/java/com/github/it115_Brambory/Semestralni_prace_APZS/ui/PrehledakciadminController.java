@@ -45,18 +45,15 @@ public class PrehledakciadminController extends Pane implements Observer {
 	 * @throws SQLException - to je kvůli těm testům na konci metody
      */
 	
-	public void inicializuj(IBuddyAplikace buddyAplikace) {
-
-        
-     //  prihlasen.setText("Hello world"); //tohle z mě ne jasného důvodu nefunguje - přitom to je úplně stejně jako na stackoverflow. Kromě toho, že tam vždy maji @Override
+	public void inicializuj(IBuddyAplikace buddyAplikace) {  
+    
 		
 		this.buddyAplikace = buddyAplikace;
 		
-		//ToDo
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+		prihlasen.setEditable(false);
 		
 		
-		
-	
 	}
 	
 	
@@ -77,6 +74,7 @@ public class PrehledakciadminController extends Pane implements Observer {
     	Prehledakciadmin.setScene(new Scene(root));
     	Prehledakciadmin.show();
     	Prehledakciadmin.setTitle("Přehled akcí");
+    	
     	
 	}
 	

@@ -9,9 +9,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakciadminController">
    <children>
-      <Button id="prehledakci" layoutX="393.0" layoutY="13.0" mnemonicParsing="false" onAction="#sceneAdmin" text="Přehled akcí" />
-      <Button id="odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
-      <TextArea id="prihlasen" layoutX="113.0" layoutY="7.0" prefHeight="36.0" prefWidth="156.0" />
+      <Button id="odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit"  />
+      <TextArea id="prihlasen" layoutX="113.0" layoutY="7.0" prefHeight="36.0" prefWidth="156.0" fx:id="prihlasen"/>
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
       <TableView layoutX="25.0" layoutY="86.0" prefHeight="223.0" prefWidth="539.0">
         <columns>
@@ -25,7 +24,6 @@
       </TableView>
       <Button id="detailakce" layoutX="28.0" layoutY="332.0" mnemonicParsing="false" onAction="#sceneDetailAkce" text="Detail akce" />
       <Button id="prehledzadosti" layoutX="25.0" layoutY="51.0" mnemonicParsing="false" onAction="#scenePrehledZadosti" text="Přehled žádostí" />
-      <Button id="prehledakci" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" onAction="#sceneAdmin" text="Přehled akcí" />
       <Button id="prehledceskych" layoutX="231.0" layoutY="51.0" mnemonicParsing="false" onAction="#scenePrehledCeskych" text="Přehled českých buddy" />
       <Button id="prehledzahranicnich" layoutX="385.0" layoutY="51.0" mnemonicParsing="false" onAction="#scenePrehledZahranicnich" text="Přehled zahraničních studentů" />
    </children>

@@ -44,8 +44,10 @@ public class DetailakceadminController extends Pane implements Observer {
 	 * @throws SQLException - to je kvůli těm testům na konci metody
      */
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		
 		this.buddyAplikace = buddyAplikace;
+		prihlasen.setEditable(false);
 		//ToDo
 		
 		

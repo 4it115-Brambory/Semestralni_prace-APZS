@@ -12,9 +12,8 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledZadostiController">
    <children>
       <Button onAction="#sceneAdmin" layoutX="167.0" layoutY="71.0" mnemonicParsing="false" text="Přehled akcí" />
-      <Button onAction="#scenePrehledZadosti" layoutX="27.0" layoutY="71.0" mnemonicParsing="false" text="Přehled žádostí" />
       <Button onAction="#scenePrehledCeskych"  layoutX="279.0" layoutY="71.0" mnemonicParsing="false" text="Přehled českých buddy" />
-      <TextArea layoutX="156.0" layoutY="15.0" prefHeight="46.0" prefWidth="200.0" />
+      <TextArea id="prihlasen" fx:id="prihlasen" layoutX="156.0" layoutY="15.0" prefHeight="46.0" prefWidth="200.0"  />
       <Label layoutX="41.0" layoutY="28.0" text="Příhlášen jako:" />
       <Label layoutX="91.0" layoutY="140.0" text="Typ:" />
       <Label layoutX="91.0" layoutY="179.0" text="Název:" />
