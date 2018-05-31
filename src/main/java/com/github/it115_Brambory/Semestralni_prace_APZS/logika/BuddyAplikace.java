@@ -138,9 +138,9 @@ public class BuddyAplikace implements IBuddyAplikace {
 		return seznamBuddy;
 	}
 	
-	public Collection<Buddy> getSeznamBuddyKolekce() {
-		return Collections.unmodifiableCollection (seznamBuddy.values());
-	}
+//	public Collection<Buddy> getSeznamBuddyKolekce() throws SQLException {
+//		return Collections.unmodifiableCollection (getDatabazeOperace().seznamBuddy.values());
+	//} to bylo na zkoušku
 
 	/**
 	 * Getter na seznam exchange studentů.

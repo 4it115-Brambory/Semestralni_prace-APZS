@@ -31,7 +31,6 @@ import javafx.stage.Stage;
 public class PrehledbuddyController extends Pane implements Observer {
 	//zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;	
-	private Buddy vybranyBuddy;
 	@FXML private TableColumn jmeno;
 	@FXML private TableColumn prijmeni;
 	@FXML private TableColumn email;
@@ -51,8 +50,8 @@ public class PrehledbuddyController extends Pane implements Observer {
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
 		
 		this.buddyAplikace = buddyAplikace;
-		seznamBuddy.getItems().addAll(buddyAplikace.getBuddyAplikace().getSeznamBuddyKolekce());
-		
+		//System.out.print(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamBuddy());
+		seznamBuddy.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamBuddyKolekce());
 		
 		
 		
@@ -160,23 +159,30 @@ public class PrehledbuddyController extends Pane implements Observer {
 	//detail buddyho, todo
 	@FXML
 	private void sceneDetailBuddyho() throws Exception {
-		FXMLLoader loader = new FXMLLoader();
-    	loader.setLocation(getClass().getResource("detailbuddyho.fxml"));    	
-    	Parent root = loader.load();
-    	DetailbuddyhoController controller = new DetailbuddyhoController();
-    	controller = loader.getController(); 
-    	controller.inicializuj(buddyAplikace,vybranyBuddy);
-    	Stage Detailbuddyho = new Stage();    	
-    	Detailbuddyho.setScene(new Scene(root));
-    	Detailbuddyho.show();
-    	Detailbuddyho.setTitle("Detail buddyho");  
+		Buddy vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();
+		System.out.print(vybranyBuddy);
+		System.out.print(vybranyBuddy.toString());
+		if (vybranyBuddy != null) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("detailbuddyho.fxml"));    	
+			Parent root = loader.load();
+			DetailbuddyhoController controller = new DetailbuddyhoController();
+			controller = loader.getController(); 
+    	
+			controller.inicializuj(buddyAplikace,vybranyBuddy);
+			Stage Detailbuddyho = new Stage();    	
+			Detailbuddyho.setScene(new Scene(root));
+			Detailbuddyho.show();
+			Detailbuddyho.setTitle("Detail buddyho");  
+		} else System.out.print("nemáš vybraného");
+		
     	
 	}
 	
 
 	
 	private void detailStudenta() throws Exception {
-		vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();;
+		//vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();
 		sceneDetailBuddyho();
 
 	}

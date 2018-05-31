@@ -13,10 +13,10 @@
       <Button id="prehledceskych" layoutX="231.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledCeskych" text="Přehled českých buddy" />
       <Button id="prehledzahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledZahranicnich" text="Přehled zahraničních studentů" />
       <Button layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
-      <TextArea id="prihlasen" layoutX="113.0" layoutY="5.0" prefHeight="38.0" prefWidth="216.0" />
+      <TextArea id="prihlasen" fx:id="prihlasenJako" layoutX="113.0" layoutY="5.0" prefHeight="38.0" prefWidth="216.0" />
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
       <Button id="pridatstudenta" layoutX="40.0" layoutY="333.0" mnemonicParsing="false" onAction="#scenePridatBuddyho" text="Pridat studenta" />
-      <Button id="detailstudenta" fx:id="detailStudenta" layoutX="164.0" layoutY="333.0" mnemonicParsing="false" onAction="#sceneDetailBuddyho" text="Detail studenta" />
+      <Button id="detailstudenta" fx:id="sceneDetailBuddyho" layoutX="164.0" layoutY="333.0" mnemonicParsing="false" onAction="#sceneDetailBuddyho" text="Detail studenta" />
       <ListView fx:id="seznamBuddy" layoutX="46.0" layoutY="100.0" prefHeight="200.0" prefWidth="492.0" />
    </children>
 </Pane>

@@ -120,6 +120,7 @@ public class Buddy extends Student{
      */
 	@Override
 	public String toString() {
-		return "Buddy [id=" + id + ", xname=" + xname + ", titul=" + titul + ", adresa=" + adresa + "] super -> " + super.toString();
+		// return "Buddy [id=" + id + ", xname=" + xname + ", titul=" + titul + ", adresa=" + adresa + "] super -> " + super.toString();
+		return super.getJmeno() +" "+ super.getPrijmeni() +"   "+ super.getEmail();
 	}
 }

@@ -3,12 +3,15 @@ package com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
+
 
 /**
  * @author Libor Zíka
@@ -89,6 +92,14 @@ public class DBTransakce {
 		}
 		return seznamBuddy;
 	}
+	
+	public Collection<Buddy>  getSeznamBuddyKolekce () throws SQLException 
+    {
+		getSeznamBuddy();
+    	return Collections.unmodifiableCollection (seznamBuddy.values());
+    }
+	
+	
 
 	/**
 	 * Metoda vrací seznam exchange studentů, kteří jsou v DB.
@@ -397,7 +408,7 @@ public class DBTransakce {
 	 * @throws SQLException
 	 */
 	public void updateBuddyStudenta(int buddy_id, String jmeno, String prijmeni, String datumNarozeni, String telefon,
-			String pohlavi, String statniPrislusnost, String xname, String titul, String adresa) throws SQLException {
+			String pohlavi, String statniPrislusnost, String xname, String titul, String adresa, String email) throws SQLException {
 
 		Connection connection = null;
 		Statement statement = null;

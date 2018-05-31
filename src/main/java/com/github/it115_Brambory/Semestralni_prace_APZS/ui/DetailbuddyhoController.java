@@ -4,13 +4,14 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 
 import java.util.Observer;
-import java.awt.TextField;
+
 import java.sql.SQLException;
 import java.util.Observable;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -24,10 +25,11 @@ import javafx.scene.layout.Pane;
 public class DetailbuddyhoController extends Pane implements Observer {
 	
 	private IBuddyAplikace buddyAplikace;	
-	private Buddy vybranyBuddy;
+	private Buddy detailBuddy ;
 	@FXML private TextField jmeno;
 	@FXML private TextField prijmeni;
 	@FXML private TextField email;
+	@FXML private TextField telefon;
 	@FXML private TextField pohlavi;
 	@FXML private TextField statniprislusnost;
 	@FXML private TextField adresa;
@@ -35,7 +37,7 @@ public class DetailbuddyhoController extends Pane implements Observer {
 	@FXML private TextField xname;
 	@FXML private TextField titul;
 	@FXML private TextArea prihlasen;
-	@FXML private TextArea textAreaTest;
+	//@FXML private TextArea textAreaTest;
 	
 	/**
      *  Metoda k inicializaci hry. Načte všechny potřebné prvky
@@ -44,17 +46,17 @@ public class DetailbuddyhoController extends Pane implements Observer {
 	 * @throws SQLException - to je kvůli těm testům na konci metody
      */
 	public void inicializuj(IBuddyAplikace buddyAplikace, Buddy vybranyBuddy) throws SQLException {
-		
 		this.buddyAplikace = buddyAplikace;
-		jmeno.setText(vybranyBuddy.getJmeno());
-		prijmeni.setText(vybranyBuddy.getPrijmeni());
-		email.setText(vybranyBuddy.getEmail());
-		pohlavi.setText(vybranyBuddy.getPohlavi());
-		statniprislusnost.setText(vybranyBuddy.getStatniPrislusnost());
-		adresa.setText(vybranyBuddy.getAdresa());
-		datumnarozeni.setText(vybranyBuddy.getDatumNarozeni());
-		xname.setText(vybranyBuddy.getXname());
-		titul.setText(vybranyBuddy.getTitul());
+		detailBuddy = vybranyBuddy;
+		jmeno.setText(detailBuddy.getJmeno());
+		prijmeni.setText(detailBuddy.getPrijmeni());
+		email.setText(detailBuddy.getEmail());
+		pohlavi.setText(detailBuddy.getPohlavi());
+		statniprislusnost.setText(detailBuddy.getStatniPrislusnost());
+		adresa.setText(detailBuddy.getAdresa());
+		datumnarozeni.setText(detailBuddy.getDatumNarozeni());
+		xname.setText(detailBuddy.getXname());
+		titul.setText(detailBuddy.getTitul());
 		
 		
 		
@@ -63,7 +65,7 @@ public class DetailbuddyhoController extends Pane implements Observer {
 		//---------------------------------------------------------------------------------------------------------------------------------
 		//Ahoj, tohle mi tady nechte zakomentovaný, jsou to testy, že funguje databázový připojení
 		//a že se data správně vkládaj do programu
-		textAreaTest.setText("Ahoj, toto je test, že funguje okno\n");
+		//textAreaTest.setText("Ahoj, toto je test, že funguje okno\n");
 		//jmeno.setText(this); Potřeba zíkávat hodnotu jednotlivých fieldů, nevím, jak to udělat
 		//this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().logInTest();
 		
@@ -80,5 +82,18 @@ public class DetailbuddyhoController extends Pane implements Observer {
 			Platform.exit();
 			Start.main(null); //tohle by mělo aplikaci zas spustit, ale nějak se to neděje, tak na to kašlu. Hlavně, že se to zavře
 		}
+		
+		public void uloz () throws SQLException {
+			System.out.print(detailBuddy.getId() +" "+ jmeno.getText() +" "+ prijmeni.getText()+" "+
+					telefon.getText()+" "+
+				pohlavi.getText()+" "+datumnarozeni.getText()+" "+statniprislusnost.getText()+" "+xname.getText()+" "+
+					titul.getText()+" "+adresa.getText()+" "+email.getText());
+			buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateBuddyStudenta(detailBuddy.getId(),jmeno.getText(),prijmeni.getText(),
+					datumnarozeni.getText(),telefon.getText(),pohlavi.getText(),statniprislusnost.getText(),xname.getText(),
+					titul.getText(),adresa.getText(),email.getText());
+			
+			
+		}
+		
 	
 }
