@@ -6,14 +6,15 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledbuddyController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledBuddyStudentuController">
    <children>
      <Button id="prehledzadosti" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledZadosti" text="Přehled žádostí" />
-      <Button id="prehledakci" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" onAction="#sceneAdmin" text="Přehled akcí" />
+      <Button id="prehledakci" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledAkci" text="Přehled akcí" />
       <Button id="prehledzahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" onAction="#scenePrehledZahranicnich" text="Přehled zahraničních studentů" />
       <Button fx:id="odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
 
-      <TextArea id="prihlasen" layoutX="113.0" layoutY="5.0" prefHeight="38.0" prefWidth="216.0" fx:id="prihlasen" />
+
+      <TextArea id="prihlasen" fx:id="prihlasen" layoutX="113.0" layoutY="5.0" prefHeight="38.0" prefWidth="216.0" />
 
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
       <Button id="pridatstudenta" layoutX="40.0" layoutY="333.0" mnemonicParsing="false" onAction="#scenePridatBuddyho" text="Pridat studenta" />

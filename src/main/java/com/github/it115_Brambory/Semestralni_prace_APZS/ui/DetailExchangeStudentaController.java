@@ -28,22 +28,23 @@ import javafx.stage.Stage;
  * @author Jan Mandík
  *
  */
-public class DetailakcestudentController extends Pane implements Observer {
+public class DetailExchangeStudentaController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TextField nazev;
+	private TextField jmeno;
 	@FXML
-	private TextField cena;
+	private TextField prijmeni;
 	@FXML
-	private TextField typ;
+	private TextField email;
 	@FXML
-	private TextField casOd;
+	private TextField pohlavi;
 	@FXML
-	private TextField casDo;
+	private TextField statniprislusnost;
 	@FXML
-	private TextField maxucast;
-
+	private TextField adresa;
+	@FXML
+	private TextField datumnarozeni;
 	@FXML
 	private TextArea prihlasen;
 	@FXML
@@ -65,6 +66,22 @@ public class DetailakcestudentController extends Pane implements Observer {
 
 	}
 
+	@FXML	
+	private void sceneZpetNaPrehledExchangeStudentu (ActionEvent event) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(this.getClass().getResource("PrehledExchangeStudentuProAdmina.fxml"));
+		Parent tableViewParent = loader.load();
+    	
+		Scene tableViewScene = new Scene(tableViewParent);
+		
+		PrehledExchangeStudentuController controller = loader.getController();
+		controller.inicializuj(buddyAplikace);
+		
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
+	}
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
@@ -82,7 +99,7 @@ public class DetailakcestudentController extends Pane implements Observer {
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);

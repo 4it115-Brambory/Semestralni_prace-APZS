@@ -42,7 +42,7 @@ public class PrihlaseniController extends Pane implements Observer {
 	private PasswordField heslo;
 
 	/**
-	 * Metoda k inicializaci hry.
+	 * Metoda k inicializaci.
 	 * 
 	 */
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
@@ -53,17 +53,19 @@ public class PrihlaseniController extends Pane implements Observer {
 
 	@FXML
 	/**
-	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím
-	 * proč. Myslím, že by ještě měla načítat kontroler
+	 * Metoda mění scénu na přehled akcí pro exchange studenta.
+	 * 
+	 * @param event
+	 * @throws Exception
 	 */
 	private void sceneExchange (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prehledakciexchange.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledAkciProExchange.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
 		
-		PrehledakciexchangeController controller = loader.getController();
+		PrehledAkciProExchangeStudentaController controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -72,18 +74,20 @@ public class PrihlaseniController extends Pane implements Observer {
 	}
 
 	/**
-	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím
-	 * proč. Myslím, že by ještě měla načítat kontroler
+	 * Metoda mění scénu na přehled akcí pro administrátora.
+	 * 
+	 * @param event
+	 * @throws Exception
 	 */
 	@FXML
 	private void sceneAdmin(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prehledakciadmin.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledAkciProAdmina.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
 		
-		PrehledakciadminController controller = loader.getController();
+		PrehledAkciProAdminaController controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -92,18 +96,20 @@ public class PrihlaseniController extends Pane implements Observer {
 	}
 
 	/**
-	 * Tahle metoda by se měla postarat o změnu Stage, nicméně nefunguje a nevím
-	 * proč. Myslím, že by ještě měla načítat kontroler
+	 * Metoda mění scénu na přehled akcí pro buddy studenta.
+	 * 
+	 * @param event
+	 * @throws Exception
 	 */
 	@FXML
 	private void sceneBuddy(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prehledakcibuddy.fxml"));
+		loader.setLocation(this.getClass().getResource("PrehledAkciProBuddyho.fxml"));
 		Parent tableViewParent = loader.load();
     	
 		Scene tableViewScene = new Scene(tableViewParent);
 		
-		PrehledakcibuddyController controller = loader.getController();
+		PrehledAkciProBuddyStudentaController controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -115,8 +121,8 @@ public class PrihlaseniController extends Pane implements Observer {
 	public void prihlasit(ActionEvent event) throws Exception {
 
 		//kontrolní výpis emailu a hesla
-		System.out.println("Kontrolní výpis emailu -->" + email.getText() + "<--");
-		System.out.println("Kontrolní výpis hesla -->" + heslo.getText() + "<--");
+		//System.out.println("Kontrolní výpis emailu -->" + email.getText() + "<--");
+		//System.out.println("Kontrolní výpis hesla -->" + heslo.getText() + "<--");
 
 		int ukazatel = buddyAplikace.getBuddyAplikace().getDatabazeOperace().logIn(email.getText(), heslo.getText(),
 				buddyAplikace);
@@ -124,19 +130,13 @@ public class PrihlaseniController extends Pane implements Observer {
 			//vyskočí modální okno
 			ukazAlertBad();
 		} else if (ukazatel == 1) {
-			//Stage curretStage = (Stage) email.getScene().getWindow();
 			sceneBuddy(event);  /* přepnutí na buddyho */
-			//curretStage.close(); 
 			
 		} else if (ukazatel == 2) {
-			//Stage curretStage = (Stage) email.getScene().getWindow();
 			sceneExchange(event); /* přepnutí na exchange */
-			//curretStage.close();
 			;
 		} else {
-			//Stage curretStage = (Stage) email.getScene().getWindow();
 			sceneAdmin(event);   /* přepnutí na admina */;
-			//curretStage.close();
 		}
 	}
 

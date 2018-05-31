@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -23,31 +24,30 @@ import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
- * pro načtení detailu buddyho
+ * pro načtení přehledu buddy
  * 
  * @author Jan Mandík
  *
  */
-public class DetailakceabuddyController extends Pane implements Observer {
+public class PrehledAkciProExchangeStudentaController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TextField nazev;
+	private TableColumn typ;
 	@FXML
-	private TextField cena;
+	private TableColumn nazev;
 	@FXML
-	private TextField typ;
+	private TableColumn casDo;
 	@FXML
-	private TextField casOd;
+	private TableColumn casOd;
 	@FXML
-	private TextField casDo;
-	@FXML
-	private TextField maxucast;
-
-	@FXML
-	private TextArea prihlasen;
+	private TableColumn misto;
 	@FXML
 	private Button odhlasit;
+	@FXML
+	private TableColumn cena;
+	@FXML
+	private TextArea prihlasen;
 
 	/**
 	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
@@ -56,12 +56,13 @@ public class DetailakceabuddyController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
-		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+	public void inicializuj(IBuddyAplikace buddyAplikace) {
 
 		this.buddyAplikace = buddyAplikace;
-		prihlasen.setEditable(false);
 		// ToDo
+
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+		prihlasen.setEditable(false);
 
 	}
 
@@ -82,7 +83,7 @@ public class DetailakceabuddyController extends Pane implements Observer {
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);

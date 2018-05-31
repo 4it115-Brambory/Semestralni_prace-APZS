@@ -16,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -24,30 +23,31 @@ import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
- * pro načtení přehledu buddy
+ * pro načtení detailu buddyho
  * 
  * @author Jan Mandík
  *
  */
-public class PrehledakciexchangeController extends Pane implements Observer {
+public class DetailAkceProAdminController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private TableColumn typ;
+	private TextField nazev;
 	@FXML
-	private TableColumn nazev;
+	private TextField cena;
 	@FXML
-	private TableColumn casDo;
+	private TextField typ;
 	@FXML
-	private TableColumn casOd;
+	private TextField casOd;
 	@FXML
-	private TableColumn misto;
+	private TextField casDo;
 	@FXML
-	private Button odhlasit;
-	@FXML
-	private TableColumn cena;
+	private TextField maxucast;
+
 	@FXML
 	private TextArea prihlasen;
+	@FXML
+	private Button odhlasit;
 
 	/**
 	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
@@ -56,14 +56,29 @@ public class PrehledakciexchangeController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace) {
+	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 
 		this.buddyAplikace = buddyAplikace;
+		prihlasen.setEditable(false);
 		// ToDo
 
-		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
-		prihlasen.setEditable(false);
+	}
 
+	@FXML	
+	private void sceneZpetNaPrehledAkci (ActionEvent event) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(this.getClass().getResource("PrehledAkciProAdmina.fxml"));
+		Parent tableViewParent = loader.load();
+    	
+		Scene tableViewScene = new Scene(tableViewParent);
+		
+		PrehledAkciProAdminaController controller = loader.getController();
+		controller.inicializuj(buddyAplikace);
+		
+		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tableViewScene);
+		window.show();
 	}
 
 	@Override
@@ -83,7 +98,7 @@ public class PrehledakciexchangeController extends Pane implements Observer {
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);

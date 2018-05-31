@@ -4,7 +4,7 @@ package com.github.it115_Brambory.Semestralni_prace_APZS.main;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.App;
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
-import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledakciexchangeController;
+import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledAkciProExchangeStudentaController;
 import com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrihlaseniController;
 import com.github.it115_Brambory.Semestralni_prace_APZS.ui.TestController;
 

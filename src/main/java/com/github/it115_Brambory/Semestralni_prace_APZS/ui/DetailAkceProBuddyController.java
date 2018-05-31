@@ -1,56 +1,50 @@
 package com.github.it115_Brambory.Semestralni_prace_APZS.ui;
 
-import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
-import java.util.Observer;
-
-import javax.persistence.Table;
-import javafx.event.ActionEvent;
+import java.awt.TextField;
 import java.sql.SQLException;
 import java.util.Observable;
+import java.util.Observer;
+
+import com.github.it115_Brambory.Semestralni_prace_APZS.logika.IBuddyAplikace;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
  * Kontroler, který zprostředkovává komunikaci mezi grafikou a logikou - slouží
- * pro načtení přehledu buddy
+ * pro načtení detailu buddyho
  * 
  * @author Jan Mandík
  *
  */
-public class PrehledakcibuddyController extends Pane implements Observer {
+public class DetailAkceProBuddyController extends Pane implements Observer {
 
-	// zjistit, jak se používá tableview
 	private IBuddyAplikace buddyAplikace;
 	@FXML
-	private Pane thisPane;
+	private TextField nazev;
 	@FXML
-	private Button odhlasit;
+	private TextField cena;
 	@FXML
-	private TableView<Table> tableView;
+	private TextField typ;
 	@FXML
-	private TableColumn<Table, String> typ;
+	private TextField casOd;
 	@FXML
-	private TableColumn<Table, String> nazev;
+	private TextField casDo;
 	@FXML
-	private TableColumn<Table, String> casOd;
-	@FXML
-	private TableColumn<Table, String> casDo;
-	@FXML
-	private TableColumn<Table, String> misto;
-	@FXML
-	private TableColumn<Table, Integer> cena;
+	private TextField maxucast;
+
 	@FXML
 	private TextArea prihlasen;
+	@FXML
+	private Button odhlasit;
 
 	/**
 	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
@@ -60,12 +54,11 @@ public class PrehledakcibuddyController extends Pane implements Observer {
 	 *             - to je kvůli těm testům na konci metody
 	 */
 	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
-		this.buddyAplikace = buddyAplikace;
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
-		prihlasen.setEditable(false);
 
-		// nacti data do tabulky
-		typ.setCellValueFactory(new PropertyValueFactory("firstName"));
+		this.buddyAplikace = buddyAplikace;
+		prihlasen.setEditable(false);
+		// ToDo
 
 	}
 
@@ -86,7 +79,7 @@ public class PrehledakcibuddyController extends Pane implements Observer {
 
 		this.buddyAplikace.getBuddyAplikace().logOut();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("prihlaseni.fxml"));
+		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
 		Parent tableViewParent = loader.load();
 
 		Scene tableViewScene = new Scene(tableViewParent);
