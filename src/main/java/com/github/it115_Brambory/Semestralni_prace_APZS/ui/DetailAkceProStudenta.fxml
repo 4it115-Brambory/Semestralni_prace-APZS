@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -25,5 +26,6 @@
       <Label layoutX="78.0" layoutY="232.0" text="Do:" />
       <TextField id="maxucast" fx:id="misto" layoutX="400.0" layoutY="159.0" />
       <Label layoutX="360.0" layoutY="163.0" text="Místo:" />
+      <Button fx:id="podejZadostBtn" layoutX="431.0" layoutY="219.0" mnemonicParsing="false" onAction="#podejZadostOPrihlaseni" prefHeight="43.0" prefWidth="87.0" text="Podat žádost o přihlášení" wrapText="true" />
    </children>
 </Pane>

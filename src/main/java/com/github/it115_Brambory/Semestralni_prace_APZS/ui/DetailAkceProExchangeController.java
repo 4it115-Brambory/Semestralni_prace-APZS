@@ -15,9 +15,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -52,7 +54,6 @@ public class DetailAkceProExchangeController extends Pane implements Observer {
 
 	@FXML
 	private TextArea prihlasen;
-	
 
 	/**
 	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
@@ -69,7 +70,7 @@ public class DetailAkceProExchangeController extends Pane implements Observer {
 		detailAkce = vybranaAkce;
 		nazev.setText(detailAkce.getNazev());
 		nazev.setEditable(false);
-		cena.setText( String.valueOf(detailAkce.getCena()));
+		cena.setText(String.valueOf(detailAkce.getCena()));
 		cena.setEditable(false);
 		typ.setText(detailAkce.getTypAkce());
 		typ.setEditable(false);
@@ -85,11 +86,47 @@ public class DetailAkceProExchangeController extends Pane implements Observer {
 		maxUcast.setEditable(false);
 	}
 
+	@FXML
+	public void podejZadostOPrihlaseni() throws SQLException {
+
+		int exchange_id = this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+				.zjistiExchangeIdPodlemailu(this.buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
+
+		if (this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+				.zjistiObsazenaAkceProExchange(detailAkce.getAkceId())) {
+			ukazAlertBad("Akce je již plně obsazena.");
+		} else if (this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+				.zjistiExistujiciRequestProExchange(detailAkce.getAkceId(), exchange_id)) {
+			ukazAlertBad("Žádost na tuto akci již byla podána.");
+		} else {
+			this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().insertNovyRequest(detailAkce.getAkceId(),
+					exchange_id);
+			ukazAlertGood("Žádost o přihlášení byla podána.");
+		}
+	}
+
+	/**
+	 * Metoda ukáže modální okno s upozorněním
+	 */
+	public void ukazAlertGood(String text) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Upozornění");
+		alert.setHeaderText(null);
+		alert.setContentText(text);
+		alert.showAndWait();
+	}
+
+	public void ukazAlertBad(String text) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Upozornění");
+		alert.setHeaderText(null);
+		alert.setContentText(text);
+		alert.showAndWait();
+	}
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 	}
-
-	
 
 }
