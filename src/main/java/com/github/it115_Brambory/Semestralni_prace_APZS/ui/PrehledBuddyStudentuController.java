@@ -143,6 +143,7 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("PridaniNovehoBuddyho.fxml"));
 		Parent root = loader.load();
+		
 		PridaniBuddyStudentaController controller = new PridaniBuddyStudentaController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);

@@ -738,6 +738,8 @@ public class DBTransakce extends Observable{
 					+ dateFormat.format(casDoUpdated) + "', '" + misto + "', '" + popis + "', '" + cena + "', '"
 					+ maxUcast + "')";
 			statement.executeUpdate(sql);
+			setChanged();
+		    notifyObservers();
 			//System.out.println("nahrano");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -803,6 +805,8 @@ public class DBTransakce extends Observable{
 					+ statniPrislusnost + "', '" + email + "', '"
 					+ org.apache.commons.codec.digest.DigestUtils.shaHex(heslo) + "', '" + access + "')";
 			statement.executeUpdate(sql);
+			setChanged();
+		    notifyObservers();
 			//System.out.println("nahrano");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -868,6 +872,8 @@ public class DBTransakce extends Observable{
 					+ statniPrislusnost + "', '" + email + "', '"
 					+ org.apache.commons.codec.digest.DigestUtils.shaHex(heslo) + "', '" + access + "')";
 			statement.executeUpdate(sql);
+			setChanged();
+		    notifyObservers();
 			//System.out.println("nahrano");
 		} catch (Exception e) {
 			e.printStackTrace();

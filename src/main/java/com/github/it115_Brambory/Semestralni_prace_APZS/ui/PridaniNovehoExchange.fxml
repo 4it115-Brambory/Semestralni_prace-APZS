@@ -8,20 +8,15 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PridaniExchangeStudentaController">
    <children>
-      <Button id="prehledzadosti" layoutX="28.0" layoutY="48.0" mnemonicParsing="false" text="Přehled žádostí" />
-      <Button id="prehledakci" layoutX="136.0" layoutY="48.0" mnemonicParsing="false" text="Přehled akcí" />
-      <Button id="prehledceskych" layoutX="231.0" layoutY="48.0" mnemonicParsing="false" text="Přehled českých buddy" />
-      <Button id="prehledzahranicnich" layoutX="386.0" layoutY="48.0" mnemonicParsing="false" text="Přehled zahraničních studentů" />
-      <Button fx:id="odhlasit" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
       <TextArea id="prihlasen" fx:id="prihlasen" layoutX="113.0" layoutY="8.0" prefHeight="37.0" prefWidth="240.0" />
       <Label layoutX="28.0" layoutY="18.0" text="Prihlasen jako:" />
-      <TextField id="jmeno" layoutX="102.0" layoutY="88.0" />
-      <TextField id="prijmeni" layoutX="102.0" layoutY="122.0" />
-      <TextField id="email" layoutX="102.0" layoutY="159.0" />
-      <TextField id="pohlavi" layoutX="102.0" layoutY="194.0" />
-      <TextField id="statniprislusnost" layoutX="400.0" layoutY="88.0" />
-      <TextField id="adresa" layoutX="400.0" layoutY="122.0" />
-      <TextField id="datumnarozeni" layoutX="400.0" layoutY="159.0" />
+      <TextField id="jmeno" fx:id="jmeno" layoutX="102.0" layoutY="88.0" />
+      <TextField id="prijmeni" fx:id="prijmeni" layoutX="102.0" layoutY="122.0" />
+      <TextField id="email" fx:id="email" layoutX="102.0" layoutY="159.0" />
+      <TextField id="pohlavi" fx:id="pohlavi" layoutX="102.0" layoutY="194.0" />
+      <TextField id="statniprislusnost" fx:id="statniprislusnost" layoutX="400.0" layoutY="88.0" />
+      <TextField id="adresa" fx:id="adresa" layoutX="400.0" layoutY="122.0" />
+      <TextField id="datumnarozeni" fx:id="datumnarozeni" layoutX="400.0" layoutY="159.0" />
       <Label layoutX="47.0" layoutY="92.0" text="Jmeno:" />
       <Label layoutX="43.0" layoutY="126.0" text="Prijmeni:" />
       <Label layoutX="57.0" layoutY="163.0" text="Email:" />
@@ -29,9 +24,11 @@
       <Label layoutX="52.0" layoutY="198.0" text="Pohlavi:" />
       <Label layoutX="300.0" layoutY="92.0" text="Statni prislusnost:" />
       <Label layoutX="349.0" layoutY="126.0" text="Adresa:" />
-      <Button id="ulozit" layoutX="113.0" layoutY="288.0" mnemonicParsing="false" text="Ulozit" />
-      <Button id="zpetnaprehled" layoutX="377.0" layoutY="288.0" mnemonicParsing="false" text="Zpet na prehled" />
-      <TextField id="heslo" layoutX="403.0" layoutY="194.0" />
+      <Button id="ulozit" fx:id="uloz" layoutX="113.0" layoutY="288.0" mnemonicParsing="false" onAction="#uloz" text="Ulozit" />
+      <Button id="zpetnaprehled" fx:id="sceneZpetNaPrehledExchange" layoutX="377.0" layoutY="288.0" mnemonicParsing="false" onAction="#sceneZpetNaPrehledExchange" text="Zpet na prehled" />
+      <TextField id="heslo" fx:id="heslo" layoutX="403.0" layoutY="194.0" />
       <Label layoutX="362.0" layoutY="198.0" text="heslo:" />
+      <TextField id="pohlavi" fx:id="telefon" layoutX="102.0" layoutY="225.0" />
+      <Label layoutX="52.0" layoutY="229.0" text="Telefon:" />
    </children>
 </Pane>
