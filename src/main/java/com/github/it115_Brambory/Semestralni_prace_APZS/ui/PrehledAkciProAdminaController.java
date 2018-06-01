@@ -75,6 +75,13 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		}
 	}
 
+	
+	/**
+	 * Metoda na přepne na detail a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void sceneDetailAkce() throws Exception {
 		Akce vybranaAkce = seznamAkci.getSelectionModel().getSelectedItem();
@@ -99,7 +106,13 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		}
 
 	}
-
+	
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void scenePrehledZadosti (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -117,6 +130,12 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		window.show();
 	}
 	
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */	
 	@FXML	
 	private void scenePrehledCeskych (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -134,6 +153,13 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		window.show();
 	}
 	
+	
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void scenePrehledZahranicnich (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();

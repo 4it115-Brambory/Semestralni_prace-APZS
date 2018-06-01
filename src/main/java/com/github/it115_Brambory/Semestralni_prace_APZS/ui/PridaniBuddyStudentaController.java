@@ -80,7 +80,13 @@ public class PridaniBuddyStudentaController extends Pane implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 	}
-
+	
+	/**
+	 * Metoda vrací zpět na přehled buddyů, pak po sobě zavře okno 
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void sceneZpetNaPrehledBuddyStudentu (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();

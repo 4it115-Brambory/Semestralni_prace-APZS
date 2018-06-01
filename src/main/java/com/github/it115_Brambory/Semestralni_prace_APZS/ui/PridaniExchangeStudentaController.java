@@ -69,6 +69,14 @@ public class PridaniExchangeStudentaController extends Pane implements Observer 
 
 	}
 
+	
+	
+	/**
+	 * Metoda vrací zpět na přehled exchangů, taky po sobě zavře okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */	
 	@FXML	
 	private void sceneZpetNaPrehledExchange (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();

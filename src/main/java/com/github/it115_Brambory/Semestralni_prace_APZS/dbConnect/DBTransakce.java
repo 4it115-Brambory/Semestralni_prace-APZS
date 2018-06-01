@@ -1689,5 +1689,43 @@ public class DBTransakce extends Observable {
 		}
 		return exchange_id;
 	}
+	
+	/**
+	 * Metoda vrací Id akce podle zadaného Id requestu
+	 * 
+	 * @param request_id
+	 * @return
+	 * @throws SQLException
+	 */
+	public Integer zjistiAkceIdPodleRequestId(int request_id) throws SQLException {
+
+		int akce_id = 0;
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "SELECT akce_id FROM `Request` WHERE `request_id` ='" + request_id + "'";
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				akce_id = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return akce_id;
+	}	
 
 }

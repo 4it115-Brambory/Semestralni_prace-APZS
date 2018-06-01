@@ -110,9 +110,15 @@ public class PrehledZadostiController extends Pane implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		
-	}
 
+	}
+	
+	/**
+	 * Metoda na přepne na přehled akcí a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void scenePrehledAkci(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -128,7 +134,13 @@ public class PrehledZadostiController extends Pane implements Observer {
 		window.setScene(tableViewScene);
 		window.show();
 	}
-
+	
+	/**
+	 * Metoda na přepne na přehled studentů a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void scenePrehledCeskych(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -145,7 +157,14 @@ public class PrehledZadostiController extends Pane implements Observer {
 		window.setTitle("Přehled Buddy studentů");
 		window.show();
 	}
-
+	
+	
+	/**
+	 * Metoda na přepne na přehled žádostí a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void scenePrehledZadosti(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -162,7 +181,13 @@ public class PrehledZadostiController extends Pane implements Observer {
 		window.setTitle("Přehled žádostí");
 		window.show();
 	}
-
+	
+	/**
+	 * Metoda na přepne na přehled zahraničních studnetů a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void scenePrehledZahranicnich(ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -213,8 +238,16 @@ public class PrehledZadostiController extends Pane implements Observer {
 		// schvalit jen to co u ceho je ---
 		if (selectedRequest != null) {
 			if (selectedRequest.getSchvaleno() == "---") {
-				this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().setRequestSchvaleno(selectedRequest.getId());
-				scenePrehledZadosti(event);
+				if (this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+						.zjistiObsazenaAkceProExchange(this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+								.zjistiAkceIdPodleRequestId(selectedRequest.getId()))) {
+
+					ukazAlertGood("Akce je již plná, nezle schvalovat další studenty.");
+				} else {
+					this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+							.setRequestSchvaleno(selectedRequest.getId());
+					scenePrehledZadosti(event);
+				}
 			} else if (selectedRequest.getSchvaleno() == "ano") {
 				ukazAlertGood("Žádost byla již schválena.");
 			} else if (selectedRequest.getSchvaleno() == "ne") {

@@ -77,6 +77,13 @@ public class DetailExchangeStudentaController extends Pane implements Observer {
 
 	}
 
+	
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void sceneZpetNaPrehledExchangeStudentu (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -98,8 +105,12 @@ public class DetailExchangeStudentaController extends Pane implements Observer {
 		// TODO Auto-generated method stub
 	}
 
-
-	
+	/**
+	 * Metoda předá zadané údaje databázi
+	 * 
+	 * 
+	 * @throws SQLException
+	 */	
 	public void uloz() throws SQLException {
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateExchangeStudenta(detailExchange.getId(), jmeno.getText(),
 				prijmeni.getText(), datumnarozeni.getText(),telefon.getText(), pohlavi.getText(),
@@ -107,6 +118,12 @@ public class DetailExchangeStudentaController extends Pane implements Observer {
 
 	}
 	
+	/**
+	 * Metoda předá databázové metodě pokyn k odstranění zvoleného studenta
+	 * 
+	 * 
+	 * @throws SQLException
+	 */		
 	public void odstran() throws SQLException {
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteExchangeStudent(detailExchange.getId());
 		Stage curretStage = (Stage) email.getScene().getWindow();

@@ -3,7 +3,7 @@ package com.github.it115_Brambory.Semestralni_prace_APZS.dbConnect;
 import java.sql.*;
 
 /**
- * @author Admiral Pike
+ * @author Libor Zíka
  *
  * Jednoduchá třída sloužící k navázání spojení s databází.
  *

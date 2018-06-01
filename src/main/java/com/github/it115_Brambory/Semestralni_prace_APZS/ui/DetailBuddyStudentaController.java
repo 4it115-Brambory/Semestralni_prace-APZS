@@ -91,6 +91,12 @@ public class DetailBuddyStudentaController extends Pane implements Observer {
 		// TODO Auto-generated method stub
 	}
 
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void sceneZpetNaPrehledBuddyStudentu (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -132,7 +138,12 @@ public class DetailBuddyStudentaController extends Pane implements Observer {
 		window.show();
 
 	}
-
+	
+	/**
+	 * Metoda pošle zadané údaje do databáze
+	 * 
+	 * @throws Exception
+	 */
 	public void uloz() throws SQLException {
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateBuddyStudenta(detailBuddy.getId(), jmeno.getText(),
 				prijmeni.getText(), datumnarozeni.getText(), telefon.getText(), pohlavi.getText(),
@@ -140,6 +151,11 @@ public class DetailBuddyStudentaController extends Pane implements Observer {
 
 	}
 	
+	/**
+	 * Metoda pošle zadané údaje do databáze
+	 * 
+	 * @throws Exception
+	 */	
 	public void odstran() throws SQLException {
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteBuddyStudent(detailBuddy.getId());
 		Stage curretStage = (Stage) email.getScene().getWindow();

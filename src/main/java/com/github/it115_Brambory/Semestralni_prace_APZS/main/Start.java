@@ -41,6 +41,8 @@ public class Start extends Application {
     /**
 	 * Metoda, ve které se konstruuje okno, kontroler a buddyAplikace,
 	 * která se předává kontroleru
+	 * @param Stage
+	 * @throws Exception
 	 */
     	@Override
 		public void start (Stage primaryStage) throws Exception {
