@@ -12,10 +12,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -36,19 +39,7 @@ public class PrehledAkciProBuddyStudentaController extends Pane implements Obser
 	@FXML
 	private Button odhlasit;
 	@FXML
-	private TableView<Table> tableView;
-	@FXML
-	private TableColumn<Table, String> typ;
-	@FXML
-	private TableColumn<Table, String> nazev;
-	@FXML
-	private TableColumn<Table, String> casOd;
-	@FXML
-	private TableColumn<Table, String> casDo;
-	@FXML
-	private TableColumn<Table, String> misto;
-	@FXML
-	private TableColumn<Table, Integer> cena;
+	private ListView<Akce> seznamAkci;
 	@FXML
 	private TextArea prihlasen;
 
@@ -59,19 +50,26 @@ public class PrehledAkciProBuddyStudentaController extends Pane implements Obser
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace){
+	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException{
 		this.buddyAplikace = buddyAplikace;
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
 
-		// nacti data do tabulky
-		//typ.setCellValueFactory(new PropertyValueFactory("firstName"));
+		seznamAkci.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamAkciKolekce());
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().addObserver(this);
 
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
+		this.buddyAplikace = buddyAplikace;
+		seznamAkci.getItems().clear();
+		try {
+			seznamAkci.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamAkciKolekce());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -109,18 +107,26 @@ public class PrehledAkciProBuddyStudentaController extends Pane implements Obser
 	 */
 	@FXML	
 	private void sceneDetailAkce (ActionEvent event) throws Exception {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("DetailAkceProBuddyho.fxml"));
-		Parent tableViewParent = loader.load();
-    	
-		Scene tableViewScene = new Scene(tableViewParent);
-		
-		DetailAkceProBuddyController controller = loader.getController();
-		controller.inicializuj(buddyAplikace);
-		
-		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		window.setScene(tableViewScene);
-		window.show();
+		Akce vybranaAkce = seznamAkci.getSelectionModel().getSelectedItem();
+		if (vybranaAkce != null) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("DetailAkceProBuddyho.fxml"));
+			Parent root = loader.load();
+			DetailAkceProBuddyController controller = new DetailAkceProBuddyController();
+			controller = loader.getController();
+
+			controller.inicializuj(buddyAplikace, vybranaAkce);
+			Stage DetailAkceBuddy = new Stage();
+			DetailAkceBuddy.setScene(new Scene(root));
+			DetailAkceBuddy.show();
+			DetailAkceBuddy.setTitle("Detail akce");
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+		    alert.setTitle("Upozornění");
+		    alert.setHeaderText(null);
+		    alert.setContentText("Nemáš vybranou akci");
+		    alert.showAndWait();
+		}
 	}
 	
 }
