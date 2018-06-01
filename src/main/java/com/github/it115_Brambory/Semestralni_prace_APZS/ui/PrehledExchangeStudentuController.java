@@ -83,6 +83,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled akcí");
 		window.show();
 	}
 	
@@ -99,6 +100,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled žádostí");
 		window.show();
 	}
 	
@@ -115,6 +117,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Buddy studentů");
 		window.show();
 	}
 	
@@ -131,6 +134,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Exchange studentů");
 		window.show();
 	}
 	

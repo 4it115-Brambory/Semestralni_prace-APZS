@@ -57,9 +57,10 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
 		
+		
 		seznamAkci.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamAkciKolekce());
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().addObserver(this);
-
+		
 	}
 
 	@Override
@@ -112,6 +113,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled žádostí");
 		window.show();
 	}
 	
@@ -128,6 +130,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Buddy studentů");
 		window.show();
 	}
 	
@@ -144,6 +147,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Exchange studentů");
 		window.show();
 	}
 	
