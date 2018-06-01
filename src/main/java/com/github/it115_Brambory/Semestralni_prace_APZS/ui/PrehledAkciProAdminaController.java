@@ -151,6 +151,21 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		window.show();
 	}
 	
+	@FXML
+	private void scenePridatAkci() throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("NovaAkce.fxml"));
+		Parent root = loader.load();
+		
+		NovaAkceController controller = new NovaAkceController();
+		controller = loader.getController();
+		controller.inicializuj(buddyAplikace);
+		Stage novAkce = new Stage();
+		novAkce.setScene(new Scene(root));
+		novAkce.show();
+		novAkce.setTitle("Přidání nové akce");
+	}
+	
 	/**
 	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální
 	 * uživatel se nastaví na null a scéna se změní na přihlášení.

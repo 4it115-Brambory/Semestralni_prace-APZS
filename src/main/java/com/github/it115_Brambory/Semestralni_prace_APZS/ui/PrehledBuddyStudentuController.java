@@ -157,7 +157,7 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		Pridanibuddyho.setTitle("Přidání buddyho");
 	}
 
-	// detail buddyho, todo
+	
 	@FXML
 	private void sceneDetailBuddyho() throws Exception {
 		Buddy vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();

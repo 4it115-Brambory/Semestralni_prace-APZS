@@ -134,7 +134,7 @@ public class PrehledExchangeStudentuController extends Pane implements Observer 
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
-		window.setTitle("Přehled Exchange studentů");
+		window.setTitle("Přidání Exchange studenta");
 		window.show();
 	}
 	
