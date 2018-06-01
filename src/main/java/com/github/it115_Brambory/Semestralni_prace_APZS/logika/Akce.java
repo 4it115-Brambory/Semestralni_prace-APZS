@@ -74,7 +74,7 @@ public class Akce {
      * @param String typ.
      */
 	public void setTypAkce(String druh) {
-		this.typ = typ;
+		this.typ = druh;
 	}
 	
 	/**
@@ -210,9 +210,10 @@ public class Akce {
      */
 	@Override
 	public String toString() {
-		return "Akce [id=" + akce_id + ", druh=" + typ + ", nazev=" + nazev + ", datumACasOd=" + casOd
-				+ ", datumACasDo=" + casDo + ", misto=" + misto + ", popis=" + popis + ", cena=" + cena
-				+ ", maxUcast=" + maxUcast + "]";
+		//return "Akce [id=" + akce_id + ", druh=" + typ + ", nazev=" + nazev + ", datumACasOd=" + casOd
+		//		+ ", datumACasDo=" + casDo + ", misto=" + misto + ", popis=" + popis + ", cena=" + cena
+		//		+ ", maxUcast=" + maxUcast + "]";
+		return akce_id+"  "+nazev+"  "+typ;
 	}
 	
 }

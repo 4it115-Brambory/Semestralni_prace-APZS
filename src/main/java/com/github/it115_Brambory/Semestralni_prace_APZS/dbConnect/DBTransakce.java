@@ -555,6 +555,8 @@ public class DBTransakce extends Observable{
 					+ "', `misto`='" + misto + "', `popis`='" + popis + "', `cena`='" + cena + "', `maxUcast`='"
 					+ maxUcast + "' WHERE `akce_id`='" + akce_id + "'";
 			statement.executeUpdate(sql);
+			setChanged();
+		    notifyObservers();
 			//System.out.println("updated");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1026,6 +1028,8 @@ public class DBTransakce extends Observable{
 			statement = connection.createStatement();
 			String sql = "DELETE FROM `Akce` WHERE `akce_id`='" + akce_id + "'";
 			statement.executeUpdate(sql);
+			setChanged();
+		    notifyObservers();
 			//System.out.println("vymazáno");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,7 +4,6 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 
 import java.util.Observer;
-import java.awt.TextField;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Observable;
@@ -157,8 +156,6 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 	@FXML
 	private void sceneDetailBuddyho() throws Exception {
 		Buddy vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();
-		System.out.print(vybranyBuddy);
-		System.out.print(vybranyBuddy.toString());
 		if (vybranyBuddy != null) {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("DetailBuddyStudentaProAdmina.fxml"));

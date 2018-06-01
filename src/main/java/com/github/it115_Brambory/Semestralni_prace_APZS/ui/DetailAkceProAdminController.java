@@ -4,7 +4,7 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 import com.github.it115_Brambory.Semestralni_prace_APZS.main.Start;
 
 import java.util.Observer;
-import java.awt.TextField;
+
 import java.sql.SQLException;
 import java.util.Observable;
 
@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -31,6 +32,7 @@ import javafx.stage.Stage;
 public class DetailAkceProAdminController extends Pane implements Observer {
 
 	private IBuddyAplikace buddyAplikace;
+	private Akce detailAkce;
 	@FXML
 	private TextField nazev;
 	@FXML
@@ -40,15 +42,17 @@ public class DetailAkceProAdminController extends Pane implements Observer {
 	@FXML
 	private TextField casOd;
 	@FXML
+	private TextField popis;
+	@FXML
 	private TextField casDo;
 	@FXML
-	private TextField maxucast;
+	private TextField misto;
+	@FXML
+	private TextField maxUcast;
 
 	@FXML
 	private TextArea prihlasen;
-	@FXML
-	private Button odhlasit;
-
+	
 	/**
 	 * Metoda k inicializaci hry. Načte všechny potřebné prvky GUI a přidá
 	 * observery.
@@ -56,12 +60,21 @@ public class DetailAkceProAdminController extends Pane implements Observer {
 	 * @throws SQLException
 	 *             - to je kvůli těm testům na konci metody
 	 */
-	public void inicializuj(IBuddyAplikace buddyAplikace) throws SQLException {
+	public void inicializuj(IBuddyAplikace buddyAplikace, Akce vybranaAkce) throws SQLException {
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 
 		this.buddyAplikace = buddyAplikace;
 		prihlasen.setEditable(false);
-		// ToDo
+		detailAkce = vybranaAkce;
+		nazev.setText(detailAkce.getNazev());
+		cena.setText( String.valueOf(detailAkce.getCena()));
+		typ.setText(detailAkce.getTypAkce());
+		casOd.setText(detailAkce.getCasOd());
+		popis.setText(detailAkce.getPopis());
+		casDo.setText(detailAkce.getCasDo());
+		misto.setText(detailAkce.getMisto());
+		maxUcast.setText(String.valueOf(detailAkce.getMaxUcast()));
+
 
 	}
 
@@ -86,30 +99,19 @@ public class DetailAkceProAdminController extends Pane implements Observer {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * Matoda na odhlášení uživatele po kliknutí na tlačítko "odhlásit". Aktuální
-	 * uživatel se nastaví na null a scéna se změní na přihlášení.
-	 * 
-	 * @param event
-	 * @throws Exception
-	 */
-	@FXML
-	public void odhlasit(ActionEvent event) throws Exception {
+	
+	
+	public void uloz() throws SQLException {
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateAkci(detailAkce.getAkceId(), typ.getText(),
+				nazev.getText(), casOd.getText(), casDo.getText(), misto.getText(),
+				popis.getText(), Integer.parseInt(cena.getText()), Integer.parseInt(maxUcast.getText()));
 
-		this.buddyAplikace.getBuddyAplikace().logOut();
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("Prihlaseni.fxml"));
-		Parent tableViewParent = loader.load();
-
-		Scene tableViewScene = new Scene(tableViewParent);
-
-		PrihlaseniController controller = loader.getController();
-		controller.inicializuj(buddyAplikace);
-
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		window.setScene(tableViewScene);
-		window.show();
-
+	}
+	
+	public void odstran() throws SQLException {
+		buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteAkce(detailAkce.getAkceId());
+		Stage curretStage = (Stage) nazev.getScene().getWindow();
+		curretStage.close();
 	}
 
 }
