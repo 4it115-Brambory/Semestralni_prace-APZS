@@ -74,7 +74,13 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void scenePrehledAkci (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -91,6 +97,13 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		window.show();
 	}
 
+	
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void scenePrehledZadosti (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -107,6 +120,13 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		window.show();
 	}
 
+	
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void scenePrehledCeskych (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -123,6 +143,13 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		window.show();
 	}
 
+	
+	/**
+	 * Metoda na přepne na přehled a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void scenePrehledZahranicnich (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();

@@ -116,6 +116,13 @@ public class PrihlaseniController extends Pane implements Observer {
 		window.setScene(tableViewScene);
 		window.show();
 	}
+	
+	/**
+	 * Metoda na přihlášení do systému, na základě informace o tom, kdo se přihlašuje, posílá na správný dialog
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 
 	@FXML
 	public void prihlasit(ActionEvent event) throws Exception {

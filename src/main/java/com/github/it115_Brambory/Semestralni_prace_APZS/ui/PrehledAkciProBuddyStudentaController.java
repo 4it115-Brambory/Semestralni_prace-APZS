@@ -100,6 +100,13 @@ public class PrehledAkciProBuddyStudentaController extends Pane implements Obser
 
 	}
 	
+	
+	/**
+	 * Metoda na přepne na datail akce a zavře po sobě okno
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void sceneDetailAkce (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
