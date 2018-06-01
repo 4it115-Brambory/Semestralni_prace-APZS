@@ -5,44 +5,33 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledZadostiController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1124.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.it115_Brambory.Semestralni_prace_APZS.ui.PrehledZadostiController">
    <children>
-      <Button layoutX="167.0" layoutY="71.0" mnemonicParsing="false" onAction="#scenePrehledAkci" text="Přehled akcí" />
-      <Button layoutX="279.0" layoutY="71.0" mnemonicParsing="false" onAction="#scenePrehledCeskych" text="Přehled českých buddy" />
-      <TextArea id="prihlasen" fx:id="prihlasen" layoutX="156.0" layoutY="15.0" prefHeight="46.0" prefWidth="200.0" />
+      <Button layoutX="305.0" layoutY="73.0" mnemonicParsing="false" onAction="#scenePrehledAkci" text="Přehled akcí" />
+      <Button layoutX="417.0" layoutY="73.0" mnemonicParsing="false" onAction="#scenePrehledCeskych" text="Přehled českých buddy" />
+      <TextArea id="prihlasen" fx:id="prihlasen" layoutX="156.0" layoutY="15.0" prefHeight="0.0" prefWidth="200.0" />
       <Label layoutX="41.0" layoutY="28.0" text="Příhlášen jako:" />
-      <Label layoutX="91.0" layoutY="140.0" text="Typ:" />
-      <Label layoutX="91.0" layoutY="179.0" text="Název:" />
-      <Label layoutX="91.0" layoutY="222.0" text="Čas od:" />
-      <Label layoutX="91.0" layoutY="265.0" text="Čas do:" />
-      <Label layoutX="380.0" layoutY="140.0" text="Místo:" />
-      <Label layoutX="380.0" layoutY="179.0" text="Popis:" />
-      <Label layoutX="380.0" layoutY="222.0" text="Cena:" />
-      <Label layoutX="380.0" layoutY="265.0" text="Maximální účast:" />
-      <TextField layoutX="141.0" layoutY="135.0" />
-      <TextField layoutX="141.0" layoutY="174.0" />
-      <TextField layoutX="141.0" layoutY="217.0" />
-      <TextField layoutX="141.0" layoutY="260.0" />
-      <TextField layoutX="499.0" layoutY="260.0" />
-      <TextField layoutX="499.0" layoutY="217.0" />
-      <TextField layoutX="499.0" layoutY="174.0" />
-      <TextField layoutX="499.0" layoutY="135.0" />
-      <Button layoutX="466.0" layoutY="71.0" mnemonicParsing="false" onAction="#scenePrehledZahranicnich" text="Přehled zahraničních studentů" />
-      <Button fx:id="odhlasit" layoutX="466.0" layoutY="23.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
-      <Button layoutX="47.0" layoutY="566.0" mnemonicParsing="false" onAction="#schvaleni" text="Schválení" />
-      <Button layoutX="377.0" layoutY="566.0" mnemonicParsing="false" onAction="#odmitnuti" text="Zamítnutí" />
-      <TableView layoutX="108.0" layoutY="310.0" prefHeight="223.0" prefWidth="539.0">
+      <Button layoutX="604.0" layoutY="73.0" mnemonicParsing="false" onAction="#scenePrehledZahranicnich" text="Přehled zahraničních studentů" />
+      <Button fx:id="odhlasit" layoutX="998.0" layoutY="24.0" mnemonicParsing="false" onAction="#odhlasit" text="Odhlásit" />
+      <Button fx:id="schvaleniBtn" layoutX="330.0" layoutY="566.0" mnemonicParsing="false" onAction="#schvaleni" text="Schválení" />
+      <Button fx:id="zamitnutiBtn" layoutX="524.0" layoutY="566.0" mnemonicParsing="false" onAction="#odmitnuti" text="Zamítnutí" />
+      <TableView fx:id="myTable" layoutX="15.0" layoutY="144.0" prefHeight="391.0" prefWidth="1087.0">
          <columns>
-            <TableColumn id="email" prefWidth="75.0" text="email" />
-            <TableColumn id="jmeno" prefWidth="90.0" text="jmeno" />
-            <TableColumn id="prijmeni" prefWidth="84.0" text="prijmeni" />
-            <TableColumn id="statniprislusnost" prefWidth="66.0" text="stat" />
-            <TableColumn id="datumnarozeni" prefWidth="107.0" text="datum narozeni" />
-            <TableColumn id="telefon" prefWidth="116.0" text="telefon" />
+            <TableColumn id="id" fx:id="id" editable="false" prefWidth="62.0" text="id žádosti" />
+            <TableColumn id="jmeno" fx:id="jmeno" editable="false" prefWidth="105.0" text="jméno" />
+            <TableColumn id="prijmeni" fx:id="prijmeni" editable="false" prefWidth="104.0" text="příjmení" />
+            <TableColumn id="telefon" fx:id="telefon" editable="false" prefWidth="118.0" text="telefon" />
+            <TableColumn id="stat" fx:id="stat" editable="false" prefWidth="44.0" text="stát" />
+            <TableColumn id="datumNarozeni" fx:id="datumNarozeni" editable="false" prefWidth="150.0" text="datum narození" />
+            <TableColumn id="nazevAkce" fx:id="nazevAkce" editable="false" prefWidth="159.0" text="název akce" />
+            <TableColumn id="prihlasenych" fx:id="prihlasenych" editable="false" prefWidth="91.0" text="přihlášených" />
+            <TableColumn id="maxUcast" fx:id="maxUcast" editable="false" prefWidth="76.0" text="max. účast" />
+            <TableColumn id="zaplaceno" fx:id="zaplaceno" prefWidth="70.0" text="Zaplaceno" />
+            <TableColumn id="schvaleno" fx:id="schvaleno" prefWidth="76.0" text="Schváleno" />
          </columns>
       </TableView>
+      <Button fx:id="zaplaceniBtn" layoutX="728.0" layoutY="566.0" mnemonicParsing="false" onAction="#zaplaceni" text="Zaplacení" />
    </children>
 </Pane>

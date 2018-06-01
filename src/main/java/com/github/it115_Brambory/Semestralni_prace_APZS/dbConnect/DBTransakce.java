@@ -254,6 +254,72 @@ public class DBTransakce extends Observable{
 	}
 
 	/**
+	 * Metoda pro získání seznamu všech requestů. Použití v admin controlleru pro
+	 * zobrazení přehledu žádostí.
+	 * 
+	 * @return Map<Integer, Request>
+	 * @throws SQLException
+	 */
+	public Map<Integer, TableViewRequest> getSeznamTableViewRequestu() throws SQLException {
+
+		Map<Integer, TableViewRequest> seznamRequestu = new HashMap<Integer, TableViewRequest>();
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			String sql = "SELECT dva.jmeno, dva.prijmeni, dva.telefon, dva.statniPrislusnost, dva.datumNarozeni, dva.nazev, jedna.pocet, dva.maxUcast, dva.request_id, dva.zaplaceno, dva.schvaleno "
+					+ "FROM (SELECT akce_id, COUNT(akce_id) AS pocet FROM `Request` GROUP BY akce_id) as jedna "
+					+ "RIGHT JOIN "
+					+ "(SELECT Exchange.jmeno, Exchange.prijmeni, Exchange.telefon, Exchange.statniPrislusnost, Exchange.datumNarozeni, Akce.nazev, Akce.maxUcast, Request.request_id, Request.akce_id, Request.zaplaceno, Request.schvaleno FROM Exchange RIGHT JOIN Request ON Exchange.exchange_id=Request.exchange_id LEFT JOIN Akce ON Request.akce_id=Akce.akce_id) as dva "
+					+ "ON jedna.akce_id=dva.akce_id";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			String zaplaceno = "ne";
+			String schvaleno = "x";
+			while (resultSet.next()) {
+				zaplaceno = "ne";
+				schvaleno = "x";
+
+				if (resultSet.getInt(10) == 1)
+					zaplaceno = "ano";
+
+				if (resultSet.getInt(11) == 1) {
+					schvaleno = "ano";
+				} else if (resultSet.getString(11) == null) {
+					schvaleno = "---";
+				} else if (resultSet.getInt(11) == 0) {
+					schvaleno = "ne";
+				}
+
+				// formátování - datum narození
+				DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
+				String datum = pozadovanyFormat.format(resultSet.getDate(5)).toString();
+
+				TableViewRequest request = new TableViewRequest(resultSet.getString(1), resultSet.getString(2),
+						resultSet.getString(3), resultSet.getString(4), datum, resultSet.getString(6),
+						resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), zaplaceno, schvaleno);
+
+				seznamRequestu.put(resultSet.getInt(9), request);
+				// System.out.println(request.toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return seznamRequestu;
+	}	
+	
+	/**
 	 * Metoda vrací buddy studenta, který je přiřazen danému exchange studentovi.
 	 * Seznam vztahů by neměl být potřeba v programu. Bude stačit toto k výpisu
 	 * jména buddy studenta v controlleru pro detail exchange studenta.
@@ -353,6 +419,50 @@ public class DBTransakce extends Observable{
 		return seznamExchange;
 	}
 
+	/**
+	 * Metoda vrací jednoho exchange studenta pomocí Id.
+	 * 
+	 * @return Exchange
+	 * @throws SQLException
+	 */
+	public Exchange getExchangeStudent(int id) throws SQLException {
+
+		Exchange student = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			String sql = "SELECT * FROM Exchange WHERE exchange_id ='" + id + "'";
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+
+				// formátování - datum narození
+				DateFormat pozadovanyFormat = new SimpleDateFormat("dd.MM. yyyy");
+				String datum = pozadovanyFormat.format(resultSet.getDate(5)).toString();
+
+				student = new Exchange(resultSet.getString(9), resultSet.getString(10), resultSet.getInt(11),
+						resultSet.getString(3), resultSet.getString(4), datum, resultSet.getString(6),
+						resultSet.getString(7), resultSet.getString(8), resultSet.getInt(1), resultSet.getString(2));
+				// System.out.println(exchangeStudent.toString());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return student;
+	}
+	
 	/**
 	 * Metoda slouží jako inspirace pro práci s formátováním časů atd.
 	 * 
@@ -1499,4 +1609,35 @@ public class DBTransakce extends Observable{
 		}
 	}
 
+	public Integer zjistiPocetPrihlasenychNaAkci(int akce_id) throws SQLException {
+
+		int pocetPrihlasenychNaAkci = 0;
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "SELECT COUNT(akce_id) FROM `Request` WHERE `schvaleno` = 1 AND `akce_id`='" + akce_id + "'";
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				pocetPrihlasenychNaAkci = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return pocetPrihlasenychNaAkci;
+	}
+		
 }
