@@ -90,6 +90,7 @@ public class PridaniBuddyStudentaController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Buddy studentů");
 		window.show();
 	}
 
