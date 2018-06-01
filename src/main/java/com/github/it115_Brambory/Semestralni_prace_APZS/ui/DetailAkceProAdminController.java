@@ -77,7 +77,11 @@ public class DetailAkceProAdminController extends Pane implements Observer {
 
 
 	}
-
+	/**
+	 * Metoda prátí pohled zpět na přehled akcí
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML	
 	private void sceneZpetNaPrehledAkci (ActionEvent event) throws Exception {
 		FXMLLoader loader = new FXMLLoader();
@@ -99,15 +103,22 @@ public class DetailAkceProAdminController extends Pane implements Observer {
 		// TODO Auto-generated method stub
 	}
 
-	
-	
+	/**
+	 * Metoda pošle zadané údaje do databáze
+	 * 
+	 * @throws Exception
+	 */	
 	public void uloz() throws SQLException {
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().updateAkci(detailAkce.getAkceId(), typ.getText(),
 				nazev.getText(), casOd.getText(), casDo.getText(), misto.getText(),
 				popis.getText(), Integer.parseInt(cena.getText()), Integer.parseInt(maxUcast.getText()));
 
 	}
-	
+	/**
+	 * Metoda pošle odstranění údajů
+	 * 
+	 * @throws Exception
+	 */
 	public void odstran() throws SQLException {
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().deleteAkce(detailAkce.getAkceId());
 		Stage curretStage = (Stage) nazev.getScene().getWindow();

@@ -1609,6 +1609,15 @@ public class DBTransakce extends Observable{
 		}
 	}
 
+	
+	/**
+	 * Metoda vypíše počet studentů přihlášených akci
+	 * 
+	 * 
+	 * @param akce_id
+	 * @return Integer PocetPrihlasenychNaAkci
+	 * @throws SQLException
+	 */
 	public Integer zjistiPocetPrihlasenychNaAkci(int akce_id) throws SQLException {
 
 		int pocetPrihlasenychNaAkci = 0;
