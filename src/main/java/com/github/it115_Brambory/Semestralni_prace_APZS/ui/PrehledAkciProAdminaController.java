@@ -57,9 +57,10 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		prihlasen.setText(buddyAplikace.getBuddyAplikace().getAktualniUzivatel().getEmail());
 		prihlasen.setEditable(false);
 		
+		
 		seznamAkci.getItems().addAll(buddyAplikace.getBuddyAplikace().getDatabazeOperace().getSeznamAkciKolekce());
 		buddyAplikace.getBuddyAplikace().getDatabazeOperace().addObserver(this);
-
+		
 	}
 
 	@Override
@@ -125,6 +126,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled žádostí");
 		window.show();
 	}
 	
@@ -147,6 +149,7 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Buddy studentů");
 		window.show();
 	}
 	
@@ -170,7 +173,23 @@ public class PrehledAkciProAdminaController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Exchange studentů");
 		window.show();
+	}
+	
+	@FXML
+	private void scenePridatAkci() throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("NovaAkce.fxml"));
+		Parent root = loader.load();
+		
+		NovaAkceController controller = new NovaAkceController();
+		controller = loader.getController();
+		controller.inicializuj(buddyAplikace);
+		Stage novAkce = new Stage();
+		novAkce.setScene(new Scene(root));
+		novAkce.show();
+		novAkce.setTitle("Přidání nové akce");
 	}
 	
 	/**

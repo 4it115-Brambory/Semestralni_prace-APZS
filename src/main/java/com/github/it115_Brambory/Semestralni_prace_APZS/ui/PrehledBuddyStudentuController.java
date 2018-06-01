@@ -93,6 +93,7 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled akcí");
 		window.show();
 	}
 
@@ -116,6 +117,7 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled žádostí");
 		window.show();
 	}
 
@@ -139,6 +141,7 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Buddy studentů");
 		window.show();
 	}
 
@@ -162,6 +165,7 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Exchange studentů");
 		window.show();
 	}
 
@@ -170,6 +174,7 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("PridaniNovehoBuddyho.fxml"));
 		Parent root = loader.load();
+		
 		PridaniBuddyStudentaController controller = new PridaniBuddyStudentaController();
 		controller = loader.getController();
 		controller.inicializuj(buddyAplikace);
@@ -179,7 +184,7 @@ public class PrehledBuddyStudentuController extends Pane implements Observer {
 		Pridanibuddyho.setTitle("Přidání buddyho");
 	}
 
-	// detail buddyho, todo
+	
 	@FXML
 	private void sceneDetailBuddyho() throws Exception {
 		Buddy vybranyBuddy = seznamBuddy.getSelectionModel().getSelectedItem();

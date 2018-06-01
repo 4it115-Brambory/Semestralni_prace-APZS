@@ -5,9 +5,19 @@ DELETE FROM `Akce`;
 DELETE FROM `Buddy`;
 DELETE FROM `Exchange`;
 
-INSERT INTO `Admin` (`admin_id`, `jmeno`, `prijmeni`, `email`, `heslo`, `access`) VALUES ('1', 'Dorota', 'Máchalová', 'dorymachy@gmail.com', SHA('heslo123'), '3'), ('2', 'Petr', 'Máchal', 'petrmachy@gmail.com', SHA('cert123'), '3'), ('3', 'Lucifer', 'Kníže', 'lucifer@peklo.de', SHA('rumplcimprcampr'), '3');
+INSERT INTO `Admin` (`admin_id`, `jmeno`, `prijmeni`, `email`, `heslo`, `access`) VALUES ('1', 'Dorota', 'Máchalová', 'dorymachy@gmail.com', SHA('heslo123'), '3'), ('2', 'Petr', 'Máchal', 'petrmachy@gmail.com', SHA
 
-INSERT INTO `Akce` (`akce_id`, `typ`, `nazev`, `casOd`, `casDo`, `misto`, `popis`, `cena`, `maxUcast`) VALUES ('1', 'Sightseeing', 'Karlštejn', '2018-07-21 10:00:00', '2018-07-21 19:00:00', 'Karlštejn', 'No women allowed', '600', '28'), ('2', 'Sightseeing', 'Prague Castle', '2018-07-15 14:00:00', '2018-07-15 18:00:00', 'Prague Castle and Charles Bridge', 'No terrorists allowed', '800', '15'), ('3', 'Bicycle trip', 'Český ráj', '2018-08-16 08:00:00', '2018-08-16 19:00:00', 'Český ráj - Svijany', 'No fatties allowed', '500', '8'), ('4', 'Bicycle trip', 'Český ráj', '2018-08-24 09:00:00', '2018-08-24 18:00:00', 'Český ráj - Žďár', 'No fatties allowed', '550', '12'), ('5', 'Lecture', 'VŠE - Žižkov', '2018-09-17 09:00:00', '2018-09-17 12:00:00', 'NB D', 'Cryptocurrencies and Bitcoin', '550', '12'), ('6', 'Social event', 'Prague', '2018-09-18 19:00:00', '2018-09-19 03:00:00', 'The Pub - Praha 1', 'Drinking beer competition', '1500', '16');
+('cert123'), '3'), ('3', 'Lucifer', 'Kníže', 'lucifer@peklo.de', SHA('rumplcimprcampr'), '3');
+
+INSERT INTO `Akce` (`akce_id`, `typ`, `nazev`, `casOd`, `casDo`, `misto`, `popis`, `cena`, `maxUcast`) VALUES ('1', 'Sightseeing', 'Karlštejn', '2018-07-21 10:00:00', '2018-07-21 19:00:00', 'Karlštejn', 'No women 
+
+allowed', '600', '28'), ('2', 'Sightseeing', 'Prague Castle', '2018-07-15 14:00:00', '2018-07-15 18:00:00', 'Prague Castle and Charles Bridge', 'No terrorists allowed', '800', '15'), ('3', 'Bicycle trip', 'Český 
+
+ráj', '2018-08-16 08:00:00', '2018-08-16 19:00:00', 'Český ráj - Svijany', 'No fatties allowed', '500', '8'), ('4', 'Bicycle trip', 'Český ráj', '2018-08-24 09:00:00', '2018-08-24 18:00:00', 'Český ráj - Žďár', 'No 
+
+fatties allowed', '550', '12'), ('5', 'Lecture', 'VŠE - Žižkov', '2018-09-17 09:00:00', '2018-09-17 12:00:00', 'NB D', 'Cryptocurrencies and Bitcoin', '550', '3'), ('6', 'Social event', 'Prague', '2018-09-18 
+
+19:00:00', '2018-09-19 03:00:00', 'The Pub - Praha 1', 'Drinking beer competition', '1500', '16');
 
 INSERT INTO `Buddy` (`buddy_id`, `adresa`, `titul`, `xname`, `jmeno`, `prijmeni`, `datumNarozeni`, `telefon`, `pohlavi`, `statniPrislusnost`, `email`, `heslo`, `access`) VALUES
 ('1', 'Náhodná 88, Praha 68', '', 'ivva01', 'Ivan', 'Válek', '1997-04-17', '+420 425 872 128', 'muž', 'ČR', 'vanwallee@gmail.com', SHA('cjoe89dn'), '1'),

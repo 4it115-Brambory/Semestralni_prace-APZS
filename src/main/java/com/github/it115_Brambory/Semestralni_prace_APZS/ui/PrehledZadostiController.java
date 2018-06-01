@@ -110,7 +110,7 @@ public class PrehledZadostiController extends Pane implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		
+
 	}
 	
 	/**
@@ -154,6 +154,7 @@ public class PrehledZadostiController extends Pane implements Observer {
 
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Buddy studentů");
 		window.show();
 	}
 	
@@ -177,6 +178,7 @@ public class PrehledZadostiController extends Pane implements Observer {
 
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled žádostí");
 		window.show();
 	}
 	
@@ -199,6 +201,7 @@ public class PrehledZadostiController extends Pane implements Observer {
 
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled Exchange studentů");
 		window.show();
 	}
 
@@ -235,8 +238,16 @@ public class PrehledZadostiController extends Pane implements Observer {
 		// schvalit jen to co u ceho je ---
 		if (selectedRequest != null) {
 			if (selectedRequest.getSchvaleno() == "---") {
-				this.buddyAplikace.getBuddyAplikace().getDatabazeOperace().setRequestSchvaleno(selectedRequest.getId());
-				scenePrehledZadosti(event);
+				if (this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+						.zjistiObsazenaAkceProExchange(this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+								.zjistiAkceIdPodleRequestId(selectedRequest.getId()))) {
+
+					ukazAlertGood("Akce je již plná, nezle schvalovat další studenty.");
+				} else {
+					this.buddyAplikace.getBuddyAplikace().getDatabazeOperace()
+							.setRequestSchvaleno(selectedRequest.getId());
+					scenePrehledZadosti(event);
+				}
 			} else if (selectedRequest.getSchvaleno() == "ano") {
 				ukazAlertGood("Žádost byla již schválena.");
 			} else if (selectedRequest.getSchvaleno() == "ne") {

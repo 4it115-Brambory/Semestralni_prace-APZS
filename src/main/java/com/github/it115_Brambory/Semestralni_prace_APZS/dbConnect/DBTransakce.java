@@ -13,8 +13,6 @@ import java.util.Observable;
 
 import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
 
-
-
 /**
  * @author Libor Zíka
  *
@@ -32,7 +30,7 @@ import com.github.it115_Brambory.Semestralni_prace_APZS.logika.*;
  *         záznamu - v databázi primární klíč.
  */
 
-public class DBTransakce extends Observable{
+public class DBTransakce extends Observable {
 
 	private Map<Integer, Buddy> seznamBuddy;
 	private Map<Integer, Exchange> seznamExchange;
@@ -94,14 +92,11 @@ public class DBTransakce extends Observable{
 		}
 		return seznamBuddy;
 	}
-	
-	public Collection<Buddy>  getSeznamBuddyKolekce () throws SQLException 
-    {
+
+	public Collection<Buddy> getSeznamBuddyKolekce() throws SQLException {
 		getSeznamBuddy();
-    	return Collections.unmodifiableCollection (seznamBuddy.values());
-    }
-	
-	
+		return Collections.unmodifiableCollection(seznamBuddy.values());
+	}
 
 	/**
 	 * Metoda vrací seznam exchange studentů, kteří jsou v DB.
@@ -148,13 +143,12 @@ public class DBTransakce extends Observable{
 		}
 		return seznamExchange;
 	}
-	
-	public Collection<Exchange>  getSeznamExchangeKolekce () throws SQLException 
-    {
+
+	public Collection<Exchange> getSeznamExchangeKolekce() throws SQLException {
 		getSeznamExchange();
-		//System.out.println(getSeznamExchange());
-    	return Collections.unmodifiableCollection (seznamExchange.values());
-    }
+		// System.out.println(getSeznamExchange());
+		return Collections.unmodifiableCollection(seznamExchange.values());
+	}
 
 	/**
 	 * Metoda vrací seznam akcí, kreré jsou v DB.
@@ -200,12 +194,11 @@ public class DBTransakce extends Observable{
 		}
 		return seznamAkci;
 	}
-	
-	public Collection<Akce>  getSeznamAkciKolekce () throws SQLException 
-    {
+
+	public Collection<Akce> getSeznamAkciKolekce() throws SQLException {
 		getSeznamAkci();
-    	return Collections.unmodifiableCollection (seznamAkci.values());
-    }
+		return Collections.unmodifiableCollection(seznamAkci.values());
+	}
 
 	/**
 	 * Metoda pro získání seznamu všech requestů. Použití v admin controlleru pro
@@ -236,7 +229,7 @@ public class DBTransakce extends Observable{
 					request.setSchvaleno();
 				}
 				seznamRequestu.put(resultSet.getInt(1), request);
-				//System.out.println(request.toString());
+				// System.out.println(request.toString());
 			}
 
 		} catch (Exception e) {
@@ -317,8 +310,8 @@ public class DBTransakce extends Observable{
 			}
 		}
 		return seznamRequestu;
-	}	
-	
+	}
+
 	/**
 	 * Metoda vrací buddy studenta, který je přiřazen danému exchange studentovi.
 	 * Seznam vztahů by neměl být potřeba v programu. Bude stačit toto k výpisu
@@ -354,10 +347,10 @@ public class DBTransakce extends Observable{
 				// System.out.println(prirazenyBuddy.toString());
 			}
 
-			//System.out.println("nalezeno");
+			// System.out.println("nalezeno");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nenalezeno");
+			// System.out.println("nenalezeno");
 		} finally {
 			try {
 				resultSet.close();
@@ -462,7 +455,7 @@ public class DBTransakce extends Observable{
 		}
 		return student;
 	}
-	
+
 	/**
 	 * Metoda slouží jako inspirace pro práci s formátováním časů atd.
 	 * 
@@ -532,10 +525,11 @@ public class DBTransakce extends Observable{
 	 * @param adresa
 	 * @throws SQLException
 	 */
-	
-	//todo dodělat změnu emailu +++++++++++++++++++++++++++++++++++++++++
+
+	// todo dodělat změnu emailu +++++++++++++++++++++++++++++++++++++++++
 	public void updateBuddyStudenta(int buddy_id, String jmeno, String prijmeni, String datumNarozeni, String telefon,
-			String pohlavi, String statniPrislusnost, String xname, String titul, String adresa, String email) throws SQLException {
+			String pohlavi, String statniPrislusnost, String xname, String titul, String adresa, String email)
+			throws SQLException {
 
 		Connection connection = null;
 		Statement statement = null;
@@ -558,11 +552,11 @@ public class DBTransakce extends Observable{
 
 			statement.executeUpdate(sql);
 			setChanged();
-		    notifyObservers();
-			//System.out.println("updated");
+			notifyObservers();
+			// System.out.println("updated");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("not updated");
+			// System.out.println("not updated");
 		} finally {
 			try {
 				statement.close();
@@ -587,10 +581,11 @@ public class DBTransakce extends Observable{
 	 * @param adresaCR
 	 * @throws SQLException
 	 */
-	
-	//todo dodělat změnu emailu +++++++++++++++++++++++++++++++++++++++++
+
+	// todo dodělat změnu emailu +++++++++++++++++++++++++++++++++++++++++
 	public void updateExchangeStudenta(int exchange_id, String jmeno, String prijmeni, String datumNarozeni,
-			String telefon, String pohlavi, String statniPrislusnost, String adresaCR, String email) throws SQLException {
+			String telefon, String pohlavi, String statniPrislusnost, String adresaCR, String email)
+			throws SQLException {
 
 		Connection connection = null;
 		Statement statement = null;
@@ -613,11 +608,11 @@ public class DBTransakce extends Observable{
 
 			statement.executeUpdate(sql);
 			setChanged();
-		    notifyObservers();
-			//System.out.println("updated");
+			notifyObservers();
+			// System.out.println("updated");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("not updated");
+			// System.out.println("not updated");
 		} finally {
 			try {
 				statement.close();
@@ -666,11 +661,11 @@ public class DBTransakce extends Observable{
 					+ maxUcast + "' WHERE `akce_id`='" + akce_id + "'";
 			statement.executeUpdate(sql);
 			setChanged();
-		    notifyObservers();
-			//System.out.println("updated");
+			notifyObservers();
+			// System.out.println("updated");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("not updated");
+			// System.out.println("not updated");
 		} finally {
 			try {
 				statement.close();
@@ -738,10 +733,12 @@ public class DBTransakce extends Observable{
 					+ dateFormat.format(casDoUpdated) + "', '" + misto + "', '" + popis + "', '" + cena + "', '"
 					+ maxUcast + "')";
 			statement.executeUpdate(sql);
-			//System.out.println("nahrano");
+			setChanged();
+			notifyObservers();
+			// System.out.println("nahrano");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nenahrano");
+			// System.out.println("nenahrano");
 		} finally {
 			try {
 				resultSet.close();
@@ -803,10 +800,12 @@ public class DBTransakce extends Observable{
 					+ statniPrislusnost + "', '" + email + "', '"
 					+ org.apache.commons.codec.digest.DigestUtils.shaHex(heslo) + "', '" + access + "')";
 			statement.executeUpdate(sql);
-			//System.out.println("nahrano");
+			setChanged();
+			notifyObservers();
+			// System.out.println("nahrano");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nenahrano");
+			// System.out.println("nenahrano");
 		} finally {
 			try {
 				resultSet.close();
@@ -868,10 +867,12 @@ public class DBTransakce extends Observable{
 					+ statniPrislusnost + "', '" + email + "', '"
 					+ org.apache.commons.codec.digest.DigestUtils.shaHex(heslo) + "', '" + access + "')";
 			statement.executeUpdate(sql);
-			//System.out.println("nahrano");
+			setChanged();
+			notifyObservers();
+			// System.out.println("nahrano");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nenahrano");
+			// System.out.println("nenahrano");
 		} finally {
 			try {
 				resultSet.close();
@@ -914,10 +915,10 @@ public class DBTransakce extends Observable{
 			sql = "INSERT INTO `Request` (`request_id`, `exchange_id`, `akce_id`, `zaplaceno`, `schvaleno`) VALUES ('"
 					+ request_id + "', '" + exchange_id + "', '" + akce_id + "', '0', '0')";
 			statement.executeUpdate(sql);
-			//System.out.println("nahrano");
+			// System.out.println("nahrano");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nenahrano");
+			// System.out.println("nenahrano");
 		} finally {
 			try {
 				resultSet.close();
@@ -955,11 +956,12 @@ public class DBTransakce extends Observable{
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
 				check = true;
-				//System.out.println("request nalezen, exchange student nemůže znovu podat žádost na stejnou akci");
+				// System.out.println("request nalezen, exchange student nemůže znovu podat
+				// žádost na stejnou akci");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("chyba ve zjišťování existujícího requestu");
+			// System.out.println("chyba ve zjišťování existujícího requestu");
 		} finally {
 			try {
 				resultSet.close();
@@ -970,7 +972,7 @@ public class DBTransakce extends Observable{
 			}
 		}
 		if (!check) {
-			//System.out.println("request nenalezen, je možno podat žádost");
+			// System.out.println("request nenalezen, je možno podat žádost");
 		}
 		return check;
 	}
@@ -1005,10 +1007,10 @@ public class DBTransakce extends Observable{
 			sql = "INSERT INTO `VztahBuddyExchange` (`exchange_id`, `buddy_id`, `vztah_id`) VALUES ('" + exchange_id
 					+ "', '" + buddy_id + "', '" + vztah_id + "')";
 			statement.executeUpdate(sql);
-			//System.out.println("nahrano");
+			// System.out.println("nahrano");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nenahrano");
+			// System.out.println("nenahrano");
 		} finally {
 			try {
 				resultSet.close();
@@ -1048,7 +1050,7 @@ public class DBTransakce extends Observable{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("někde je chyba");
+			// System.out.println("někde je chyba");
 		} finally {
 			try {
 				resultSet.close();
@@ -1060,10 +1062,11 @@ public class DBTransakce extends Observable{
 		}
 
 		if (vztah == 1) {
-			//System.out.println("vracím true - buddy student už má přiřazeného exchange studenta");
+			// System.out.println("vracím true - buddy student už má přiřazeného exchange
+			// studenta");
 			return true;
 		} else {
-			//System.out.println("vracím false - buddy student se zatím o níkoho nestará");
+			// System.out.println("vracím false - buddy student se zatím o níkoho nestará");
 			return false;
 		}
 	}
@@ -1093,7 +1096,7 @@ public class DBTransakce extends Observable{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("někde je chyba");
+			// System.out.println("někde je chyba");
 		} finally {
 			try {
 				resultSet.close();
@@ -1105,10 +1108,12 @@ public class DBTransakce extends Observable{
 		}
 
 		if (vztah == 1) {
-			//System.out.println("vracím true - exchange student už má přiřazeného buddy studenta");
+			// System.out.println("vracím true - exchange student už má přiřazeného buddy
+			// studenta");
 			return true;
 		} else {
-			//System.out.println("vracím false - o exchange studenta se zatím nikdo nestará");
+			// System.out.println("vracím false - o exchange studenta se zatím nikdo
+			// nestará");
 			return false;
 		}
 	}
@@ -1139,11 +1144,11 @@ public class DBTransakce extends Observable{
 			String sql = "DELETE FROM `Akce` WHERE `akce_id`='" + akce_id + "'";
 			statement.executeUpdate(sql);
 			setChanged();
-		    notifyObservers();
-			//System.out.println("vymazáno");
+			notifyObservers();
+			// System.out.println("vymazáno");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nevymazáno");
+			// System.out.println("nevymazáno");
 		} finally {
 			try {
 				statement.close();
@@ -1171,15 +1176,15 @@ public class DBTransakce extends Observable{
 			String sql = "DELETE FROM `Buddy` WHERE `buddy_id`='" + buddy_id + "'";
 			statement.executeUpdate(sql);
 
-			//System.out.println("vymazáno");
+			// System.out.println("vymazáno");
 			setChanged();
-		    notifyObservers();
+			notifyObservers();
 
-			//System.out.println("vymazáno");
+			// System.out.println("vymazáno");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nevymazáno");
+			// System.out.println("nevymazáno");
 		} finally {
 			try {
 				statement.close();
@@ -1207,11 +1212,11 @@ public class DBTransakce extends Observable{
 			String sql = "DELETE FROM `Exchange` WHERE `exchange_id`='" + exchange_id + "'";
 			statement.executeUpdate(sql);
 			setChanged();
-		    notifyObservers();
-			//System.out.println("vymazáno");
+			notifyObservers();
+			// System.out.println("vymazáno");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nevymazáno");
+			// System.out.println("nevymazáno");
 		} finally {
 			try {
 				statement.close();
@@ -1238,10 +1243,10 @@ public class DBTransakce extends Observable{
 			statement = connection.createStatement();
 			String sql = "DELETE FROM `VztahBuddyExchange` WHERE `vztah_id`='" + vztah_id + "'";
 			statement.executeUpdate(sql);
-			//System.out.println("vymazáno");
+			// System.out.println("vymazáno");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nevymazáno");
+			// System.out.println("nevymazáno");
 		} finally {
 			try {
 				statement.close();
@@ -1268,10 +1273,10 @@ public class DBTransakce extends Observable{
 			statement = connection.createStatement();
 			String sql = "DELETE FROM `Request` WHERE `request_id`='" + request_id + "'";
 			statement.executeUpdate(sql);
-			//System.out.println("vymazáno");
+			// System.out.println("vymazáno");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("nevymazáno");
+			// System.out.println("nevymazáno");
 		} finally {
 			try {
 				statement.close();
@@ -1318,7 +1323,7 @@ public class DBTransakce extends Observable{
 			while (resultSet.next()) {
 				if (Objects.equals(email, resultSet.getString("email"))
 						&& Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
-					//System.out.println("Admin found - logged in");
+					// System.out.println("Admin found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
 					aplikace.getBuddyAplikace().setAktualniUzivatel(prihlasovany);
@@ -1331,20 +1336,20 @@ public class DBTransakce extends Observable{
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("Chyba u ověřování - admin");
+			// System.out.println("Chyba u ověřování - admin");
 		}
 
 		// zkus najít exchange
 		try {
 			// System.out.println("zkousime");
 			String sql = "SELECT `email`, `access`, `heslo` FROM `Exchange`";
-			//connection = connectionClass.getConnection();
-			//statement = connection.createStatement();
+			// connection = connectionClass.getConnection();
+			// statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
 				if (Objects.equals(email, resultSet.getString("email"))
 						&& Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
-					//System.out.println("Exchange student found - logged in");
+					// System.out.println("Exchange student found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
 					aplikace.getBuddyAplikace().setAktualniUzivatel(prihlasovany);
@@ -1357,20 +1362,20 @@ public class DBTransakce extends Observable{
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("Chyba u ověřování - exchange student");
+			// System.out.println("Chyba u ověřování - exchange student");
 		}
 
 		// zkus najít buddy
 		try {
 			// System.out.println("zkousime");
 			String sql = "SELECT `email`, `access`, `heslo` FROM `Buddy`";
-			//connection = connectionClass.getConnection();
-			//statement = connection.createStatement();
+			// connection = connectionClass.getConnection();
+			// statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
 				if (Objects.equals(email, resultSet.getString("email"))
 						&& Objects.equals(shaHashInputHeslo, resultSet.getString("heslo"))) {
-					//System.out.println("Buddy found - logged in");
+					// System.out.println("Buddy found - logged in");
 					access = resultSet.getInt("access");
 					prihlasovany = new Uzivatel(email, shaHashInputHeslo, access);
 					aplikace.getBuddyAplikace().setAktualniUzivatel(prihlasovany);
@@ -1383,7 +1388,7 @@ public class DBTransakce extends Observable{
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("Chyba u ověřování - buddy");
+			// System.out.println("Chyba u ověřování - buddy");
 		} finally {
 			try {
 				resultSet.close();
@@ -1393,7 +1398,7 @@ public class DBTransakce extends Observable{
 				e.printStackTrace();
 			}
 		}
-		//System.out.println("Neplatné jméno nebo heslo");
+		// System.out.println("Neplatné jméno nebo heslo");
 		return access;
 	}
 
@@ -1425,10 +1430,10 @@ public class DBTransakce extends Observable{
 					+ "' WHERE `vztah_id`='" + vztah_id + "'";
 
 			statement.executeUpdate(sql);
-			//System.out.println("updated");
+			// System.out.println("updated");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("not updated");
+			// System.out.println("not updated");
 		} finally {
 			try {
 				statement.close();
@@ -1460,10 +1465,10 @@ public class DBTransakce extends Observable{
 			String sql = "UPDATE `Request` SET `zaplaceno`= 1 WHERE `request_id`='" + request_id + "'";
 
 			statement.executeUpdate(sql);
-			//System.out.println("updated zaplaceno");
+			// System.out.println("updated zaplaceno");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("not updated");
+			// System.out.println("not updated");
 		} finally {
 			try {
 				statement.close();
@@ -1493,10 +1498,10 @@ public class DBTransakce extends Observable{
 			String sql = "UPDATE `Request` SET `schvaleno`= 1 WHERE `request_id`='" + request_id + "'";
 
 			statement.executeUpdate(sql);
-			//System.out.println("updated schvaleno");
+			// System.out.println("updated schvaleno");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("not updated");
+			// System.out.println("not updated");
 		} finally {
 			try {
 				statement.close();
@@ -1527,10 +1532,10 @@ public class DBTransakce extends Observable{
 			String sql = "UPDATE `Request` SET `schvaleno`= 0 WHERE `request_id`='" + request_id + "'";
 
 			statement.executeUpdate(sql);
-			//System.out.println("updated zamítnuto");
+			// System.out.println("updated zamítnuto");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("not updated");
+			// System.out.println("not updated");
 		} finally {
 			try {
 				statement.close();
@@ -1584,12 +1589,12 @@ public class DBTransakce extends Observable{
 				maxKapacitaAkce = resultSet.getInt(1);
 			}
 
-			//System.out.println("Počet přihlášených - " + pocetPrihlasenychNaAkci);
-			//System.out.println("Kapacita akce - " + maxKapacitaAkce);
-			//System.out.println("čísla uloženy do proměnných");
+			// System.out.println("Počet přihlášených - " + pocetPrihlasenychNaAkci);
+			// System.out.println("Kapacita akce - " + maxKapacitaAkce);
+			// System.out.println("čísla uloženy do proměnných");
 		} catch (Exception e) {
 			e.printStackTrace();
-			//System.out.println("někde je chyba");
+			// System.out.println("někde je chyba");
 		} finally {
 			try {
 				resultSet.close();
@@ -1601,21 +1606,19 @@ public class DBTransakce extends Observable{
 		}
 
 		if (maxKapacitaAkce > pocetPrihlasenychNaAkci) {
-			//System.out.println("vracím false - akce má místo");
+			// System.out.println("vracím false - akce má místo");
 			return false;
 		} else {
-			//System.out.println("vracím true - akce je plná");
+			// System.out.println("vracím true - akce je plná");
 			return true;
 		}
 	}
 
-	
 	/**
-	 * Metoda vypíše počet studentů přihlášených akci
-	 * 
+	 * Metoda zjistí, kolik je schválených přihlášených exchange studentů na akci.
 	 * 
 	 * @param akce_id
-	 * @return Integer PocetPrihlasenychNaAkci
+	 * @return
 	 * @throws SQLException
 	 */
 	public Integer zjistiPocetPrihlasenychNaAkci(int akce_id) throws SQLException {
@@ -1648,5 +1651,81 @@ public class DBTransakce extends Observable{
 		}
 		return pocetPrihlasenychNaAkci;
 	}
-		
+
+	/**
+	 * Metoda vrací Id exchange studenta podle zadaného mailu
+	 * 
+	 * @param mail
+	 * @return
+	 * @throws SQLException
+	 */
+	public Integer zjistiExchangeIdPodlemailu(String mail) throws SQLException {
+
+		int exchange_id = 0;
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "SELECT exchange_id FROM `Exchange` WHERE `email` ='" + mail + "'";
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				exchange_id = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return exchange_id;
+	}
+	
+	/**
+	 * Metoda vrací Id akce podle zadaného Id requestu
+	 * 
+	 * @param request_id
+	 * @return
+	 * @throws SQLException
+	 */
+	public Integer zjistiAkceIdPodleRequestId(int request_id) throws SQLException {
+
+		int akce_id = 0;
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = connectionClass.getConnection();
+			statement = connection.createStatement();
+
+			String sql = "SELECT akce_id FROM `Request` WHERE `request_id` ='" + request_id + "'";
+			resultSet = statement.executeQuery(sql);
+			while (resultSet.next()) {
+				akce_id = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return akce_id;
+	}	
+
 }

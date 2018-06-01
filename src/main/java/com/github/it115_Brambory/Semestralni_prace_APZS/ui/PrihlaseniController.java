@@ -70,6 +70,7 @@ public class PrihlaseniController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled akcí");
 		window.show();
 	}
 
@@ -92,6 +93,7 @@ public class PrihlaseniController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled akcí");
 		window.show();
 	}
 
@@ -114,6 +116,7 @@ public class PrihlaseniController extends Pane implements Observer {
 		
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tableViewScene);
+		window.setTitle("Přehled akcí");
 		window.show();
 	}
 	
