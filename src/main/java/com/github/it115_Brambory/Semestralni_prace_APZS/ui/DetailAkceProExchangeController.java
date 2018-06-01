@@ -68,14 +68,21 @@ public class DetailAkceProExchangeController extends Pane implements Observer {
 		prihlasen.setEditable(false);
 		detailAkce = vybranaAkce;
 		nazev.setText(detailAkce.getNazev());
+		nazev.setEditable(false);
 		cena.setText( String.valueOf(detailAkce.getCena()));
+		cena.setEditable(false);
 		typ.setText(detailAkce.getTypAkce());
+		typ.setEditable(false);
 		casOd.setText(detailAkce.getCasOd());
+		casOd.setEditable(false);
 		popis.setText(detailAkce.getPopis());
+		popis.setEditable(false);
 		casDo.setText(detailAkce.getCasDo());
+		casDo.setEditable(false);
 		misto.setText(detailAkce.getMisto());
+		misto.setEditable(false);
 		maxUcast.setText(String.valueOf(detailAkce.getMaxUcast()));
-
+		maxUcast.setEditable(false);
 	}
 
 	@Override
