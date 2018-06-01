@@ -47,7 +47,7 @@ public class Start extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			//loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/MainWindow.fxml"));
 			//loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/TestWindow.fxml"));
-			loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/prihlaseni.fxml"));
+			loader.setLocation(this.getClass().getResource("/com/github/it115_Brambory/Semestralni_prace_APZS/ui/Prihlaseni.fxml"));
 			
 	    	Parent root = loader.load();
 	
